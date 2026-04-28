@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "title": "Jérôme Delodder — Prompt Engineer & Fullstack Developer",
+    "description": "Portfolio of Jérôme Delodder — Prompt Engineer, Fullstack Developer, Automation Specialist. I build fast and right, powered by Claude.",
+    "ogLocale": "en_US"
+  },
+  "nav": {
+    "about": "About",
+    "stack": "Stack",
+    "work": "Work",
+    "process": "Process",
+    "contact": "Contact",
+    "hire": "Hire me",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "hero": {
+    "availability": "Available for work — Remote & Freelance",
+    "tagline": "Prompt Engineer · Fullstack Developer · Automation.",
+    "buildPrefix": "I build",
+    "words": ["fast.", "right.", "all in."],
+    "cta_work": "See projects",
+    "cta_contact": "Get in touch",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "section": "01 — About",
+    "headline": "I turn complex ideas into products that actually ship.",
+    "p1": "Fullstack developer specialized in prompt engineering and automation. I use Claude as a permanent co-pilot — which lets me deliver in days what normally takes weeks.",
+    "p2": "My playground: n8n workflows, Next.js apps, internal SaaS tools, and prompt systems that replace 10 emails with a single API call.",
+    "cta": "Let's talk about your project",
+    "stats": [
+      { "value": "3+", "label": "years of experience" },
+      { "value": "40+", "label": "projects shipped" },
+      { "value": "10×", "label": "faster with AI" },
+      { "value": "100%", "label": "remote ready" }
+    ]
+  },
+  "stack": {
+    "section": "02 — Stack",
+    "headline": "A stack built to ship fast, not to look good on a CV."
+  },
+  "work": {
+    "section": "03 — Work",
+    "headline": "Projects with measurable impact, not mockups.",
+    "projects": [
+      {
+        "title": "Automation Pipeline n8n",
+        "category": "Automation",
+        "description": "Inbound lead processing system — from form collection to AI qualification, Slack notification, and CRM insertion. Zero human intervention on 90% of cases.",
+        "impact": "-4h/day of manual ops · 340+ leads processed/month"
+      },
+      {
+        "title": "Internal SaaS Dashboard",
+        "category": "Fullstack",
+        "description": "Next.js app for an e-commerce client: custom analytics dashboard, order management with advanced filters, CSV/PDF export. Clerk auth, Prisma/Postgres data layer.",
+        "impact": "100% team adoption in day 3 · Replaces 3 disparate tools"
+      },
+      {
+        "title": "Prompt Engineering Framework",
+        "category": "AI Systems",
+        "description": "Modular prompt system for a content agency: chained templates, output validation, retry logic. Reduced generation cost by 60%.",
+        "impact": "-60% token cost · ×3 output consistency"
+      },
+      {
+        "title": "Web App Customer Portal",
+        "category": "Fullstack",
+        "description": "Client portal for a B2B SME: real-time order tracking, integrated messaging, document upload. Deployed on Vercel with edge functions.",
+        "impact": "Client NPS +28pts · Support tickets -45%"
+      }
+    ],
+    "stackLabel": "Stack"
+  },
+  "process": {
+    "section": "04 — Process",
+    "headline": "From idea to prod in days. Not months.",
+    "subheadline": "The difference between a standard dev and me: I use Claude at every step. Not as autocomplete — as a decision accelerator. The result is a velocity no solo dev can reach alone.",
+    "classic_label": "Classic approach",
+    "my_label": "My approach",
+    "classic_items": ["Weeks of dev", "Back-and-forth emails", "Costly revisions", "Unpredictable delivery"],
+    "my_items": ["Days, not weeks", "Single clear brief", "Fast iterations", "Predictable ship"],
+    "steps": [
+      {
+        "title": "Brief & Scope",
+        "duration": "1–2h",
+        "description": "We define the real problem, not the symptoms. A call or a Google doc is enough. I ask the right questions to avoid 3 weeks of pointless dev."
+      },
+      {
+        "title": "Architecture + Claude",
+        "duration": "2–4h",
+        "description": "I structure the app or workflow with Claude as co-architect. Not to replace thinking — to accelerate it. We ship a solid technical plan in a few hours."
+      },
+      {
+        "title": "Iterative build",
+        "duration": "2–5 days",
+        "description": "Short sprints, intermediate deliverables, tight feedback loop. Each feature is tested before moving on. No big bang delivery."
+      },
+      {
+        "title": "Ship & Transfer",
+        "duration": "1 day",
+        "description": "Deploy, minimal technical doc, video walkthrough if needed. You take over something that runs, not a prototype."
+      }
+    ]
+  },
+  "contact": {
+    "section": "05 — Contact",
+    "headline1": "Let's build something",
+    "headline2": "together?",
+    "description": "I'm available for freelance projects, remote full-time roles, or partnerships on AI/automation projects.",
+    "cta_email": "Send a message",
+    "cta_copy": "Copy email",
+    "cta_copied": "Copied!",
+    "footer_copy": "© 2026 Jérôme Delodder — Built with Next.js & Claude",
+    "footer_availability": "Available · Remote · Freelance"
+  }
+}

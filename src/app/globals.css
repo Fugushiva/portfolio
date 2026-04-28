@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Custom cursor hidden on default ─── */
+* {
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  * {
+    cursor: auto;
+  }
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #7c3aed;
+  border-radius: 999px;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: #7c3aed;
+  color: #f5f5f0;
+}
+
+/* ─── Base ─── */
+html {
+  background: #0a0a0a;
+  color: #f5f5f0;
+}
+
+body {
+  background: #0a0a0a;
+  color: #f5f5f0;
+  overflow-x: hidden;
+}
+
+/* When preloader is active, block scroll */
+body.is-loading {
+  overflow: hidden;
+}
+
+/* ─── Noise grain overlay ─── */
+.grain-overlay {
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.035;
+  animation: grain 0.5s steps(1) infinite;
+  mix-blend-mode: overlay;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(3%, 2%); }
+  30%  { transform: translate(-1%, 4%); }
+  40%  { transform: translate(4%, -1%); }
+  50%  { transform: translate(-3%, 1%); }
+  60%  { transform: translate(2%, -4%); }
+  70%  { transform: translate(-4%, 2%); }
+  80%  { transform: translate(1%, -2%); }
+  90%  { transform: translate(-2%, 3%); }
+}
+
+/* ─── Cursor dot ─── */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: #f5f5f0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(245, 245, 240, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s linear, width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.cursor.is-hovering {
+  width: 24px;
+  height: 24px;
+  background: #7c3aed;
+}
+
+.cursor-ring.is-hovering {
+  width: 60px;
+  height: 60px;
+  opacity: 0.6;
+}
+
+/* ─── Clip path animation utility ─── */
+.clip-reveal {
+  clip-path: inset(0 0 100% 0);
+}
+
+.clip-revealed {
+  clip-path: inset(0 0 0% 0);
+}
+
+/* ─── Section padding ─── */
+.section-pad {
+  padding-top: clamp(5rem, 10vw, 10rem);
+  padding-bottom: clamp(5rem, 10vw, 10rem);
+}
+
+/* ─── Horizontal rule ─── */
+.hr-line {
+  width: 100%;
+  height: 1px;
+  background: #222222;
+}
+
+/* ─── Split text mask ─── */
+.split-line {
+  overflow: hidden;
+  display: block;
+}
+
+/* ─── Magnetic button container ─── */
+.magnetic-wrap {
+  display: inline-block;
+}
+
+/* ─── Gradient glow ─── */
+.glow-accent {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.35) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* ─── Reduce motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain-overlay {
+    display: none;
+  }
+}

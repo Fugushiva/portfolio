@@ -1,0 +1,8 @@
+node_modules
+
+## Claude files
+CLAUDE.md
+
+## obsidian files
+graphify-out/
+.graphify*
