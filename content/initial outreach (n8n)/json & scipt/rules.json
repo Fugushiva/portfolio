@@ -1,0 +1,83 @@
+let rules = `MESSAGE GENERATION RULES
+
+You must follow every rule below exactly.
+If two rules seem to conflict, follow the more restrictive rule.
+Do not ignore, relax, reinterpret, or override any rule.
+
+1. LANGUAGE RULE
+The campaign language is the ONLY language allowed in messages.
+Write every single word of every message in the campaign language.
+Even if the strategy, instructions, or prospect data are in English, the message must be in the campaign language.
+Do NOT mix languages. Zero exceptions.
+This is the highest priority rule.
+
+2. PERSONALIZATION & SAFETY
+Use only verified, observable, explicit information.
+Never invent facts about the prospect OR the sender's service.
+Never infer unconfirmed details.
+When information is limited, prefer a safe and general message.
+
+3. SERVICE ACCURACY
+Only reference features explicitly described in the input.
+Do NOT invent features the service does not have.
+Do NOT assume the service does something just because the prospect needs it.
+
+4. MESSAGE COMPLETION
+Generate exactly one message for every required touchpoint.
+Never skip a touchpoint.
+
+5. TOPIC CONTROL
+Keep one single core topic per message.
+Do not switch topic.
+
+6. TONE AND VOCABULARY
+Write like a colleague in a hallway chat. Professional but relaxed.
+The prospect is a senior professional. Respect their intelligence.
+Use clear, everyday words. No jargon, no buzzwords, no corporate speak.
+But do NOT dumb down the ideas.
+Do not flatter. Do not compliment. Do not congratulate.
+Do not use amplifying adjectives: "huge", "amazing", "impressive", "incredible", "extensive", "smart move", "great work".
+
+7. PRODUCT AND SALES RESTRICTION
+Do not pitch any product.
+Do not sell.
+Do not push an offer.
+Do not use promotional phrasing.
+
+8. SENTENCE LENGTH AND COUNT
+Each sentence must be 10 words or less.
+The default is 2 to 3 sentences in the body.
+The greeting line and the closing question (if any) do NOT count toward this limit.
+
+9. QUESTION RULE
+Every message touchpoint MUST end with exactly one closed yes/no question.
+The question MUST be answerable with ONLY "yes" or "no", 10 words or less.
+
+10. CHARACTER LIMIT
+Each message must be 500 characters maximum.
+
+11. SIMPLICITY TARGET
+Target Hemingway grade 6 or lower.
+Short sentences (under 10 words). Common everyday words.
+Subject + verb + object. No subordinate clauses.
+No gerund phrases. No passive voice. No abstract nouns.
+
+12. BUZZWORDS
+Do not use these words:
+scalable, enablement, empower, leverage, precision, complexity, streamline, optimize, synergy, robust, holistic, facilitate, utilize, implement, structured, alignment, operational, strategic
+
+13. FORMATTING - HARD LIMIT
+Do not use dashes. Use periods or commas instead.
+HARD LIMIT: Every message must have EXACTLY 2 paragraphs. Never 1. Never 3. Never more.
+
+18. GREETING RULE
+The first message touchpoint MUST open with a greeting + "thanks for connecting" in the campaign language.
+Examples: "Hi Steven, thanks for connecting with me here." (en), "Bonjour Mathieu, ravi d'etre en contact." (fr)
+
+27. FORMALITY
+In French: ALWAYS use "vous" (formal). NEVER use "tu".
+In German: ALWAYS use "Sie" (formal). NEVER use "du".
+In Spanish: ALWAYS use "usted" (formal). NEVER use "tu".
+`;
+
+return [{ json: { rules } }];

@@ -42,34 +42,73 @@
   },
   "work": {
     "section": "03 — Work",
-    "headline": "Des projets qui ont un impact mesurable, pas des maquettes.",
+    "headline": "Des systèmes en production. Un impact réel.",
+    "cta_case": "Case study",
     "projects": [
       {
-        "title": "Automation Pipeline n8n",
-        "category": "Automation",
-        "description": "Système de traitement de leads entrants — de la collecte formulaire jusqu'à la qualification AI, la notif Slack, et l'insertion CRM. Zéro intervention humaine sur 90% des cas.",
-        "impact": "-4h/jour d'ops manuelles · 340+ leads traités/mois"
+        "title": "AI B2B Outreach Engine",
+        "category": "AI Automation",
+        "year": "2024",
+        "client": "SalesMind AI",
+        "headline": "LinkedIn → messages hyper-personnalisés, 100% automatisé.",
+        "description": "Pipeline IA de bout en bout qui transforme des données LinkedIn brutes en séquences de prospection multi-touchpoints. 9 étapes séquentielles : validation d'entrée, 4 branches parallèles (détection de langue, hooks de personnalisation, base de connaissances, parsing de touchpoints), classification acheteur, génération de stratégie, génération de messages, quality gate, et livraison API avec retry logic.",
+        "architecture": "9 étapes · 4 branches parallèles · 21 nœuds LLM · Modèle primaire/fallback par appel",
+        "metrics": [
+          { "value": "21", "label": "nœuds LLM orchestrés" },
+          { "value": "9", "label": "étapes de pipeline" },
+          { "value": "3×", "label": "retry avec fallback" },
+          { "value": "100%", "label": "contrat de sortie respecté" }
+        ]
       },
       {
-        "title": "SaaS Dashboard Interne",
-        "category": "Fullstack",
-        "description": "App Next.js pour un client e-commerce : dashboard analytics custom, gestion des commandes avec filtres avancés, export CSV/PDF. Auth Clerk, data Prisma/Postgres.",
-        "impact": "Adoption 100% équipe en J+3 · Remplace 3 outils disparates"
+        "title": "Reassurez-vous CRM",
+        "category": "Fullstack SaaS",
+        "year": "2024",
+        "client": "Assurance & Finance",
+        "headline": "CRM full-stack pour équipes de vente en assurance — solo, AI-assisted.",
+        "description": "Plateforme CRM de niveau production pour les équipes commerciales en assurance et services financiers. Gère tout le cycle client : import de prospects en masse, opérations call-center, collecte de documents, prise de rendez-vous et validation de contrats — dans une seule plateforme sécurisée par rôle. Construit de zéro avec Next.js 15, Supabase, et 13+ procédures stockées PostgreSQL.",
+        "architecture": "75+ composants React · 15+ tables PostgreSQL · 13+ fonctions RPC · Pipeline de vente 4 étapes",
+        "metrics": [
+          { "value": "75+", "label": "composants React" },
+          { "value": "15+", "label": "tables PostgreSQL" },
+          { "value": "4", "label": "étapes du pipeline de vente" },
+          { "value": "3", "label": "niveaux d'accès par rôle" }
+        ]
       },
       {
-        "title": "Prompt Engineering Framework",
-        "category": "AI Systems",
-        "description": "Système de prompts modulaires pour une agence de contenu : templates chaînés, validation de sortie, retry logic. Réduit le coût de génération de 60%.",
-        "impact": "-60% coût tokens · ×3 cohérence des outputs"
+        "title": "AI Brand Identity Generator",
+        "category": "Prompt Engineering",
+        "year": "2024",
+        "client": "Google Opal",
+        "headline": "Brief → kit de marque complet. 14 agents IA spécialisés.",
+        "description": "Générateur d'identité de marque complet orchestrant 14 agents IA spécialisés en topologie fan-out / fan-in. Prend un brief fondateur et produit un kit de lancement : planche identité visuelle, concepts logo, blueprint étiquette, photographie packaging, environnement retail, assets réseaux sociaux et prompt site web — tous cohérents, tous ancrés dans un unique nœud Visual Strategy upstream.",
+        "architecture": "14 agents spécialisés · topologie fan-out/fan-in · contrats d'entrée scopés · prompting espace négatif",
+        "metrics": [
+          { "value": "14", "label": "agents IA spécialisés" },
+          { "value": "7", "label": "branches de sortie parallèles" },
+          { "value": "1", "label": "nœud stratégie upstream" },
+          { "value": "0", "label": "contamination de contexte" }
+        ]
       },
       {
-        "title": "Web App Customer Portal",
-        "category": "Fullstack",
-        "description": "Portail client pour une PME BtoB : suivi des commandes en temps réel, messaging intégré, upload de documents. Deployed sur Vercel avec edge functions.",
-        "impact": "NPS client +28pts · Support tickets -45%"
+        "title": "AI Content Engine — SalesMind AI",
+        "category": "AI Content & Brand",
+        "year": "2025",
+        "client": "SalesMind AI",
+        "headline": "1 thème/semaine → 30 pièces platform-native. 6 canaux. 85% IA.",
+        "description": "Stratégie de contenu 12 mois et moteur de production pour SalesMind AI. Système complet : positionnement ICP, roadmap éditoriale 12 mois, design system Figma (55 variables couleur, 82 variables numériques, 49 styles texte, light + dark), et pipeline de production AI-heavy. Un hero asset par semaine cascade en carousels, Reels, hooks Threads, YouTube Shorts, Stories, et annonces payantes sur 6 canaux — jamais copy-paste, toujours platform-native.",
+        "architecture": "6 canaux · roadmap 12 mois · système tokens Figma light + dark · production AI-assisted",
+        "metrics": [
+          { "value": "30", "label": "pièces par semaine" },
+          { "value": "6", "label": "plateformes orchestrées" },
+          { "value": "85%", "label": "contenu statique produit par IA" },
+          { "value": "120", "label": "demo calls/mois cibles" }
+        ]
       }
     ],
-    "stackLabel": "Stack"
+    "stackLabel": "Stack",
+    "architectureLabel": "Architecture",
+    "metricsLabel": "Métriques clés"
   },
   "process": {
     "section": "04 — Process",
