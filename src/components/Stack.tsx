@@ -64,7 +64,7 @@ function MarqueeStrip({ items, reverse = false }: { items: string[]; reverse?: b
 export default function Stack() {
   const t = useTranslations('stack')
   const containerRef = useRef<HTMLElement>(null)
-  useGSAPReveal(containerRef, { stagger: 0.08 })
+  useGSAPReveal(containerRef, { stagger: 0.1, duration: 1.0, y: 50, start: 'top 88%' })
 
   // Flatten all skills for marquee
   const allSkills = CATEGORIES.flatMap((c) => c.skills)

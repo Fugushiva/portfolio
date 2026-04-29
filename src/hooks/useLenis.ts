@@ -22,6 +22,13 @@ export function getLenis() {
 // - We skip Lenis entirely on coarse pointer (touch) — the OS already
 //   handles momentum scrolling natively, and double-smooth is nauseating.
 // - We also skip on prefers-reduced-motion per WCAG 2.1 SC 2.3.3.
+//
+// GSAP ScrollTrigger integration:
+// - Lenis fires a 'scroll' event on every RAF tick with the interpolated
+//   scrollY value. We forward that into ScrollTrigger.update() so
+//   ScrollTrigger reads Lenis's smooth position rather than the raw
+//   window.scrollY, keeping both systems perfectly in sync.
+//   This is the canonical Lenis + ScrollTrigger pattern.
 
 export function useLenis() {
   const rafRef = useRef<number>(0)
@@ -45,6 +52,25 @@ export function useLenis() {
 
     lenisInstance = lenis
 
+    // Connect Lenis scroll events to GSAP ScrollTrigger (if loaded).
+    // ScrollTrigger is loaded lazily by useGSAPReveal; we poll until it's
+    // available rather than importing it here (avoids GSAP in the main bundle).
+    let scrollTriggerProxy: (() => void) | null = null
+    const connectScrollTrigger = () => {
+      // @ts-expect-error — GSAP is loaded asynchronously, not in types
+      const ST = typeof window !== 'undefined' && window.__gsap_ScrollTrigger__
+      if (ST) {
+        const handler = () => ST.update()
+        lenis.on('scroll', handler)
+        scrollTriggerProxy = () => lenis.off('scroll', handler)
+      }
+    }
+
+    // Try immediately (in case GSAP already loaded), then again after a
+    // short delay to handle the async chunk case.
+    connectScrollTrigger()
+    const retryTimer = setTimeout(connectScrollTrigger, 500)
+
     const raf = (time: number) => {
       lenis.raf(time)
       rafRef.current = requestAnimationFrame(raf)
@@ -52,7 +78,9 @@ export function useLenis() {
     rafRef.current = requestAnimationFrame(raf)
 
     return () => {
+      clearTimeout(retryTimer)
       cancelAnimationFrame(rafRef.current)
+      scrollTriggerProxy?.()
       lenis.destroy()
       lenisInstance = null
     }

@@ -50,10 +50,13 @@ async function initGSAP() {
   const { ScrollTrigger } = await import('gsap/ScrollTrigger')
   gsap.registerPlugin(ScrollTrigger)
 
-  // Let Lenis drive the scroll position for ScrollTrigger
-  // Lenis dispatches 'scroll' on the window object with a scrollY-compatible API.
-  // We proxy that into ScrollTrigger.update() so both systems stay in sync.
+  // Suppress mobile resize refresh (Lenis handles this better via its own resize logic).
   ScrollTrigger.config({ ignoreMobileResize: true })
+
+  // Expose ScrollTrigger on window so useLenis can connect its scroll events
+  // without importing GSAP in the Lenis hook (keeps the main bundle clean).
+  // @ts-expect-error — intentional global for cross-hook communication
+  window.__gsap_ScrollTrigger__ = ScrollTrigger
 }
 
 // ─── DOM split-text helper ────────────────────────────────────────────────────

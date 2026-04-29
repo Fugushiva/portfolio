@@ -43,7 +43,7 @@ export default function Contact() {
   const t = useTranslations('contact')
   const containerRef = useRef<HTMLElement>(null)
   const [copied, setCopied] = useState(false)
-  useGSAPReveal(containerRef, { stagger: 0.1 })
+  useGSAPReveal(containerRef, { stagger: 0.12, duration: 1.1, y: 60, start: 'top 90%' })
 
   const copyEmail = async () => {
     try {
