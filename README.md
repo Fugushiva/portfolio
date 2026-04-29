@@ -2,7 +2,7 @@
 
 A modern, high-performance personal portfolio built with cutting-edge web technologies. Features smooth scrolling, dynamic animations, and internationalization.
 
-## 🚀 Tech Stack
+## 🚀 Tech Stack 
 
 - **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
