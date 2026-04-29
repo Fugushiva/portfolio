@@ -1,7 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import Image from 'next/image'
+import { useGSAPReveal } from '@/hooks/useGSAPReveal'
 import { useTranslations } from 'next-intl'
 
 export default function About() {
@@ -9,7 +10,7 @@ export default function About() {
   const stats = t.raw('stats') as Array<{ value: string; label: string }>
 
   const containerRef = useRef<HTMLElement>(null)
-  useScrollReveal(containerRef, { stagger: 0.1 })
+  useGSAPReveal(containerRef, { stagger: 0.12, duration: 1.1, y: 50, start: 'top 86%' })
 
   return (
     <section
@@ -23,22 +24,54 @@ export default function About() {
         <div className="flex-1 h-px bg-border" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 max-w-[1600px]">
-        {/* Left — Text */}
-        <div className="flex flex-col justify-center">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr_1fr] gap-12 lg:gap-16 max-w-[1600px] items-start">
+
+        {/* Col 1 — Portrait */}
+        <div className="relative" data-reveal>
+          {/* Accent border frame — offset bottom-right for depth */}
+          <div
+            className="absolute -bottom-3 -right-3 w-full h-full border border-accent/30 pointer-events-none"
+            aria-hidden="true"
+          />
+          <div className="relative overflow-hidden aspect-[3/4] bg-surface">
+            <Image
+              src="/projects/owner/img/jerome delodder.jpg"
+              alt="Jérôme Delodder"
+              fill
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              className="object-cover object-top grayscale hover:grayscale-0 transition-[filter] duration-700 ease-out"
+              priority={false}
+            />
+            {/* Cinematic vignette */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%)',
+              }}
+              aria-hidden="true"
+            />
+          </div>
+          {/* Name tag below photo */}
+          <p className="mt-4 font-mono text-xs text-muted uppercase tracking-widest">
+            Jérôme Delodder — 2025
+          </p>
+        </div>
+
+        {/* Col 2 — Text */}
+        <div className="flex flex-col justify-center lg:pt-4">
           <h2
-            data-reveal
+            data-reveal-text
             className="font-black text-foreground leading-tight tracking-tighter mb-8"
-            style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)' }}
+            style={{ fontSize: 'clamp(2rem, 3.5vw, 4rem)' }}
           >
             {t('headline')}
           </h2>
 
-          <p data-reveal className="text-muted text-base md:text-lg leading-relaxed mb-6 max-w-[480px]">
+          <p data-reveal-text className="text-muted text-base md:text-lg leading-relaxed mb-6">
             {t('p1')}
           </p>
 
-          <p data-reveal className="text-muted text-base md:text-lg leading-relaxed max-w-[480px]">
+          <p data-reveal-text className="text-muted text-base md:text-lg leading-relaxed">
             {t('p2')}
           </p>
 
@@ -56,16 +89,16 @@ export default function About() {
           </div>
         </div>
 
-        {/* Right — Stats grid */}
-        <div className="grid grid-cols-2 gap-px bg-border" data-reveal>
+        {/* Col 3 — Stats grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-1 gap-px bg-border" data-reveal>
           {stats.map(({ value, label }) => (
             <div
               key={label}
-              className="bg-bg p-8 md:p-10 flex flex-col justify-between group hover:bg-surface transition-colors duration-300"
+              className="bg-bg p-8 flex flex-col justify-between group hover:bg-surface transition-colors duration-300"
             >
               <span
                 className="font-black text-foreground leading-none tracking-tighter group-hover:text-accent transition-colors duration-300"
-                style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)' }}
+                style={{ fontSize: 'clamp(2.5rem, 3.5vw, 4.5rem)' }}
               >
                 {value}
               </span>
@@ -75,6 +108,7 @@ export default function About() {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )

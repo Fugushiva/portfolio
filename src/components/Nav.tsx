@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import LangSwitcher from '@/components/LangSwitcher'
+import { getLenis } from '@/hooks/useLenis'
 
 interface NavProps {
   isReady: boolean
@@ -29,16 +30,27 @@ export default function Nav({ isReady }: NavProps) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Use Lenis scroll when available (avoids double smooth-scroll conflict).
+  // Falls back gracefully to native scrollIntoView on touch / reduced-motion.
   const handleNavClick = (href: string) => {
     setMenuOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    const target = document.querySelector(href)
+    if (!target) return
+
+    const lenis = getLenis()
+    if (lenis) {
+      // Lenis.scrollTo handles easing, duration, and offset internally.
+      lenis.scrollTo(target as HTMLElement, { offset: -80, duration: 1.0 })
+    } else {
+      // Fallback: native scroll (touch devices, reduced-motion).
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
     <AnimatePresence>
       {isReady && (
-        <motion.header
+        <m.header
           key="nav"
           className={`fixed top-0 left-0 right-0 z-[9000] transition-all duration-500 ${
             scrolled ? 'py-3' : 'py-6'
@@ -81,13 +93,8 @@ export default function Nav({ isReady }: NavProps) {
 
             {/* Right side: LangSwitcher + CTA */}
             <div className="hidden md:flex items-center gap-5">
-              {/* Language switcher — vertical slide */}
               <LangSwitcher />
-
-              {/* Separator */}
               <span className="w-px h-3 bg-border/60" aria-hidden="true" />
-
-              {/* CTA */}
               <a
                 href="mailto:jerome@delodder.dev"
                 data-magnetic
@@ -103,17 +110,17 @@ export default function Nav({ isReady }: NavProps) {
               className="md:hidden flex flex-col gap-1.5 p-2"
               aria-label={menuOpen ? t('menuClose') : t('menuOpen')}
             >
-              <motion.span
+              <m.span
                 className="block w-5 h-px bg-foreground origin-center"
                 animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 4 : 0 }}
                 transition={{ duration: 0.3 }}
               />
-              <motion.span
+              <m.span
                 className="block w-5 h-px bg-foreground"
                 animate={{ opacity: menuOpen ? 0 : 1 }}
                 transition={{ duration: 0.3 }}
               />
-              <motion.span
+              <m.span
                 className="block w-5 h-px bg-foreground origin-center"
                 animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -4 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -124,7 +131,7 @@ export default function Nav({ isReady }: NavProps) {
           {/* Mobile menu */}
           <AnimatePresence>
             {menuOpen && (
-              <motion.div
+              <m.div
                 key="mobile-menu"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
@@ -144,7 +151,6 @@ export default function Nav({ isReady }: NavProps) {
                     </a>
                   ))}
 
-                  {/* Mobile lang switcher */}
                   <div className="flex items-center gap-3 pt-2 border-t border-border">
                     <LangSwitcher />
                   </div>
@@ -156,10 +162,10 @@ export default function Nav({ isReady }: NavProps) {
                     {t('hire')}
                   </a>
                 </nav>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
-        </motion.header>
+        </m.header>
       )}
     </AnimatePresence>
   )

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 // ─── Token types for minimal syntax highlighting ─────────────────────────────
 
@@ -165,7 +165,7 @@ export default function CodeViewer({
             >
               {f.filename}
               {activeTab === i && (
-                <motion.div
+                <m.div
                   layoutId="tab-indicator"
                   className="absolute bottom-0 left-3 right-3 h-px"
                   style={{ background: accent }}
@@ -182,7 +182,7 @@ export default function CodeViewer({
         >
           <AnimatePresence mode="wait" initial={false}>
             {copied ? (
-              <motion.span
+              <m.span
                 key="copied"
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -190,16 +190,16 @@ export default function CodeViewer({
                 style={{ color: accent }}
               >
                 ✓ Copied
-              </motion.span>
+              </m.span>
             ) : (
-              <motion.span
+              <m.span
                 key="copy"
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
               >
                 Copy
-              </motion.span>
+              </m.span>
             )}
           </AnimatePresence>
         </button>
@@ -256,7 +256,7 @@ export default function CodeViewer({
           className="w-full flex items-center justify-center gap-2 py-3 text-[0.7rem] text-muted hover:text-foreground transition-all duration-300 border-t border-border/30"
           style={{ background: 'rgba(255,255,255,0.02)' }}
         >
-          <motion.svg
+          <m.svg
             width="12"
             height="12"
             viewBox="0 0 12 12"
@@ -265,7 +265,7 @@ export default function CodeViewer({
             transition={{ duration: 0.3 }}
           >
             <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </motion.svg>
+          </m.svg>
           {expanded
             ? `Collapse (${lines.length} lines)`
             : `Show all ${lines.length} lines`}

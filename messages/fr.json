@@ -31,7 +31,7 @@
     "cta": "Discutons de votre projet",
     "stats": [
       { "value": "3+", "label": "ans d'expérience" },
-      { "value": "40+", "label": "projets livrés" },
+      { "value": "10+", "label": "projets livrés" },
       { "value": "10×", "label": "plus vite avec AI" },
       { "value": "100%", "label": "remote ready" }
     ]

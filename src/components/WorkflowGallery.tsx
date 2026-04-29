@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 export interface WorkflowImage {
   src: string
@@ -55,7 +55,7 @@ function Lightbox({
   const img = images[current]
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -81,7 +81,7 @@ function Lightbox({
       </div>
 
       {/* Main image */}
-      <motion.div
+      <m.div
         key={current}
         initial={{ opacity: 0, scale: 0.97, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -101,10 +101,10 @@ function Lightbox({
             priority
           />
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Caption */}
-      <motion.div
+      <m.div
         key={`cap-${current}`}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -118,7 +118,7 @@ function Lightbox({
         {img.description && (
           <p className="mt-1.5 text-sm text-muted/70 max-w-xl mx-auto">{img.description}</p>
         )}
-      </motion.div>
+      </m.div>
 
       {/* Nav arrows */}
       <div className="absolute inset-y-0 left-4 flex items-center" onClick={(e) => e.stopPropagation()}>
@@ -161,11 +161,11 @@ function Lightbox({
               outline: current === i ? `1.5px solid ${accent}` : 'none',
             }}
           >
-            <Image src={img.src} alt={img.alt} fill className="object-cover" />
+            <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="60px" quality={50} />
           </button>
         ))}
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -188,7 +188,7 @@ export default function WorkflowGallery({
     <>
       <div ref={containerRef} className="space-y-3">
         {/* ── Hero image (full workflow) ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
@@ -205,6 +205,8 @@ export default function WorkflowGallery({
             fill
             className="object-cover object-left transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, 80vw"
+            quality={75}
+            loading="lazy"
           />
 
           {/* Dark overlay */}
@@ -243,14 +245,14 @@ export default function WorkflowGallery({
               </svg>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ── Grid images ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {gridImages.map((img, i) => {
             const absIdx = i + 1
             return (
-              <motion.div
+              <m.div
                 key={absIdx}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -268,6 +270,8 @@ export default function WorkflowGallery({
                   fill
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   sizes="(max-width: 768px) 50vw, 20vw"
+                  quality={68}
+                  loading="lazy"
                 />
 
                 {/* Overlay */}
@@ -304,7 +308,7 @@ export default function WorkflowGallery({
                     <path d="M1 1h7v7M1 8l7-7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-              </motion.div>
+              </m.div>
             )
           })}
         </div>

@@ -1,8 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion } from 'framer-motion'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { useGSAPReveal } from '@/hooks/useGSAPReveal'
 import { useTranslations } from 'next-intl'
 
 type SkillCategory = {
@@ -34,18 +33,19 @@ const CATEGORIES: SkillCategory[] = [
   },
 ]
 
-// Marquee strip component
+// Marquee strip — pure CSS (no JS animation engine).
+// The doubled list lets us translate from 0 → -50% seamlessly.
+// Animation runs on the GPU via translate3d; pauses when off-screen
+// thanks to content-visibility + animation-play-state media queries.
 function MarqueeStrip({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
   const doubled = [...items, ...items]
   return (
     <div className="overflow-hidden">
-      <motion.div
-        className="flex gap-3 w-max"
-        animate={{ x: reverse ? ['0%', '50%'] : ['0%', '-50%'] }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: 'linear',
+      <div
+        className="flex gap-3 w-max marquee-track"
+        style={{
+          animationDuration: '18s',
+          animationDirection: reverse ? 'reverse' : 'normal',
         }}
       >
         {doubled.map((item, i) => (
@@ -56,7 +56,7 @@ function MarqueeStrip({ items, reverse = false }: { items: string[]; reverse?: b
             {item}
           </span>
         ))}
-      </motion.div>
+      </div>
     </div>
   )
 }
@@ -64,7 +64,7 @@ function MarqueeStrip({ items, reverse = false }: { items: string[]; reverse?: b
 export default function Stack() {
   const t = useTranslations('stack')
   const containerRef = useRef<HTMLElement>(null)
-  useScrollReveal(containerRef, { stagger: 0.08 })
+  useGSAPReveal(containerRef, { stagger: 0.08 })
 
   // Flatten all skills for marquee
   const allSkills = CATEGORIES.flatMap((c) => c.skills)
@@ -85,7 +85,7 @@ export default function Stack() {
         {/* Headline */}
         <div className="mb-16 md:mb-20 max-w-[1600px]">
           <h2
-            data-reveal
+            data-reveal-text
             className="font-black text-foreground leading-tight tracking-tighter"
             style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)' }}
           >

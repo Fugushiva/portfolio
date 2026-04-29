@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useCallback } from 'react'
 
 export default function LangSwitcher() {
@@ -31,7 +31,7 @@ export default function LangSwitcher() {
       style={{ height: '1.2em', width: '2.4ch' }}
     >
       {/* Track — slides on hover */}
-      <motion.div
+      <m.div
         className="flex flex-col"
         initial={false}
         whileHover={{ y: '-50%' }}
@@ -58,7 +58,7 @@ export default function LangSwitcher() {
             {otherLabel}
           </span>
         </span>
-      </motion.div>
+      </m.div>
     </button>
   )
 }

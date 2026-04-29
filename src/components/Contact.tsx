@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { m } from 'framer-motion'
+import { useGSAPReveal } from '@/hooks/useGSAPReveal'
 import { useTranslations } from 'next-intl'
 
 const LINKS = [
@@ -43,7 +43,7 @@ export default function Contact() {
   const t = useTranslations('contact')
   const containerRef = useRef<HTMLElement>(null)
   const [copied, setCopied] = useState(false)
-  useScrollReveal(containerRef, { stagger: 0.1 })
+  useGSAPReveal(containerRef, { stagger: 0.1 })
 
   const copyEmail = async () => {
     try {
@@ -59,12 +59,20 @@ export default function Contact() {
     <section
       id="contact"
       ref={containerRef}
-      className="section-pad px-6 md:px-12 lg:px-20 relative overflow-hidden"
+      className="section-pad px-6 md:px-12 lg:px-20 relative"
     >
-      {/* Background glow */}
+      {/* Background glow — outside overflow:hidden so it isn't clipped */}
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 glow-accent"
-        style={{ width: '80vw', height: '40vw', opacity: 0.3 }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
+        style={{
+          width: '80vw',
+          height: '50vw',
+          background: 'radial-gradient(circle at 50% 100%, rgba(124,58,237,0.18) 0%, rgba(124,58,237,0.06) 40%, transparent 70%)',
+          filter: 'blur(60px)',
+          transform: 'translate(-50%, 20%)',
+          willChange: 'transform',
+        }}
+        aria-hidden="true"
       />
 
       {/* Section label */}
@@ -75,14 +83,16 @@ export default function Contact() {
 
       <div className="max-w-[1600px] relative z-10">
         {/* Big CTA text */}
-        <div className="mb-16 md:mb-24" data-reveal>
+        <div className="mb-16 md:mb-24">
           <h2
+            data-reveal-text
             className="font-black text-foreground leading-tight tracking-tighter"
             style={{ fontSize: 'clamp(2.5rem, 7vw, 8rem)' }}
           >
             {t('headline1')}
           </h2>
           <h2
+            data-reveal-text
             className="font-black leading-tight tracking-tighter"
             style={{
               fontSize: 'clamp(2.5rem, 7vw, 8rem)',
@@ -101,15 +111,16 @@ export default function Contact() {
             <p className="text-muted text-sm leading-relaxed mb-8 max-w-[360px]">
               {t('description')}
             </p>
-            <div className="flex items-center gap-4">
-              <motion.a
+            <div className="flex items-center gap-4 flex-wrap">
+              <m.a
                 href="mailto:jerome@delodder.dev"
                 data-magnetic
-                className="magnetic-wrap relative inline-flex items-center gap-3 px-8 py-4 bg-accent text-bg font-mono text-sm uppercase tracking-widest rounded-full font-bold transition-all duration-300 hover:bg-accent-light overflow-hidden group"
+                className="magnetic-wrap relative !inline-flex items-center gap-3 px-8 py-4 bg-accent text-bg font-mono text-sm uppercase tracking-widest rounded-full font-bold overflow-hidden group"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.3, ease: [0.19, 1, 0.22, 1] }}
               >
-                <motion.span
+                <m.span
                   className="absolute inset-0 bg-white/10 origin-left"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
@@ -119,12 +130,12 @@ export default function Contact() {
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="relative">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </motion.a>
+              </m.a>
 
               <button
                 onClick={copyEmail}
                 data-magnetic
-                className="magnetic-wrap inline-flex items-center gap-2 font-mono text-xs text-muted border border-border rounded-full px-4 py-3 hover:border-foreground/40 hover:text-foreground transition-all duration-300"
+                className="magnetic-wrap !inline-flex items-center gap-2 font-mono text-xs text-muted border border-border rounded-full px-4 py-3 hover:border-foreground/40 hover:text-foreground transition-all duration-300"
               >
                 {copied ? (
                   <>
@@ -146,35 +157,51 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Social links */}
-          <div className="flex flex-col gap-4 md:ml-auto" data-reveal>
-            {LINKS.map(({ label, href, display, icon }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith('http') ? '_blank' : undefined}
-                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                data-magnetic
-                className="magnetic-wrap flex items-center gap-3 text-muted hover:text-foreground transition-colors duration-300 group"
-              >
-                <span className="w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:border-accent group-hover:text-accent transition-all duration-300">
-                  {icon}
-                </span>
-                <span>
-                  <span className="font-mono text-[10px] uppercase tracking-wider block text-muted/60">{label}</span>
-                  <span className="font-mono text-xs">{display}</span>
-                </span>
-              </a>
-            ))}
-          </div>
+
         </div>
 
         {/* Footer */}
-        <div className="mt-24 pt-8 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" data-reveal>
-          <span className="font-mono text-xs text-muted/50">
+        <div
+          className="mt-24 pt-8 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+          data-reveal
+        >
+          <span className="font-mono text-xs text-muted/50 order-3 sm:order-1">
             {t('footer_copy')}
           </span>
-          <span className="font-mono text-xs text-muted/30 uppercase tracking-wider">
+
+          {/* Social Links inside Footer */}
+          <div className="flex items-center gap-5 order-2">
+            {LINKS.filter(link => link.label !== 'Email').map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-magnetic
+                aria-label={label}
+                className="magnetic-wrap w-12 h-12 rounded-full border border-foreground/20 !flex items-center justify-center text-foreground/50 hover:border-accent hover:text-accent hover:bg-accent/10 transition-all duration-300"
+              >
+                {label === 'LinkedIn' ? (
+                  <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="3" stroke="currentColor" strokeWidth="1.3"/>
+                    <path d="M5.5 8v4.5M5.5 6v-.5M8.5 12.5V9.5c0-1 .5-1.5 1.5-1.5s1.5.5 1.5 1.5v3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+                  </svg>
+                ) : (
+                  <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2a7 7 0 00-2.21 13.64c.35.06.48-.15.48-.34v-1.19c-1.95.42-2.36-.94-2.36-.94-.32-.81-.78-1.03-.78-1.03-.64-.44.05-.43.05-.43.7.05 1.07.72 1.07.72.63 1.07 1.64.76 2.04.58.06-.45.24-.76.44-.93-1.56-.18-3.2-.78-3.2-3.47 0-.77.27-1.39.72-1.88-.07-.18-.31-.89.07-1.85 0 0 .59-.19 1.92.72a6.7 6.7 0 013.5 0c1.33-.91 1.92-.72 1.92-.72.38.96.14 1.67.07 1.85.45.49.72 1.11.72 1.88 0 2.7-1.65 3.29-3.22 3.47.25.22.48.65.48 1.31v1.95c0 .19.13.4.48.34A7 7 0 009 2z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </a>
+            ))}
+          </div>
+
+          {/* Availability pill */}
+          <span className="inline-flex items-center gap-2 font-mono text-xs text-muted/40 uppercase tracking-wider order-1 sm:order-3">
+            {/* Pulsing dot */}
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
+            </span>
             {t('footer_availability')}
           </span>
         </div>

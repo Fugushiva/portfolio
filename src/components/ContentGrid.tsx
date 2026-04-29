@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 export interface ContentPiece {
   src: string
@@ -71,7 +71,7 @@ function ContentCard({
       : '1/1'
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24, scale: 0.97 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-20px' }}
@@ -86,7 +86,7 @@ function ContentCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Image */}
+      {/* Image — quality 70 is plenty for thumbnails; saves ~30% per file */}
       <Image
         src={piece.src}
         alt={piece.alt}
@@ -94,6 +94,8 @@ function ContentCard({
         className="object-cover transition-transform duration-700 ease-out"
         style={{ transform: hovered ? 'scale(1.05)' : 'scale(1)' }}
         sizes="(max-width: 768px) 50vw, 25vw"
+        quality={70}
+        loading="lazy"
       />
 
       {/* Bottom gradient overlay */}
@@ -164,7 +166,7 @@ function ContentCard({
           </svg>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -200,7 +202,7 @@ function ContentLightbox({
     piece.format?.toLowerCase().includes('stories')
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -224,7 +226,7 @@ function ContentLightbox({
       </div>
 
       {/* Image */}
-      <motion.div
+      <m.div
         key={current}
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -252,10 +254,10 @@ function ContentLightbox({
             priority
           />
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Caption */}
-      <motion.div
+      <m.div
         key={`cap-${current}`}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -278,7 +280,7 @@ function ContentLightbox({
             {piece.format}
           </span>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Nav arrows */}
       <div className="absolute inset-y-0 left-4 flex items-center" onClick={(e) => e.stopPropagation()}>
@@ -301,7 +303,7 @@ function ContentLightbox({
           </svg>
         </button>
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -347,7 +349,7 @@ export default function ContentGrid({
 
       {/* Show more */}
       {!showAll && pieces.length > 9 && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -362,7 +364,7 @@ export default function ContentGrid({
             </svg>
             Show {pieces.length - 9} more
           </button>
-        </motion.div>
+        </m.div>
       )}
 
       {/* Lightbox */}

@@ -1,9 +1,16 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { gsap } from 'gsap'
+import { m } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import HeroParticles from './HeroParticles'
+
+// HeroParticles is imported statically. Although Three.js is browser-only,
+// the component itself guards every browser API behind useEffect (which only
+// runs client-side). SiteShell's mounted-gate ensures Hero never renders on
+// the server anyway — by the time HeroParticles instantiates, we're 100%
+// in the browser. Static import avoids the Next.js 15.5 webpack bug where
+// dynamic chunks can lose their react module reference.
 
 interface HeroProps {
   isReady: boolean
@@ -15,64 +22,108 @@ export default function Hero({ isReady }: HeroProps) {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const orbRef = useRef<HTMLDivElement>(null)
-  const wordIndexRef = useRef(0)
   const wordRef = useRef<HTMLSpanElement>(null)
-  const wordIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // Mouse parallax on orb
+  // ── Mouse parallax on the orb ─────────────────────────────────────────
+  // Previously this called gsap.to(orb, ...) on every mousemove — that
+  // imported all of GSAP and queued a tween per pointer event (60+/s).
+  // Now: we throttle to one rAF per frame and animate via translate3d
+  // directly, no library involved. Smooth, GPU-only, zero deps.
   useEffect(() => {
     if (!orbRef.current) return
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
+    if (typeof window === 'undefined') return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (window.matchMedia('(pointer: coarse)').matches) return
+
+    const orb = orbRef.current
+    let targetX = 0
+    let targetY = 0
+    let currentX = 0
+    let currentY = 0
+    let rafId = 0
 
     const onMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 60
-      const y = (e.clientY / window.innerHeight - 0.5) * 40
-      gsap.to(orbRef.current, {
-        x,
-        y,
-        duration: 2,
-        ease: 'power2.out',
-      })
+      targetX = (e.clientX / window.innerWidth - 0.5) * 60
+      targetY = (e.clientY / window.innerHeight - 0.5) * 40
+      if (rafId === 0) rafId = requestAnimationFrame(loop)
     }
-    window.addEventListener('mousemove', onMove)
-    return () => window.removeEventListener('mousemove', onMove)
+
+    const loop = () => {
+      currentX += (targetX - currentX) * 0.06
+      currentY += (targetY - currentY) * 0.06
+      orb.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`
+      if (Math.abs(targetX - currentX) + Math.abs(targetY - currentY) < 0.05) {
+        rafId = 0
+        return
+      }
+      rafId = requestAnimationFrame(loop)
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
   }, [])
 
-  // Rotating words
+  // ── Rotating words ────────────────────────────────────────────────────
+  // Replaced GSAP tween with a CSS transition + scheduled rAF tick.
+  // One transitionend listener swaps text after fade-out, no setInterval
+  // race conditions, and the loop pauses when the page is hidden.
   useEffect(() => {
-    if (!isReady || !wordRef.current) return
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
+    if (!isReady) return
+    const el = wordRef.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    // Reset to first word when locale changes
-    wordIndexRef.current = 0
-    if (wordRef.current) wordRef.current.textContent = words[0]
+    let index = 0
+    let timer: ReturnType<typeof setTimeout> | null = null
+    let cancelled = false
 
-    const rotateWord = () => {
-      wordIndexRef.current = (wordIndexRef.current + 1) % words.length
-      if (!wordRef.current) return
+    el.style.transition =
+      'transform 380ms cubic-bezier(0.55, 0, 0.55, 0.2), opacity 380ms ease'
+    el.textContent = words[0]
 
-      gsap.to(wordRef.current, {
-        y: '-110%',
-        opacity: 0,
-        duration: 0.4,
-        ease: 'power2.in',
-        onComplete: () => {
-          if (!wordRef.current) return
-          wordRef.current.textContent = words[wordIndexRef.current]
-          gsap.fromTo(
-            wordRef.current,
-            { y: '60%', opacity: 0 },
-            { y: '0%', opacity: 1, duration: 0.5, ease: 'power2.out' }
-          )
-        },
-      })
+    const tick = () => {
+      if (cancelled) return
+      // Fade up + out
+      el.style.transform = 'translate3d(0, -110%, 0)'
+      el.style.opacity = '0'
+
+      timer = setTimeout(() => {
+        if (cancelled) return
+        index = (index + 1) % words.length
+        el.textContent = words[index]
+        // Snap below
+        el.style.transition = 'none'
+        el.style.transform = 'translate3d(0, 60%, 0)'
+        el.style.opacity = '0'
+        // Force reflow then animate up
+        void el.offsetWidth
+        el.style.transition =
+          'transform 480ms cubic-bezier(0.19, 1, 0.22, 1), opacity 480ms ease-out'
+        el.style.transform = 'translate3d(0, 0, 0)'
+        el.style.opacity = '1'
+        timer = setTimeout(tick, 2200)
+      }, 380)
     }
 
-    wordIntervalRef.current = setInterval(rotateWord, 2200)
+    timer = setTimeout(tick, 2200)
+
+    const onVisibility = () => {
+      if (document.hidden && timer) {
+        clearTimeout(timer)
+        timer = null
+      } else if (!document.hidden && !timer && !cancelled) {
+        timer = setTimeout(tick, 2200)
+      }
+    }
+    document.addEventListener('visibilitychange', onVisibility)
+
     return () => {
-      if (wordIntervalRef.current) clearInterval(wordIntervalRef.current)
+      cancelled = true
+      if (timer) clearTimeout(timer)
+      document.removeEventListener('visibilitychange', onVisibility)
     }
   }, [isReady, words])
 
@@ -98,64 +149,60 @@ export default function Hero({ isReady }: HeroProps) {
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-end overflow-hidden px-6 pb-16 md:px-12 md:pb-24 lg:px-20 lg:pb-28"
     >
-      {/* Background orb */}
+      {/* WebGL particle background */}
+      <HeroParticles isReady={isReady} />
+
+      {/* Ambient depth orb — kept very faint behind particles for colour warmth */}
       <div
         ref={orbRef}
-        className="absolute top-1/4 right-0 md:right-[10%] w-[clamp(300px,55vw,700px)] h-[clamp(300px,55vw,700px)] rounded-full pointer-events-none"
+        className="absolute top-1/4 right-0 md:right-[10%] w-[clamp(300px,60vw,800px)] h-[clamp(300px,60vw,800px)] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle at center, rgba(124,58,237,0.22) 0%, rgba(124,58,237,0.06) 50%, transparent 75%)',
-          filter: 'blur(40px)',
-        }}
-      />
-
-      {/* Grid lines */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
+            'radial-gradient(circle at center, rgba(124,58,237,0.10) 0%, rgba(124,58,237,0.03) 50%, transparent 75%)',
+          filter: 'blur(80px)',
+          willChange: 'transform',
+          transform: 'translate3d(0,0,0)',
+          zIndex: 1,
         }}
       />
 
       {/* Content */}
-      <motion.div
+      <m.div
         variants={containerVariants}
         initial="hidden"
         animate={isReady ? 'visible' : 'hidden'}
         className="relative z-10 max-w-[1600px] w-full"
       >
         {/* Eyebrow */}
-        <motion.div variants={itemVariants} className="split-line mb-6 md:mb-8">
+        <m.div variants={itemVariants} className="split-line mb-6 md:mb-8">
           <span className="font-mono text-xs md:text-sm text-muted tracking-widest uppercase">
             {t('availability')}
           </span>
-        </motion.div>
+        </m.div>
 
         {/* Name headline */}
         <div className="overflow-hidden mb-2 md:mb-4">
-          <motion.h1
+          <m.h1
             variants={itemVariants}
             className="font-black text-foreground leading-none tracking-tighter"
             style={{ fontSize: 'clamp(3.5rem, 11vw, 11.5rem)' }}
           >
             Jérôme
-          </motion.h1>
+          </m.h1>
         </div>
 
         <div className="overflow-hidden mb-8 md:mb-10">
-          <motion.h1
+          <m.h1
             variants={itemVariants}
             className="font-black text-foreground leading-none tracking-tighter"
             style={{ fontSize: 'clamp(3.5rem, 11vw, 11.5rem)' }}
           >
             Delodder
-          </motion.h1>
+          </m.h1>
         </div>
 
         {/* Tagline row */}
-        <motion.div
+        <m.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-8"
         >
@@ -169,6 +216,7 @@ export default function Hero({ isReady }: HeroProps) {
               <span
                 ref={wordRef}
                 className="inline-block text-accent font-semibold"
+                style={{ willChange: 'transform, opacity' }}
               >
                 {words[0]}
               </span>
@@ -198,10 +246,10 @@ export default function Hero({ isReady }: HeroProps) {
               {t('cta_contact')}
             </a>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Scroll indicator */}
-        <motion.div
+        <m.div
           variants={itemVariants}
           className="absolute bottom-0 right-0 hidden md:flex flex-col items-center gap-2"
         >
@@ -209,14 +257,14 @@ export default function Hero({ isReady }: HeroProps) {
             <span className="font-mono text-[10px] text-muted uppercase tracking-widest [writing-mode:vertical-rl]">
               {t('scroll')}
             </span>
-            <motion.div
+            <m.div
               className="w-px h-12 bg-gradient-to-b from-accent to-transparent origin-top"
               animate={{ scaleY: [0, 1, 0] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
             />
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
 
       {/* Bottom divider */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />

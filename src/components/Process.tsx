@@ -1,8 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion } from 'framer-motion'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { useGSAPReveal } from '@/hooks/useGSAPReveal'
 import { useTranslations } from 'next-intl'
 
 const STEP_ICONS = [
@@ -38,7 +37,7 @@ export default function Process() {
   const myItems = t.raw('my_items') as string[]
 
   const containerRef = useRef<HTMLElement>(null)
-  useScrollReveal(containerRef, { stagger: 0.1 })
+  useGSAPReveal(containerRef, { stagger: 0.1, duration: 1.0, y: 50, start: 'top 88%' })
 
   return (
     <section
@@ -56,6 +55,7 @@ export default function Process() {
         {/* Left — headline */}
         <div className="flex flex-col justify-center" data-reveal>
           <h2
+            data-reveal-text
             className="font-black text-foreground leading-tight tracking-tighter mb-6"
             style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)' }}
           >
@@ -97,11 +97,10 @@ export default function Process() {
         {/* Right — steps */}
         <div className="flex flex-col gap-0">
           {steps.map((step, i) => (
-            <motion.div
+            <div
               key={step.title}
               data-reveal
               className="flex gap-6 py-6 border-t border-border group hover:bg-surface/30 px-4 -mx-4 rounded transition-colors duration-300"
-              initial={false}
             >
               {/* Number line */}
               <div className="flex flex-col items-center shrink-0">
@@ -123,7 +122,7 @@ export default function Process() {
                 </div>
                 <p className="text-muted text-sm leading-relaxed">{step.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
           <div className="border-t border-border" />
         </div>

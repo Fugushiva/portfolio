@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Custom cursor hidden on default ─── */
-* {
-  cursor: none;
-}
-
-@media (pointer: coarse) {
-  * {
-    cursor: auto;
-  }
+/* ─── Custom cursor ───────────────────────────────────────────────────────
+   `cursor: none` on `*` triggers a recalc on every element. Setting it on
+   <html> covers the whole page just as well and is way cheaper.
+   Touch devices keep the OS pointer.
+*/
+@media (hover: hover) and (pointer: fine) {
+  html { cursor: none; }
+  /* Inputs/textareas keep their native carets */
+  html input, html textarea, html [contenteditable="true"] { cursor: text; }
 }
 
 /* ─── Scrollbar ─── */
@@ -35,12 +35,18 @@
 html {
   background: #0a0a0a;
   color: #f5f5f0;
+  /* Smooth scroll handled by Lenis when JS is ready; native fallback only */
+  scroll-behavior: auto;
+  /* Lenis recommended baseline is actually auto, not 100% */
+  height: auto;
 }
 
 body {
   background: #0a0a0a;
   color: #f5f5f0;
   overflow-x: hidden;
+  /* iOS bounce control + smoother momentum on trackpads */
+  overscroll-behavior-y: none;
 }
 
 /* When preloader is active, block scroll */
@@ -48,7 +54,16 @@ body.is-loading {
   overflow: hidden;
 }
 
-/* ─── Noise grain overlay ─── */
+/* ─── Noise grain overlay ─────────────────────────────────────────────────
+   Fixed pseudo-overlay promoted to its own compositor layer.
+
+   IMPORTANT: `contain: strict` includes `paint` containment, which creates
+   a stacking context and clips anything painted outside the element's border
+   box. Since this element is inset:-200% (400% size) and fixed, `strict`
+   was silently clipping visible page content in some compositing scenarios.
+   `contain: size layout` gives us the layout/size savings without the paint
+   clip hazard.
+*/
 .grain-overlay {
   position: fixed;
   inset: -200%;
@@ -62,61 +77,81 @@ body.is-loading {
   opacity: 0.035;
   animation: grain 0.5s steps(1) infinite;
   mix-blend-mode: overlay;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  /* size + layout is safe; avoids the paint-clip hazard of 'strict' */
+  contain: size layout;
+}
+
+/* Hide grain on small / low-end devices where it's a real perf hit */
+@media (max-width: 640px), (prefers-reduced-motion: reduce) {
+  .grain-overlay { display: none; }
 }
 
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10%  { transform: translate(-2%, -3%); }
-  20%  { transform: translate(3%, 2%); }
-  30%  { transform: translate(-1%, 4%); }
-  40%  { transform: translate(4%, -1%); }
-  50%  { transform: translate(-3%, 1%); }
-  60%  { transform: translate(2%, -4%); }
-  70%  { transform: translate(-4%, 2%); }
-  80%  { transform: translate(1%, -2%); }
-  90%  { transform: translate(-2%, 3%); }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  10%  { transform: translate3d(-2%, -3%, 0); }
+  20%  { transform: translate3d(3%, 2%, 0); }
+  30%  { transform: translate3d(-1%, 4%, 0); }
+  40%  { transform: translate3d(4%, -1%, 0); }
+  50%  { transform: translate3d(-3%, 1%, 0); }
+  60%  { transform: translate3d(2%, -4%, 0); }
+  70%  { transform: translate3d(-4%, 2%, 0); }
+  80%  { transform: translate3d(1%, -2%, 0); }
+  90%  { transform: translate3d(-2%, 3%, 0); }
 }
 
-/* ─── Cursor dot ─── */
+/* ─── Cursor dot ──────────────────────────────────────────────────────────
+   Positioned via JS-driven transform: translate3d(x,y,0) translate(-50%,-50%).
+*/
 .cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background: #f5f5f0;
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+  transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.25s ease;
   mix-blend-mode: difference;
+  will-change: transform;
 }
 
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(245, 245, 240, 0.5);
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(245, 245, 240, 0.4);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: transform 0.08s linear, width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.25s ease;
+  will-change: transform;
 }
 
 .cursor.is-hovering {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   background: #7c3aed;
 }
 
 .cursor-ring.is-hovering {
-  width: 60px;
-  height: 60px;
-  opacity: 0.6;
+  width: 56px;
+  height: 56px;
+  opacity: 0.55;
+}
+
+/* Hide custom cursor on touch */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor, .cursor-ring { display: none; }
 }
 
 /* ─── Clip path animation utility ─── */
@@ -132,6 +167,17 @@ body.is-loading {
 .section-pad {
   padding-top: clamp(5rem, 10vw, 10rem);
   padding-bottom: clamp(5rem, 10vw, 10rem);
+}
+
+/* ─── Content-visibility deferred render ─────────────────────────────────
+   Skips layout + paint of off-screen sections.
+   contain-intrinsic-size is a hint so the browser reserves scroll space
+   while the section is skipped — prevents layout shift on scroll.
+   Only safe on sections that don't have position:sticky children.
+*/
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 /* ─── Horizontal rule ─── */
@@ -152,6 +198,22 @@ body.is-loading {
   display: inline-block;
 }
 
+/* ─── Marquee (CSS-only, GPU-accelerated) ─────────────────────────────────
+   Using translate3d forces GPU compositing so the scrolling strip never
+   triggers main-thread paint. animation-play-state:paused when the
+   element is off-screen is handled automatically by content-visibility.
+*/
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
 /* ─── Gradient glow ─── */
 .glow-accent {
   position: absolute;
@@ -159,6 +221,50 @@ body.is-loading {
   background: radial-gradient(circle, rgba(124, 58, 237, 0.35) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ─── Availability pulsing dot ────────────────────────────────────────────
+   The Tailwind `animate-ping` class drives this — we just make sure it
+   looks right on the dark background.
+*/
+@keyframes ping-slow {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* ─── GSAP text reveal masks ──────────────────────────────────────────────
+   .reveal-mask   → overflow:hidden container that hides the inner until reveal.
+   .reveal-inner  → the actual text node that slides up from below the mask.
+
+   These are injected programmatically by useGSAPReveal's splitIntoLines().
+   Keeping them in CSS ensures correct rendering even before JS fires and
+   eliminates any FOUC: the inner starts at yPercent:102 (via GSAP.set) so
+   nothing is visible, and the mask clips it perfectly.
+*/
+.reveal-mask {
+  display: block;
+  overflow: hidden;
+  /* Tiny extra bottom padding to avoid descenders being clipped at rest */
+  padding-bottom: 0.08em;
+  /* Collapse vertical whitespace between lines elegantly */
+  line-height: inherit;
+}
+
+/* Inline variant — used for word-by-word reveals */
+.reveal-mask[style*="inline-block"] {
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.reveal-inner {
+  display: block;
+  /* will-change is set/cleared by GSAP during the tween only */
 }
 
 /* ─── Reduce motion ─── */
@@ -169,7 +275,11 @@ body.is-loading {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .grain-overlay {
-    display: none;
+  .grain-overlay { display: none; }
+
+  /* Force text-reveal elements visible if reduced motion is set */
+  .reveal-inner {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
