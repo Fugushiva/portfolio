@@ -71,3 +71,12 @@ CLAUDE.md
 # Obsidian files
 graphify-out/
 .graphify*
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
