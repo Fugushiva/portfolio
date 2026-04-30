@@ -61,21 +61,6 @@
         ]
       },
       {
-        "title": "Reassurez-vous CRM",
-        "category": "Fullstack SaaS",
-        "year": "2024",
-        "client": "Insurance & Finance",
-        "headline": "Full-stack CRM for insurance sales teams — built solo, AI-assisted.",
-        "description": "Production-grade Customer Relationship Management platform for insurance and financial services sales teams. Handles the entire customer lifecycle: bulk prospect import, call-center operations, document collection, appointment scheduling, and contract validation — all within a single, role-secured platform. Built from scratch with Next.js 15, Supabase, and 13+ PostgreSQL stored procedures.",
-        "architecture": "75+ React components · 15+ PostgreSQL tables · 13+ RPC functions · 4-stage sales pipeline",
-        "metrics": [
-          { "value": "75+", "label": "React components" },
-          { "value": "15+", "label": "PostgreSQL tables" },
-          { "value": "4", "label": "stage sales pipeline" },
-          { "value": "3", "label": "role access tiers" }
-        ]
-      },
-      {
         "title": "AI Brand Identity Generator",
         "category": "Prompt Engineering",
         "year": "2024",

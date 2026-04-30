@@ -1,0 +1,396 @@
+{
+  "nodes": [
+    {
+      "id": "claude_portfolio_jerome",
+      "label": "Portfolio Jerome Delodder",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 1",
+      "source_url": null,
+      "captured_at": null,
+      "author": "Jerome Delodder",
+      "contributor": null
+    },
+    {
+      "id": "claude_nextjs_framework",
+      "label": "Next.js 16 App Router",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 13",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_framer_motion",
+      "label": "Framer Motion",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 14",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_gsap",
+      "label": "GSAP ScrollTrigger",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 14",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_lenis",
+      "label": "Lenis Smooth Scroll",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 15",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_tailwind",
+      "label": "Tailwind CSS",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 16",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_threejs",
+      "label": "Three.js WebGL",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 17",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_typescript",
+      "label": "TypeScript Strict",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 19",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_dark_cinematic",
+      "label": "Dark Cinematic Visual Direction",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 25",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_noise_overlay",
+      "label": "Noise Grain Texture Overlay",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 30",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_preloader",
+      "label": "Preloader Animation",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 38",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_hero_section",
+      "label": "Hero Section",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 39",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_magnetic_cursor",
+      "label": "Magnetic Custom Cursor",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 53",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_n8n_workflows",
+      "label": "n8n Automation Workflows",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 66",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_prompt_engineering",
+      "label": "Prompt Engineering Systems",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 69",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_awwwards_target",
+      "label": "Awwwards Quality Target",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_lighthouse_perf",
+      "label": "Lighthouse Performance 90+",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 110",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_reduced_motion",
+      "label": "prefers-reduced-motion Accessibility",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 112",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_nextjs_framework",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 13",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_framer_motion",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 14",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_gsap",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 14",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_lenis",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 15",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_tailwind",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 16",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_typescript",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 19",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_dark_cinematic",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 25",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_portfolio_jerome",
+      "target": "claude_awwwards_target",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 7",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_dark_cinematic",
+      "target": "claude_noise_overlay",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 30",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_awwwards_target",
+      "target": "claude_lighthouse_perf",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 110",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_awwwards_target",
+      "target": "claude_reduced_motion",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 112",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_framer_motion",
+      "target": "claude_preloader",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 55",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_gsap",
+      "target": "claude_hero_section",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 54",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_n8n_workflows",
+      "target": "claude_prompt_engineering",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 66",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_magnetic_cursor",
+      "target": "claude_dark_cinematic",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 53",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_threejs",
+      "target": "claude_hero_section",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 60",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "animation_stack",
+      "label": "Animation Stack",
+      "nodes": [
+        "claude_framer_motion",
+        "claude_gsap",
+        "claude_lenis",
+        "claude_magnetic_cursor"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "CLAUDE.md"
+    },
+    {
+      "id": "portfolio_sections",
+      "label": "Portfolio Sections",
+      "nodes": [
+        "claude_preloader",
+        "claude_hero_section",
+        "claude_n8n_workflows",
+        "claude_prompt_engineering"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "CLAUDE.md"
+    }
+  ],
+  "input_tokens": 800,
+  "output_tokens": 400
+}

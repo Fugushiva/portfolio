@@ -69,5 +69,6 @@ ehthumbs_vista.db
 CLAUDE.md
 
 # Obsidian files
-graphify-out/
-.graphify*
+graphify-out/cache/
+graphify-out/manifest.json
+graphify-out/cost.json
