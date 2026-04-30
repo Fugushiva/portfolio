@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+Sitemap: https://jeromedelodder.com/sitemap.xml
+Host: https://jeromedelodder.com

@@ -7,7 +7,7 @@ import { routing } from '@/i18n/routing'
 import JsonLd from '@/components/JsonLd'
 import '../globals.css'
 
-const BASE_URL = 'https://jerome-delodder.com'
+const BASE_URL = 'https://jeromedelodder.com'
 
 // display:swap → no FOIT, content paints as soon as possible.
 // metadataBase is set below in the metadata export so Next.js resolves

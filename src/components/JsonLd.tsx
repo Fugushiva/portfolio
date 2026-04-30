@@ -8,7 +8,7 @@
  *  - BreadcrumbList
  */
 
-const BASE_URL = 'https://jerome-delodder.com'
+const BASE_URL = 'https://jeromedelodder.com'
 
 interface JsonLdProps {
   locale: 'fr' | 'en'

@@ -129,7 +129,7 @@ export default function Image() {
             letterSpacing: '0.5px',
           }}
         >
-          jerome-delodder.com
+          jeromedelodder.com
         </div>
       </div>
     ),

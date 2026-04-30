@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 // metadataBase is set here so Next.js resolves relative OG / Twitter
 // image URLs in ALL nested layouts (including /[locale]).
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jerome-delodder.com'),
+  metadataBase: new URL('https://jeromedelodder.com'),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
