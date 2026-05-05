@@ -33,6 +33,17 @@ const config: NextConfig = {
 
   productionBrowserSourceMaps: false,
 
+  webpack(config, { isServer, nextRuntime }) {
+    // The Edge Runtime (middleware) forbids eval() — which webpack's default
+    // devtool `eval-source-map` uses for source maps in development.
+    // Switch to `cheap-module-source-map` for Edge chunks: same line-level
+    // accuracy, no eval(), middleware works in both dev and prod.
+    if (nextRuntime === 'edge') {
+      config.devtool = 'cheap-module-source-map'
+    }
+    return config
+  },
+
   async headers() {
     return [
       // ── Static asset cache ─────────────────────────────────────
