@@ -1,37 +1,32 @@
 'use client'
 
 /**
- * Hero — cinematic world-class opening screen.
+ * Hero — cinematic world-class opening screen ("Galaxy Engine v2").
  *
- * Visual hierarchy:
- *   - Deep galaxy background (HeroParticles WebGL)
- *   - Subtle radial vignette to frame the content
- *   - Eyebrow: availability badge with pulsing dot
- *   - Name: massive letter-stagger reveal, gradient accent on first name
- *   - Role line: rotating words with clip-mask transition
- *   - CTA row: ghost button + filled pill
- *   - Vertical scroll indicator with animated line
- *   - Floating stat chips (years exp / projects / satisfaction)
+ * Composition (back to front, by z-index):
+ *   z 0  HeroParticles        WebGL galaxy (stars, nebula, dust, lines)
+ *   z 1  HeroShootingStars    Canvas2D comets w/ chromatic trails
+ *   z 2  Vignettes / orbs / godrays / aurora
+ *   z 10 Foreground content (badge, name, taglines, CTAs)
  *
- * Effects:
- *   - Multi-layer orb parallax on mousemove (2 orbs at different depths)
- *   - Name letters: y + rotateZ + opacity stagger via Framer Motion
- *   - Gradient text on "Jérome" via CSS background-clip
- *   - Ambient vignette: radial-gradient overlay
- *   - Bottom horizon glow (like stars reflecting off atmosphere)
+ * Cursor gravity & click ripple live in HeroParticles (shader uniforms).
+ * Name effects live in HeroName (gradient/shimmer/chromatic/tilt/scramble).
+ *
+ * The whole hero gracefully degrades on prefers-reduced-motion and on
+ * coarse pointers — see each child component.
  */
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { m } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import HeroParticles from './HeroParticles'
+import HeroParticles     from './HeroParticles'
+import HeroShootingStars from './HeroShootingStars'
+import HeroAurora        from './HeroAurora'
+import HeroName          from './HeroName'
 
 interface HeroProps {
   isReady: boolean
 }
-
-const JEROME   = ['J', 'é', 'r', 'ô', 'm', 'e']
-const DELODDER = ['D', 'e', 'l', 'o', 'd', 'd', 'e', 'r']
 
 export default function Hero({ isReady }: HeroProps) {
   const t     = useTranslations('hero')
@@ -41,6 +36,9 @@ export default function Hero({ isReady }: HeroProps) {
   const orbRef       = useRef<HTMLDivElement>(null)
   const orb2Ref      = useRef<HTMLDivElement>(null)
   const wordRef      = useRef<HTMLSpanElement>(null)
+
+  // Pause heavy children when hero leaves viewport
+  const [active, setActive] = useState(true)
 
   // ── Multi-orb mouse parallax ──────────────────────────────────────────────
   useEffect(() => {
@@ -130,32 +128,30 @@ export default function Hero({ isReady }: HeroProps) {
     }
   }, [isReady, words])
 
-  // ── Animation variants ────────────────────────────────────────────────────
-  const letterVariants = {
-    hidden: { y: '115%', opacity: 0, rotateZ: -8 },
-    visible: (i: number) => ({
-      y: '0%', opacity: 1, rotateZ: 0,
-      transition: {
-        delay: 0.04 + i * 0.038,
-        duration: 1.05,
-        ease: [0.19, 1, 0.22, 1] as [number, number, number, number],
-      },
-    }),
-  }
+  // ── Pause heavy children when hero leaves viewport ────────────────────────
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { threshold: 0 },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
+  // ── Animation variants ────────────────────────────────────────────────────
   const itemVariants = {
-    hidden:   { y: 50, opacity: 0 },
+    hidden:  { y: 50, opacity: 0 },
     visible: {
       y: 0, opacity: 1,
       transition: { duration: 1.1, ease: [0.19, 1, 0.22, 1] as [number, number, number, number] },
     },
   }
-
   const containerVariants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } },
   }
-
   const isVisible = isReady ? 'visible' : 'hidden'
 
   return (
@@ -166,13 +162,22 @@ export default function Hero({ isReady }: HeroProps) {
     >
       {/* ── Background layers ── */}
 
-      {/* Deep space background gradient */}
+      {/* Deep space background gradient (z 0) */}
       <div className="hero-galaxy-bg" aria-hidden="true" />
 
-      {/* WebGL galaxy */}
+      {/* WebGL galaxy (z 0) */}
       <HeroParticles isReady={isReady} />
 
-      {/* Radial vignette — frames content, darkens edges */}
+      {/* Comets (z 1) */}
+      <HeroShootingStars isReady={isReady} active={active} />
+
+      {/* Aurora ribbon (z 2) — lazy mounted after idle */}
+      <HeroAurora isReady={isReady} />
+
+      {/* Volumetric godrays from top-right (z 2) */}
+      <div className="hero-godrays" aria-hidden="true" />
+
+      {/* Radial vignette — frames content, darkens edges (z 2) */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -182,7 +187,7 @@ export default function Hero({ isReady }: HeroProps) {
         aria-hidden="true"
       />
 
-      {/* Top vignette */}
+      {/* Top vignette (z 2) */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -192,7 +197,7 @@ export default function Hero({ isReady }: HeroProps) {
         aria-hidden="true"
       />
 
-      {/* Orb 1 — close/warm violet, large */}
+      {/* Orb 1 — close/warm violet, large (z 2) */}
       <div
         ref={orbRef}
         className="absolute top-[10%] right-[-5%] md:right-[5%] pointer-events-none"
@@ -208,7 +213,7 @@ export default function Hero({ isReady }: HeroProps) {
         }}
       />
 
-      {/* Orb 2 — distant/cool indigo */}
+      {/* Orb 2 — distant/cool indigo (z 2) */}
       <div
         ref={orb2Ref}
         className="absolute bottom-[10%] left-[-5%] pointer-events-none"
@@ -224,7 +229,7 @@ export default function Hero({ isReady }: HeroProps) {
         }}
       />
 
-      {/* Horizon glow — atmospheric bottom edge */}
+      {/* Horizon glow — atmospheric bottom edge (z 2) */}
       <div
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
         style={{
@@ -235,7 +240,7 @@ export default function Hero({ isReady }: HeroProps) {
         aria-hidden="true"
       />
 
-      {/* ── Content ── */}
+      {/* ── Content (z 10) ── */}
       <m.div
         variants={containerVariants}
         initial="hidden"
@@ -251,59 +256,8 @@ export default function Hero({ isReady }: HeroProps) {
           </div>
         </m.div>
 
-        {/* Name block */}
-        <div className="mb-8 md:mb-10">
-          {/* JÉROME — gradient accent */}
-          <div
-            className="overflow-hidden"
-            style={{ lineHeight: 1 }}
-          >
-            <div
-              className="flex flex-wrap leading-none tracking-tighter font-black"
-              style={{ fontSize: 'clamp(3.8rem, 11.5vw, 12rem)' }}
-            >
-              {JEROME.map((char, i) => (
-                <span key={i} style={{ overflow: 'hidden', display: 'inline-block', lineHeight: 1.05 }}>
-                  <m.span
-                    custom={i}
-                    variants={letterVariants}
-                    initial="hidden"
-                    animate={isVisible}
-                    className="hero-name-gradient"
-                    style={{ display: 'inline-block', willChange: 'transform, opacity' }}
-                  >
-                    {char}
-                  </m.span>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* DELODDER — plain white */}
-          <div
-            className="overflow-hidden"
-            style={{ lineHeight: 1, marginTop: '-0.04em' }}
-          >
-            <div
-              className="flex flex-wrap leading-none tracking-tighter font-black text-foreground"
-              style={{ fontSize: 'clamp(3.8rem, 11.5vw, 12rem)' }}
-            >
-              {DELODDER.map((char, i) => (
-                <span key={i} style={{ overflow: 'hidden', display: 'inline-block', lineHeight: 1.05 }}>
-                  <m.span
-                    custom={JEROME.length + i}
-                    variants={letterVariants}
-                    initial="hidden"
-                    animate={isVisible}
-                    style={{ display: 'inline-block', willChange: 'transform, opacity' }}
-                  >
-                    {char}
-                  </m.span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Name block — extracted */}
+        <HeroName isReady={isReady} />
 
         {/* Tagline + CTAs */}
         <m.div

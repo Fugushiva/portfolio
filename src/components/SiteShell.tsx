@@ -30,6 +30,7 @@ import Stack from '@/components/Stack'
 import Work from '@/components/Work'
 import Process from '@/components/Process'
 import Contact from '@/components/Contact'
+import PerfHUD from '@/components/PerfHUD'
 
 export default function SiteShell() {
   const [mounted, setMounted]     = useState(false)
@@ -70,6 +71,8 @@ export default function SiteShell() {
         <Process />
         <Contact />
       </main>
+
+      <PerfHUD />
     </Providers>
   )
 }
