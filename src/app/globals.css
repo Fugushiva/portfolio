@@ -18,7 +18,7 @@
   width: 3px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #020208;
 }
 ::-webkit-scrollbar-thumb {
   background: #7c3aed;
@@ -33,7 +33,7 @@
 
 /* ─── Base ─── */
 html {
-  background: #0a0a0a;
+  background: #020208;
   color: #f5f5f0;
   /* Smooth scroll handled by Lenis when JS is ready; native fallback only */
   scroll-behavior: auto;
@@ -42,7 +42,7 @@ html {
 }
 
 body {
-  background: #0a0a0a;
+  background: #020208;
   color: #f5f5f0;
   overflow-x: hidden;
   /* iOS bounce control + smoother momentum on trackpads */
@@ -515,6 +515,148 @@ body.is-loading {
   border-radius: 50%;
   background: currentColor;
   animation: ring-expand 1.6s ease-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO SYSTEM — Galaxy cinematic world-class
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Name gradient — "Jérome" first name gets violet-to-indigo gradient ─── */
+.hero-name-gradient {
+  /* Gradient text via background-clip */
+  background: linear-gradient(
+    135deg,
+    #e8d5ff 0%,    /* light lavender */
+    #c4b5fd 20%,   /* violet-300 */
+    #a78bfa 45%,   /* violet-400 */
+    #7c3aed 70%,   /* accent */
+    #6366f1 90%,   /* indigo */
+    #818cf8 100%   /* indigo-400 */
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* fallback for reduced-motion / no-clip-path browsers */
+}
+
+/* Reduced motion: plain white text */
+@media (prefers-reduced-motion: reduce) {
+  .hero-name-gradient {
+    background: none;
+    -webkit-text-fill-color: #f5f5f0;
+    color: #f5f5f0;
+  }
+}
+
+/* ─── Availability badge — pulsing dot ───────────────────────────────────── */
+.hero-availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hero-availability-dot::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: hero-dot-ping 2.2s ease-out infinite;
+  opacity: 0;
+}
+
+@keyframes hero-dot-ping {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  60%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ─── Hero CTA pill ──────────────────────────────────────────────────────── */
+.hero-cta-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  font-family: var(--font-geist-mono, monospace);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  color: #f5f5f0;
+  border: 1px solid rgba(124, 58, 237, 0.6);
+  background: rgba(124, 58, 237, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    box-shadow 400ms ease,
+    border-color 400ms ease,
+    background 400ms ease,
+    color 300ms ease;
+}
+
+.hero-cta-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124,58,237,0.9), rgba(99,102,241,0.9));
+  opacity: 0;
+  transition: opacity 350ms ease;
+  z-index: -1;
+}
+
+.hero-cta-pill:hover {
+  box-shadow:
+    0 0 24px rgba(124, 58, 237, 0.5),
+    0 0 60px rgba(124, 58, 237, 0.2),
+    inset 0 0 20px rgba(167, 139, 250, 0.1);
+  border-color: rgba(124, 58, 237, 0.9);
+  color: #ffffff;
+}
+
+.hero-cta-pill:hover::before {
+  opacity: 1;
+}
+
+/* ─── Shooting star keyframe ─────────────────────────────────────────────── */
+@keyframes shootingStar {
+  0%   {
+    transform: rotate(var(--angle, 25deg)) scaleX(0);
+    opacity: 0;
+  }
+  10%  {
+    opacity: 1;
+  }
+  70%  {
+    transform: rotate(var(--angle, 25deg)) scaleX(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(var(--angle, 25deg)) scaleX(1) translateX(60px);
+    opacity: 0;
+  }
+}
+
+/* ─── Galaxy background deep color ──────────────────────────────────────── */
+.hero-galaxy-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 100% 60% at 70% 20%, rgba(88, 28, 135, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 80%  80% at 20% 80%, rgba(49, 46, 129, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60%  40% at 50% 50%, rgba(17,  7,  43, 0.60) 0%, transparent 80%),
+    linear-gradient(180deg, #020208 0%, #060318 40%, #080420 70%, #020208 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
