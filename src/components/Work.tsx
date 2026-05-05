@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { m, AnimatePresence, useInView } from 'framer-motion'
 import { useGSAPReveal } from '@/hooks/useGSAPReveal'
+import { useCountUp } from '@/hooks/useCountUp'
 import { useTranslations } from 'next-intl'
 import { N8N_IMAGES, N8N_CODE_FILES, CONTENT_PIECES, PROJECT_META } from '@/components/work-data'
 
@@ -46,14 +47,15 @@ function MetricCard({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const displayed = useCountUp(value, isInView, 1000)
 
   return (
     <m.div
       ref={ref}
-      initial={{ opacity: 0, y: 16 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1], delay }}
-      className="relative p-4 rounded-xl border border-border/60 overflow-hidden"
+      initial={{ opacity: 0, y: 20, clipPath: 'inset(100% 0 0 0)' }}
+      animate={isInView ? { opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0)' } : {}}
+      transition={{ duration: 0.7, ease: [0.19, 1, 0.22, 1], delay }}
+      className="shimmer-wrap relative p-4 rounded-xl border border-border/60 overflow-hidden"
       style={{ background: `rgba(${accentRgb},0.04)` }}
     >
       <div
@@ -61,10 +63,10 @@ function MetricCard({
         style={{ background: accent }}
       />
       <div
-        className="font-black leading-none tracking-tighter mb-1"
+        className="ticker font-black leading-none tracking-tighter mb-1"
         style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: accent }}
       >
-        {value}
+        {displayed}
       </div>
       <div className="font-mono text-[0.65rem] text-muted uppercase tracking-wider leading-snug">
         {label}
@@ -152,10 +154,15 @@ function ProjectCard({
 
   return (
     <div
-      className="border-t border-border group"
+      className="border-t border-border group relative"
       data-reveal
       style={{ '--project-accent': accent } as React.CSSProperties}
     >
+      {/* Hover accent line */}
+      <div
+        className="absolute left-0 top-0 w-0 h-px group-hover:w-full transition-all duration-500 ease-out pointer-events-none"
+        style={{ background: accent }}
+      />
       {/* ── Header row ── */}
       <button
         onClick={onToggle}
@@ -228,9 +235,13 @@ function ProjectCard({
 
           {/* Toggle arrow */}
           <m.div
-            className="shrink-0 w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted transition-colors duration-300"
-            style={isOpen ? { borderColor: accent, color: accent } : {}}
-            animate={{ rotate: isOpen ? 45 : 0 }}
+            className="shrink-0 w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
+            style={isOpen
+              ? { borderColor: accent, color: accent, background: `rgba(${accentRgb},0.1)` }
+              : { borderColor: 'rgba(255,255,255,0.1)', color: '#6b6b6b' }
+            }
+            animate={{ rotate: isOpen ? 45 : 0, scale: isOpen ? 1.1 : 1 }}
+            whileHover={{ scale: 1.15 }}
             transition={{ duration: 0.35, ease: [0.19, 1, 0.22, 1] }}
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -245,10 +256,10 @@ function ProjectCard({
         {isOpen && (
           <m.div
             key="panel"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.55, ease: [0.19, 1, 0.22, 1] }}
+            initial={{ height: 0, opacity: 0, y: -10 }}
+            animate={{ height: 'auto', opacity: 1, y: 0 }}
+            exit={{ height: 0, opacity: 0, y: -10 }}
+            transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
             className="overflow-hidden"
           >
             <div className="pb-14 pl-0 md:pl-16">

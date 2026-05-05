@@ -5,13 +5,6 @@ import { m } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import HeroParticles from './HeroParticles'
 
-// HeroParticles is imported statically. Although Three.js is browser-only,
-// the component itself guards every browser API behind useEffect (which only
-// runs client-side). SiteShell's mounted-gate ensures Hero never renders on
-// the server anyway — by the time HeroParticles instantiates, we're 100%
-// in the browser. Static import avoids the Next.js 15.5 webpack bug where
-// dynamic chunks can lose their react module reference.
-
 interface HeroProps {
   isReady: boolean
 }
@@ -22,24 +15,23 @@ export default function Hero({ isReady }: HeroProps) {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const orbRef = useRef<HTMLDivElement>(null)
+  const orb2Ref = useRef<HTMLDivElement>(null)
   const wordRef = useRef<HTMLSpanElement>(null)
 
-  // ── Mouse parallax on the orb ─────────────────────────────────────────
-  // Previously this called gsap.to(orb, ...) on every mousemove — that
-  // imported all of GSAP and queued a tween per pointer event (60+/s).
-  // Now: we throttle to one rAF per frame and animate via translate3d
-  // directly, no library involved. Smooth, GPU-only, zero deps.
+  // ── Multi-orb mouse parallax ──────────────────────────────────────────────
+  // Two orbs at different depths create a parallax sense of 3D space.
   useEffect(() => {
-    if (!orbRef.current) return
     if (typeof window === 'undefined') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     if (window.matchMedia('(pointer: coarse)').matches) return
 
-    const orb = orbRef.current
-    let targetX = 0
-    let targetY = 0
-    let currentX = 0
-    let currentY = 0
+    const orb  = orbRef.current
+    const orb2 = orb2Ref.current
+    if (!orb || !orb2) return
+
+    let targetX = 0, targetY = 0
+    let currentX = 0, currentY = 0
+    let currentX2 = 0, currentY2 = 0
     let rafId = 0
 
     const onMove = (e: MouseEvent) => {
@@ -49,13 +41,18 @@ export default function Hero({ isReady }: HeroProps) {
     }
 
     const loop = () => {
-      currentX += (targetX - currentX) * 0.06
-      currentY += (targetY - currentY) * 0.06
-      orb.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`
-      if (Math.abs(targetX - currentX) + Math.abs(targetY - currentY) < 0.05) {
-        rafId = 0
-        return
-      }
+      // Orb 1: fast lerp — feels close
+      currentX  += (targetX  - currentX)  * 0.06
+      currentY  += (targetY  - currentY)  * 0.06
+      // Orb 2: slow lerp + deeper magnitude — feels far away
+      currentX2 += (targetX * 1.6 - currentX2) * 0.03
+      currentY2 += (targetY * 1.6 - currentY2) * 0.03
+
+      orb.style.transform  = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`
+      orb2.style.transform = `translate3d(${(-currentX2 * 0.6).toFixed(2)}px, ${(-currentY2 * 0.6).toFixed(2)}px, 0)`
+
+      const delta = Math.abs(targetX - currentX) + Math.abs(targetY - currentY)
+      if (delta < 0.05) { rafId = 0; return }
       rafId = requestAnimationFrame(loop)
     }
 
@@ -66,10 +63,7 @@ export default function Hero({ isReady }: HeroProps) {
     }
   }, [])
 
-  // ── Rotating words ────────────────────────────────────────────────────
-  // Replaced GSAP tween with a CSS transition + scheduled rAF tick.
-  // One transitionend listener swaps text after fade-out, no setInterval
-  // race conditions, and the loop pauses when the page is hidden.
+  // ── Rotating words ────────────────────────────────────────────────────────
   useEffect(() => {
     if (!isReady) return
     const el = wordRef.current
@@ -86,7 +80,6 @@ export default function Hero({ isReady }: HeroProps) {
 
     const tick = () => {
       if (cancelled) return
-      // Fade up + out
       el.style.transform = 'translate3d(0, -110%, 0)'
       el.style.opacity = '0'
 
@@ -94,11 +87,9 @@ export default function Hero({ isReady }: HeroProps) {
         if (cancelled) return
         index = (index + 1) % words.length
         el.textContent = words[index]
-        // Snap below
         el.style.transition = 'none'
         el.style.transform = 'translate3d(0, 60%, 0)'
         el.style.opacity = '0'
-        // Force reflow then animate up
         void el.offsetWidth
         el.style.transition =
           'transform 480ms cubic-bezier(0.19, 1, 0.22, 1), opacity 480ms ease-out'
@@ -112,8 +103,7 @@ export default function Hero({ isReady }: HeroProps) {
 
     const onVisibility = () => {
       if (document.hidden && timer) {
-        clearTimeout(timer)
-        timer = null
+        clearTimeout(timer); timer = null
       } else if (!document.hidden && !timer && !cancelled) {
         timer = setTimeout(tick, 2200)
       }
@@ -127,11 +117,27 @@ export default function Hero({ isReady }: HeroProps) {
     }
   }, [isReady, words])
 
+  // ─── Letter-level stagger for the name  ──────────────────────────────────
+  const JEROME = ['J', 'é', 'r', 'ô', 'm', 'e']
+  const DELODDER = ['D', 'e', 'l', 'o', 'd', 'd', 'e', 'r']
+
+  const letterVariants = {
+    hidden: { y: '110%', opacity: 0, rotateZ: -6 },
+    visible: (i: number) => ({
+      y: '0%',
+      opacity: 1,
+      rotateZ: 0,
+      transition: {
+        delay: 0.05 + i * 0.04,
+        duration: 1.0,
+        ease: [0.19, 1, 0.22, 1] as [number, number, number, number],
+      },
+    }),
+  }
+
   const containerVariants = {
     hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
+    visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
   }
 
   const itemVariants = {
@@ -152,14 +158,34 @@ export default function Hero({ isReady }: HeroProps) {
       {/* WebGL particle background */}
       <HeroParticles isReady={isReady} />
 
-      {/* Ambient depth orb — kept very faint behind particles for colour warmth */}
+      {/* Orb 1 — close/warm */}
       <div
         ref={orbRef}
-        className="absolute top-1/4 right-0 md:right-[10%] w-[clamp(300px,60vw,800px)] h-[clamp(300px,60vw,800px)] rounded-full pointer-events-none"
+        className="absolute top-1/4 right-0 md:right-[10%] pointer-events-none"
         style={{
+          width:  'clamp(300px, 60vw, 800px)',
+          height: 'clamp(300px, 60vw, 800px)',
+          borderRadius: '50%',
           background:
-            'radial-gradient(circle at center, rgba(124,58,237,0.10) 0%, rgba(124,58,237,0.03) 50%, transparent 75%)',
+            'radial-gradient(circle at center, rgba(124,58,237,0.12) 0%, rgba(124,58,237,0.04) 50%, transparent 75%)',
           filter: 'blur(80px)',
+          willChange: 'transform',
+          transform: 'translate3d(0,0,0)',
+          zIndex: 1,
+        }}
+      />
+
+      {/* Orb 2 — distant/cool, opposite parallax */}
+      <div
+        ref={orb2Ref}
+        className="absolute bottom-[15%] left-[5%] pointer-events-none"
+        style={{
+          width:  'clamp(200px, 35vw, 500px)',
+          height: 'clamp(200px, 35vw, 500px)',
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle at center, rgba(59,130,246,0.07) 0%, rgba(59,130,246,0.02) 50%, transparent 75%)',
+          filter: 'blur(90px)',
           willChange: 'transform',
           transform: 'translate3d(0,0,0)',
           zIndex: 1,
@@ -180,25 +206,53 @@ export default function Hero({ isReady }: HeroProps) {
           </span>
         </m.div>
 
-        {/* Name headline */}
-        <div className="overflow-hidden mb-2 md:mb-4">
-          <m.h1
-            variants={itemVariants}
-            className="font-black text-foreground leading-none tracking-tighter"
+        {/* Name — letter-by-letter stagger with overflow:hidden mask */}
+        <div
+          className="overflow-hidden mb-1 md:mb-2"
+          style={{ lineHeight: 1 }}
+        >
+          <div
+            className="flex flex-wrap leading-none tracking-tighter font-black text-foreground"
             style={{ fontSize: 'clamp(3.5rem, 11vw, 11.5rem)' }}
           >
-            Jérôme
-          </m.h1>
+            {JEROME.map((char, i) => (
+              <span key={i} style={{ overflow: 'hidden', display: 'inline-block', lineHeight: 1.05 }}>
+                <m.span
+                  custom={i}
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate={isReady ? 'visible' : 'hidden'}
+                  style={{ display: 'inline-block', willChange: 'transform, opacity' }}
+                >
+                  {char}
+                </m.span>
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="overflow-hidden mb-8 md:mb-10">
-          <m.h1
-            variants={itemVariants}
-            className="font-black text-foreground leading-none tracking-tighter"
+        <div
+          className="overflow-hidden mb-8 md:mb-10"
+          style={{ lineHeight: 1 }}
+        >
+          <div
+            className="flex flex-wrap leading-none tracking-tighter font-black text-foreground"
             style={{ fontSize: 'clamp(3.5rem, 11vw, 11.5rem)' }}
           >
-            Delodder
-          </m.h1>
+            {DELODDER.map((char, i) => (
+              <span key={i} style={{ overflow: 'hidden', display: 'inline-block', lineHeight: 1.05 }}>
+                <m.span
+                  custom={JEROME.length + i}
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate={isReady ? 'visible' : 'hidden'}
+                  style={{ display: 'inline-block', willChange: 'transform, opacity' }}
+                >
+                  {char}
+                </m.span>
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Tagline row */}
@@ -233,15 +287,20 @@ export default function Hero({ isReady }: HeroProps) {
                 className="absolute -inset-3 rounded-full border border-border opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               />
               {t('cta_work')}
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
+              <m.svg
+                width="16" height="16" viewBox="0 0 16 16" fill="none"
+                className="transition-transform duration-300 group-hover:translate-x-1"
+                whileHover={{ x: 3 }}
+                transition={{ duration: 0.3 }}
+              >
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              </m.svg>
             </a>
 
             <a
               href="#contact"
               data-magnetic
-              className="magnetic-wrap relative inline-flex items-center justify-center px-6 py-3 font-mono text-xs uppercase tracking-widest border border-accent text-accent rounded-full transition-all duration-400 hover:bg-accent hover:text-bg"
+              className="magnetic-wrap liquid-btn relative inline-flex items-center justify-center px-6 py-3 font-mono text-xs uppercase tracking-widest border border-accent text-accent rounded-full transition-all duration-400 hover:bg-accent hover:text-bg"
             >
               {t('cta_contact')}
             </a>
@@ -260,7 +319,7 @@ export default function Hero({ isReady }: HeroProps) {
             <m.div
               className="w-px h-12 bg-gradient-to-b from-accent to-transparent origin-top"
               animate={{ scaleY: [0, 1, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
             />
           </div>
         </m.div>

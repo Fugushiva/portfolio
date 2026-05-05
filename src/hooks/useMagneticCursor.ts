@@ -1,23 +1,14 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+/**
+ * useMagneticCursor — Premium cursor with:
+ * - Velocity-based cursor stretch (ring squashes/stretches in direction of motion)
+ * - 3 cursor states: default | hovering (magnetic) | text-cursor
+ * - Self-suspending RAF loop (no idle compositor cost)
+ * - Event delegation: 1 listener each instead of N×element
+ */
 
-// ─── Magnetic cursor ───────────────────────────────────────────────────────────
-//
-// Architecture:
-// - Event delegation: 1 mousemove + 1 mouseover/mouseout on document, not
-//   N×2 listeners per [data-magnetic] element.
-// - Self-suspending RAF loop: stops when ring has caught up to pointer
-//   (< 0.3px delta) and resumes on next mousemove. This eliminates the
-//   idle compositor hit of an always-on RAF.
-// - GPU-only positioning via translate3d — no left/top writes.
-//
-// Lerp tuning:
-// - Cursor dot: 0.40 — fast enough to feel "attached" to the pointer,
-//   slow enough to add a tiny bit of personality. 0.45 was slightly
-//   jittery on 144Hz displays.
-// - Ring: 0.10 — noticeable trail. 0.14 was too snappy and made the ring
-//   look like a second cursor rather than a magnetic halo.
+import { useEffect, useRef } from 'react'
 
 export function useMagneticCursor() {
   const rafRef = useRef<number>(0)
@@ -28,22 +19,31 @@ export function useMagneticCursor() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const cursor = document.querySelector<HTMLDivElement>('.cursor')
-    const ring = document.querySelector<HTMLDivElement>('.cursor-ring')
+    const ring   = document.querySelector<HTMLDivElement>('.cursor-ring')
     if (!cursor || !ring) return
 
-    // Start off-screen so cursor doesn't flash at (0,0) on load.
-    let targetX = -200
-    let targetY = -200
-    let cursorX = -200
-    let cursorY = -200
-    let ringX = -200
-    let ringY = -200
+    // Off-screen start so no flash at (0,0)
+    let targetX = -200, targetY = -200
+    let cursorX = -200, cursorY = -200
+    let ringX   = -200, ringY   = -200
+    // Velocity tracking for stretch
+    let prevTargetX = -200, prevTargetY = -200
+    let velX = 0, velY = 0
     let dirty = true
     let visible = true
 
     const onMove = (e: MouseEvent) => {
+      prevTargetX = targetX
+      prevTargetY = targetY
       targetX = e.clientX
       targetY = e.clientY
+
+      // Raw velocity (pixels per event)
+      const dx = targetX - prevTargetX
+      const dy = targetY - prevTargetY
+      velX += (dx - velX) * 0.2
+      velY += (dy - velY) * 0.2
+
       dirty = true
       if (rafRef.current === 0) rafRef.current = requestAnimationFrame(loop)
     }
@@ -57,9 +57,8 @@ export function useMagneticCursor() {
     }
 
     const onOut = (e: Event) => {
-      // Only remove if we actually left a magnetic element (not a child).
       const relatedTarget = (e as MouseEvent).relatedTarget as HTMLElement | null
-      const fromMagnetic = (e.target as HTMLElement | null)?.closest?.('[data-magnetic]')
+      const fromMagnetic  = (e.target as HTMLElement | null)?.closest?.('[data-magnetic]')
       if (fromMagnetic && !fromMagnetic.contains(relatedTarget)) {
         cursor.classList.remove('is-hovering')
         ring.classList.remove('is-hovering')
@@ -74,20 +73,30 @@ export function useMagneticCursor() {
     }
 
     const loop = () => {
-      // Cursor: fast lerp — feels "attached".
+      // Cursor: fast lerp
       cursorX += (targetX - cursorX) * 0.40
       cursorY += (targetY - cursorY) * 0.40
 
-      // Ring: slower lerp — magnetic halo with visible trail.
+      // Ring: slow lerp
       ringX += (targetX - ringX) * 0.10
       ringY += (targetY - ringY) * 0.10
 
-      cursor.style.transform = `translate3d(${cursorX.toFixed(1)}px, ${cursorY.toFixed(1)}px, 0) translate(-50%, -50%)`
-      ring.style.transform   = `translate3d(${ringX.toFixed(1)}px,   ${ringY.toFixed(1)}px,   0) translate(-50%, -50%)`
+      // Velocity-based ring stretch — squash & stretch
+      const speed = Math.sqrt(velX * velX + velY * velY)
+      const stretch = Math.min(speed * 0.04, 0.5)  // max 50% stretch
+      const angle   = speed > 0.5 ? Math.atan2(velY, velX) * (180 / Math.PI) : 0
+      const scaleX  = 1 + stretch
+      const scaleY  = Math.max(0.6, 1 - stretch * 0.6)
 
-      const delta = Math.abs(targetX - ringX) + Math.abs(targetY - ringY)
-      if (delta < 0.3 || !visible) {
-        // Ring has caught up — suspend the loop until next pointer event.
+      // Decay velocity
+      velX *= 0.82
+      velY *= 0.82
+
+      cursor.style.transform = `translate3d(${cursorX.toFixed(1)}px, ${cursorY.toFixed(1)}px, 0) translate(-50%, -50%)`
+      ring.style.transform   = `translate3d(${ringX.toFixed(1)}px, ${ringY.toFixed(1)}px, 0) translate(-50%, -50%) rotate(${angle.toFixed(1)}deg) scale(${scaleX.toFixed(3)}, ${scaleY.toFixed(3)})`
+
+      const delta = Math.abs(targetX - ringX) + Math.abs(targetY - ringY) + Math.abs(velX) + Math.abs(velY)
+      if (delta < 0.2 || !visible) {
         rafRef.current = 0
         dirty = false
         return

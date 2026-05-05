@@ -67,6 +67,8 @@ ehthumbs_vista.db
 
 # Claude files
 CLAUDE.md
+.claude/
+.token-savior-cache.json
 
 # Obsidian files
 graphify-out/cache/
