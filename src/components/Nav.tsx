@@ -1,41 +1,97 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+/**
+ * Nav — cinematic world-class header.
+ *
+ * Three visual states:
+ *   1. Hero state    (scroll = 0)      — transparent, full-width, items spaced
+ *   2. Pill state    (scroll > 60px)   — compressed glassmorphism pill, aurora bg
+ *   3. Active state  (section in view) — nav link dash indicator active
+ *
+ * Architecture:
+ *   - useScrollProgress  writes --nav-progress/--nav-pill/--nav-blur CSS vars
+ *   - useActiveSection   tracks which section is in view via IntersectionObserver
+ *   - All scroll animation is CSS-only (no Framer Motion in the scroll path)
+ *   - Framer Motion: AnimatePresence for entry animation + mobile overlay only
+ *   - Mobile overlay: NavMobileMenu (sole AnimatePresence consumer besides entry)
+ *
+ * View Transitions API:
+ *   Wraps Lenis scroll-to in document.startViewTransition when available.
+ *   Progressive enhancement — no impact on older browsers.
+ *
+ * Constraints honored:
+ *   - No useScroll/useSpring from Framer Motion (LazyMotion strict mode)
+ *   - No layout recalc in RAF — transform/opacity/clip-path only
+ *   - prefers-reduced-motion: animations cut, visual states preserved
+ *   - pointer: coarse — cursor custom hidden, hover effects disabled
+ */
+
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
-import { useTranslations } from 'next-intl'
-import LangSwitcher from '@/components/LangSwitcher'
+import { useTranslations, useLocale } from 'next-intl'
+import { useRouter, usePathname } from 'next/navigation'
 import { getLenis } from '@/hooks/useLenis'
-import { useTextScramble } from '@/hooks/useTextScramble'
+import { useScrollProgress } from '@/hooks/useScrollProgress'
+import { useActiveSection } from '@/hooks/useActiveSection'
+import { useCommandPalette, type PaletteItem } from '@/hooks/useCommandPalette'
+import { useNavSound } from '@/hooks/useNavSound'
+import { NavLogo }        from '@/components/nav/NavLogo'
+import { NavLink }        from '@/components/nav/NavLink'
+import { NavCTA }         from '@/components/nav/NavCTA'
+import { NavBurger }      from '@/components/nav/NavBurger'
+import { NavStatus }      from '@/components/nav/NavStatus'
+import { NavMobileMenu }  from '@/components/nav/NavMobileMenu'
+import { CommandPalette } from '@/components/nav/CommandPalette'
+import LangSwitcher       from '@/components/LangSwitcher'
 
 interface NavProps {
   isReady: boolean
 }
 
-// ─── NavLink with letter-scramble hover ───────────────────────────────────────
-function NavLink({
-  label,
-  href,
-  onClick,
-}: {
-  label: string
-  href: string
-  onClick: (href: string) => void
-}) {
-  const spanRef = useRef<HTMLSpanElement>(null)
-  const scramble = useTextScramble(400)
+// Section IDs matching the page — kept here so Nav is the single source of truth
+const SECTION_IDS = ['hero', 'about', 'stack', 'work', 'process', 'contact']
+
+// ─── Progress bar — pure RAF-driven, no Framer Motion ──────────────────────────
+function ProgressBar() {
+  const barRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const bar = barRef.current
+    if (!bar) return
+
+    let rafId = 0
+    let lastVal = -1
+
+    const tick = () => {
+      rafId = 0
+      const docH = document.documentElement.scrollHeight - window.innerHeight
+      const p    = docH > 0 ? Math.min(window.scrollY / docH, 1) : 0
+      if (Math.abs(p - lastVal) > 0.0008) {
+        bar.style.transform = `scaleX(${p.toFixed(4)})`
+        lastVal = p
+      }
+    }
+
+    const schedule = () => {
+      if (rafId === 0) rafId = requestAnimationFrame(tick)
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true })
+    schedule()
+
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
+  }, [])
 
   return (
-    <a
-      href={href}
-      onClick={(e) => { e.preventDefault(); onClick(href) }}
-      data-magnetic
-      className="magnetic-wrap relative font-mono text-xs text-muted uppercase tracking-widest hover:text-foreground transition-colors duration-200 group"
-      onMouseEnter={() => scramble(spanRef.current, label)}
-    >
-      <span ref={spanRef}>{label}</span>
-      {/* Liquid underline */}
-      <span className="absolute -bottom-0.5 left-0 w-full h-px bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-    </a>
+    <div
+      ref={barRef}
+      className="scroll-progress"
+      style={{ transformOrigin: 'left center', transform: 'scaleX(0)' }}
+      aria-hidden="true"
+    />
   )
 }
 
@@ -43,181 +99,276 @@ export default function Nav({ isReady }: NavProps) {
   const t = useTranslations('nav')
 
   const NAV_ITEMS = [
-    { label: t('about'), href: '#about' },
-    { label: t('stack'), href: '#stack' },
-    { label: t('work'), href: '#work' },
+    { label: t('about'),   href: '#about'   },
+    { label: t('stack'),   href: '#stack'   },
+    { label: t('work'),    href: '#work'    },
     { label: t('process'), href: '#process' },
     { label: t('contact'), href: '#contact' },
   ]
 
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const progressRef = useRef<HTMLDivElement>(null)
+  // ── State ───────────────────────────────────────────────────────────────────
+  const [menuOpen,     setMenuOpen]     = useState(false)
+  const [scrollState,  setScrollState]  = useState<'hero' | 'pill'>('hero')
+  const burgerRef                       = useRef<HTMLButtonElement>(null)
 
-  // Scroll progress bar — pure RAF, no framer-motion dependency on lazy features
+  // ── i18n for locale switching in palette ────────────────────────────────────
+  const locale   = useLocale()
+  const router   = useRouter()
+  const pathname = usePathname()
+
+  // ── Sound ───────────────────────────────────────────────────────────────────
+  const { enabled: soundEnabled, toggle: toggleSound, click: playClick } = useNavSound()
+
+  // ── Scroll progress driver ──────────────────────────────────────────────────
+  useScrollProgress({
+    threshold: 60,
+    onScrollStateChange: setScrollState,
+  })
+
+  // ── Active section tracker ──────────────────────────────────────────────────
+  const { activeSection, setActiveSection } = useActiveSection({
+    sectionIds: SECTION_IDS,
+  })
+
+  // ── Close menu on resize to desktop ────────────────────────────────────────
   useEffect(() => {
-    const bar = progressRef.current
-    if (!bar) return
-
-    const onScroll = () => {
-      setScrolled(window.scrollY > 60)
-      const docH = document.documentElement.scrollHeight - window.innerHeight
-      const progress = docH > 0 ? window.scrollY / docH : 0
-      bar.style.transform = `scaleX(${progress.toFixed(4)})`
+    const onResize = () => {
+      if (window.innerWidth >= 768 && menuOpen) setMenuOpen(false)
     }
+    window.addEventListener('resize', onResize, { passive: true })
+    return () => window.removeEventListener('resize', onResize)
+  }, [menuOpen])
 
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  const handleNavClick = (href: string) => {
+  // ── Navigation with View Transitions + Lenis ────────────────────────────────
+  const handleNavClick = useCallback((href: string) => {
     setMenuOpen(false)
+    playClick()
+    const sectionId = href.replace('#', '')
+    setActiveSection(sectionId)
+
     const target = document.querySelector(href)
     if (!target) return
 
-    const lenis = getLenis()
-    if (lenis) {
-      lenis.scrollTo(target as HTMLElement, { offset: -80, duration: 1.0 })
-    } else {
-      target.scrollIntoView({ behavior: 'smooth' })
+    const doScroll = () => {
+      const lenis = getLenis()
+      if (lenis) {
+        lenis.scrollTo(target as HTMLElement, { offset: -80, duration: 1.0 })
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' })
+      }
     }
-  }
+
+    // Progressive enhancement — View Transitions API (Chrome 111+)
+    if ('startViewTransition' in document) {
+      (document as Document & { startViewTransition: (cb: () => void) => void })
+        .startViewTransition(doScroll)
+    } else {
+      doScroll()
+    }
+  }, [setActiveSection, playClick])
+
+  // ── Mobile menu toggle ──────────────────────────────────────────────────────
+  const toggleMenu = useCallback(() => setMenuOpen(prev => !prev), [])
+  const closeMenu  = useCallback(() => setMenuOpen(false), [])
+
+  // ── Locale switch helper ────────────────────────────────────────────────────
+  const switchLocale = useCallback(() => {
+    const other    = locale === 'fr' ? 'en' : 'fr'
+    const segments = pathname.split('/')
+    segments[1]    = other
+    router.push(segments.join('/') || `/${other}`)
+  }, [locale, pathname, router])
+
+  // ── Command palette items ───────────────────────────────────────────────────
+  const paletteItems: PaletteItem[] = [
+    ...NAV_ITEMS.map(({ label, href }) => ({
+      id:     `nav-${href}`,
+      type:   'nav' as const,
+      icon:   '→',
+      label,
+      hint:   `Scroll to ${label}`,
+      action: () => handleNavClick(href),
+    })),
+    {
+      id:     'action-email',
+      type:   'action' as const,
+      icon:   '✉',
+      label:  'Send email',
+      hint:   'jerome@delodder.dev',
+      shortcut: '⌘E',
+      action: () => { window.location.href = 'mailto:jerome@delodder.dev' },
+    },
+    {
+      id:     'action-copy-email',
+      type:   'action' as const,
+      icon:   '⎘',
+      label:  'Copy email',
+      hint:   'jerome@delodder.dev',
+      ...(({ toastMsg: 'Email copied!' }) as unknown as Partial<PaletteItem>),
+      action: () => {
+        navigator.clipboard.writeText('jerome@delodder.dev').catch(() => {})
+      },
+    } as PaletteItem & { toastMsg: string },
+    {
+      id:     'action-github',
+      type:   'action' as const,
+      icon:   '◈',
+      label:  'GitHub',
+      hint:   'Fugushiva',
+      shortcut: '⌘G',
+      action: () => { window.open('https://github.com/Fugushiva', '_blank', 'noopener') },
+    },
+    {
+      id:     'action-linkedin',
+      type:   'action' as const,
+      icon:   '◉',
+      label:  'LinkedIn',
+      hint:   'jerome-delodder',
+      action: () => { window.open('https://linkedin.com/in/jerome-delodder', '_blank', 'noopener') },
+    },
+    {
+      id:     'action-lang',
+      type:   'action' as const,
+      icon:   '⌂',
+      label:  `Switch to ${locale === 'fr' ? 'English' : 'Français'}`,
+      shortcut: '⌘L',
+      action: switchLocale,
+    },
+    {
+      id:     'action-sound',
+      type:   'action' as const,
+      icon:   soundEnabled ? '♪' : '♩',
+      label:  `Sound: ${soundEnabled ? 'ON — click to disable' : 'OFF — click to enable'}`,
+      action: toggleSound,
+    },
+  ]
+
+  // ── Command palette state ───────────────────────────────────────────────────
+  const {
+    open: paletteOpen,
+    openPalette,
+    closePalette,
+    query,
+    setQuery,
+    filtered,
+    selected,
+    setSelected,
+    inputRef,
+  } = useCommandPalette({ items: paletteItems })
 
   return (
+    <>
     <AnimatePresence>
       {isReady && (
         <m.header
-          key="nav"
-          className={`fixed top-0 left-0 right-0 z-[9000] transition-all duration-500 ${
-            scrolled ? 'py-3' : 'py-6'
-          }`}
+          key="nav-header"
+          className="fixed top-0 left-0 right-0 z-[9000]"
           initial={{ y: -80, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.19, 1, 0.22, 1] }}
+          animate={{ y: 0,  opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.19, 1, 0.22, 1] }}
+          style={{ viewTransitionName: 'nav' } as React.CSSProperties}
         >
-          {/* Scroll progress line — driven by plain RAF in useEffect above */}
-          <div
-            ref={progressRef}
-            className="scroll-progress"
-            style={{ width: '100%', transformOrigin: 'left center', transform: 'scaleX(0)' }}
-          />
+          {/* Scroll progress line */}
+          <ProgressBar />
 
+          {/* Pill container — morphs hero→pill via CSS vars */}
           <div
-            className={`mx-6 md:mx-12 lg:mx-20 flex items-center justify-between transition-all duration-500 ${
-              scrolled
-                ? 'bg-bg/80 backdrop-blur-md border border-border/50 rounded-full px-5 py-3'
-                : ''
-            }`}
+            className={`
+              nav-pill
+              mx-4 sm:mx-8 md:mx-12 lg:mx-20
+              flex items-center justify-between
+              px-4 md:px-5
+              py-3 md:py-3.5
+              mt-3
+            `}
           >
-            {/* Logo */}
-            <a
-              href="#hero"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#hero') }}
-              data-magnetic
-              className="magnetic-wrap font-black text-foreground tracking-tighter leading-none text-lg hover:text-accent transition-colors duration-300 relative group"
-            >
-              <span className="relative z-10">JD</span>
-              {/* Expand ring on hover */}
-              <m.span
-                className="absolute inset-0 rounded-full border border-accent/0 group-hover:border-accent/50"
-                style={{ margin: '-8px' }}
-                whileHover={{ scale: 1.3, opacity: 1 }}
-                initial={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </a>
+            {/* Left: Logo + Status */}
+            <div className="flex items-center gap-3">
+              <NavLogo onNavigate={handleNavClick} />
+              <NavStatus />
+            </div>
 
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-8">
+            {/* Center: Desktop nav links */}
+            <nav
+              className="hidden md:flex items-center gap-6 lg:gap-8"
+              aria-label="Navigation principale"
+            >
               {NAV_ITEMS.map(({ label, href }) => (
                 <NavLink
-                  key={label}
+                  key={href}
                   label={label}
                   href={href}
+                  section={href.replace('#', '')}
+                  activeSection={activeSection}
                   onClick={handleNavClick}
                 />
               ))}
             </nav>
 
-            {/* Right side: LangSwitcher + CTA */}
-            <div className="hidden md:flex items-center gap-5">
-              <LangSwitcher />
-              <span className="w-px h-3 bg-border/60" aria-hidden="true" />
-              <a
-                href="mailto:jerome@delodder.dev"
-                data-magnetic
-                className="magnetic-wrap liquid-btn inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent border border-accent/40 rounded-full px-4 py-2 hover:bg-accent hover:text-bg hover:border-accent transition-all duration-300"
-              >
-                {t('hire')}
-              </a>
-            </div>
+            {/* Right: LangSwitcher + CTA + Burger */}
+            <div className="flex items-center gap-3 md:gap-4">
+              <span className="hidden md:block">
+                <LangSwitcher />
+              </span>
+              <span
+                className="hidden md:block w-px h-3 bg-border/60"
+                aria-hidden="true"
+              />
+              <span className="hidden md:block">
+                <NavCTA label={t('hire')} />
+              </span>
 
-            {/* Mobile burger */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden flex flex-col gap-1.5 p-2"
-              aria-label={menuOpen ? t('menuClose') : t('menuOpen')}
-            >
-              <m.span
-                className="block w-5 h-px bg-foreground origin-center"
-                animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 4 : 0 }}
-                transition={{ duration: 0.3 }}
+              {/* ⌘K trigger — desktop only */}
+              <button
+                type="button"
+                onClick={openPalette}
+                className="hidden md:flex items-center gap-1.5 font-mono text-xs text-muted/60 border border-border/40 rounded-md px-2 py-1 hover:text-muted hover:border-border transition-colors duration-200"
+                aria-label="Ouvrir la command palette (⌘K)"
+                title="⌘K"
+              >
+                <span className="text-[10px] opacity-70">⌘K</span>
+              </button>
+
+              {/* Burger — mobile only */}
+              <NavBurger
+                isOpen={menuOpen}
+                onToggle={toggleMenu}
+                labelOpen={t('menuOpen')}
+                labelClose={t('menuClose')}
               />
-              <m.span
-                className="block w-5 h-px bg-foreground"
-                animate={{ opacity: menuOpen ? 0 : 1 }}
-                transition={{ duration: 0.3 }}
-              />
-              <m.span
-                className="block w-5 h-px bg-foreground origin-center"
-                animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -4 : 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </button>
+            </div>
           </div>
 
-          {/* Mobile menu */}
-          <AnimatePresence>
-            {menuOpen && (
-              <m.div
-                key="mobile-menu"
-                initial={{ opacity: 0, height: 0, y: -10 }}
-                animate={{ opacity: 1, height: 'auto', y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -10 }}
-                transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
-                className="md:hidden overflow-hidden mx-6 mt-2 bg-surface border border-border rounded-2xl"
-              >
-                <nav className="flex flex-col p-6 gap-5">
-                  {NAV_ITEMS.map(({ label, href }, i) => (
-                    <m.a
-                      key={label}
-                      href={href}
-                      onClick={(e) => { e.preventDefault(); handleNavClick(href) }}
-                      className="font-sans text-lg font-bold text-foreground hover:text-accent transition-colors duration-200"
-                      initial={{ opacity: 0, x: -16 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.06, duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
-                    >
-                      {label}
-                    </m.a>
-                  ))}
-
-                  <div className="flex items-center gap-3 pt-2 border-t border-border">
-                    <LangSwitcher />
-                  </div>
-
-                  <a
-                    href="mailto:jerome@delodder.dev"
-                    className="mt-2 inline-flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-widest text-bg bg-accent rounded-full px-6 py-3"
-                  >
-                    {t('hire')}
-                  </a>
-                </nav>
-              </m.div>
-            )}
-          </AnimatePresence>
+          {/* Mobile overlay — sole AnimatePresence consumer in Nav tree */}
+          <NavMobileMenu
+            isOpen={menuOpen}
+            items={NAV_ITEMS}
+            onClose={closeMenu}
+            onNavigate={handleNavClick}
+            burgerRef={burgerRef}
+            activeSection={activeSection}
+          />
         </m.header>
       )}
     </AnimatePresence>
+
+    {/* Command palette — rendered at body level via portal-like placement */}
+    {isReady && (
+      <CommandPalette
+        open={paletteOpen}
+        onClose={closePalette}
+        query={query}
+        onQueryChange={setQuery}
+        items={paletteItems}
+        filtered={filtered}
+        selected={selected}
+        onSelect={setSelected}
+        onExecute={(item) => { item.action(); closePalette() }}
+        inputRef={inputRef}
+      />
+    )}
+    </>
   )
 }
+
+
