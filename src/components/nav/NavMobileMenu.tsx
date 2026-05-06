@@ -158,13 +158,18 @@ export function NavMobileMenu({
             {/* Separator */}
             <div className="w-full h-px bg-border" aria-hidden="true" />
 
-            {/* Email */}
+            {/* Contact link (no email in clear HTML — anti-scraping) */}
             <div className="flex items-center justify-between">
               <a
-                href="mailto:jerome@delodder.dev"
+                href="#contact"
                 className="nav-mobile-footer-email"
+                onClick={() => {
+                  // Close mobile menu then scroll to contact section
+                  const el = document.getElementById('contact')
+                  if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 80)
+                }}
               >
-                jerome@delodder.dev
+                Contact
               </a>
               <LangSwitcher />
             </div>

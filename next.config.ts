@@ -33,7 +33,7 @@ const config: NextConfig = {
 
   productionBrowserSourceMaps: false,
 
-  webpack(config, { isServer, nextRuntime }) {
+  webpack(config, { nextRuntime }) {
     // The Edge Runtime (middleware) forbids eval() — which webpack's default
     // devtool `eval-source-map` uses for source maps in development.
     // Switch to `cheap-module-source-map` for Edge chunks: same line-level
@@ -41,6 +41,7 @@ const config: NextConfig = {
     if (nextRuntime === 'edge') {
       config.devtool = 'cheap-module-source-map'
     }
+
     return config
   },
 
@@ -89,11 +90,12 @@ const config: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Next.js needs unsafe-eval in dev; tighten in prod if desired
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com", // unsafe-eval: Next.js dev; challenges.cloudflare.com: Turnstile widget
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https:",
-              "connect-src 'self'",
+              "connect-src 'self' https://challenges.cloudflare.com", // Turnstile siteverify is server-side; widget may ping CF
+              "frame-src https://challenges.cloudflare.com", // Turnstile renders in an iframe
               "frame-ancestors 'none'",
             ].join('; '),
           },

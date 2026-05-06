@@ -135,6 +135,28 @@
     "cta_copy": "Copy email",
     "cta_copied": "Copied!",
     "footer_copy": "© 2026 Jérôme Delodder — Built with Next.js & Claude",
-    "footer_availability": "Available · Remote · Freelance"
+    "footer_availability": "Available · Remote · Freelance",
+    "form": {
+      "name_label": "Name",
+      "name_placeholder": "Your name",
+      "email_label": "Email",
+      "email_placeholder": "you@email.com",
+      "message_label": "Message",
+      "message_placeholder": "Describe your project, your need, or just say hello…",
+      "submit": "Send message",
+      "submitting": "Sending…",
+      "success_title": "Message sent.",
+      "success_body": "I'll get back to you within 24–48h.",
+      "success_reset": "Send another message",
+      "error_generic": "Something went wrong. Try again or",
+      "error_fallback_link": "reach me directly",
+      "error_rate_limited": "Too many attempts. Please try again in 10 minutes.",
+      "error_captcha": "Verification failed. Refresh and try again.",
+      "err_name_min": "Minimum 2 characters",
+      "err_name_max": "Maximum 80 characters",
+      "err_email_invalid": "Invalid email address",
+      "err_message_min": "Minimum 10 characters",
+      "err_message_max": "Maximum 2000 characters"
+    }
   }
 }
