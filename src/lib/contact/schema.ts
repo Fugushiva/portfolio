@@ -53,7 +53,23 @@ export const contactSchema = z.object({
 
 export type ContactPayload = z.infer<typeof contactSchema>
 
-/** Client-side schema (excludes turnstileToken which is injected by widget) */
-export const contactClientSchema = contactSchema.omit({ company: true })
+/**
+ * Client-side schema — only the fields the user fills in.
+ * locale + turnstileToken + company are injected programmatically on submit.
+ */
+export const contactClientSchema = z.object({
+  name: z
+    .string()
+    .min(1, 'err_name_min')
+    .max(80, 'err_name_max'),
+  email: z
+    .string()
+    .email('err_email_invalid')
+    .max(120, 'err_email_invalid'),
+  message: z
+    .string()
+    .min(10, 'err_message_min')
+    .max(2000, 'err_message_max'),
+})
 
 export type ContactClientPayload = z.infer<typeof contactClientSchema>
