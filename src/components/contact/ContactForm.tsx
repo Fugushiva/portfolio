@@ -50,6 +50,14 @@ export default function ContactForm() {
       setFormState('submitting')
       setErrorCode('generic')
 
+      // eslint-disable-next-line no-console
+      console.warn('[contact] submit start', {
+        hasInitialToken: !!turnstileToken.current,
+        tokenLen: turnstileToken.current?.length ?? 0,
+        hasRef: !!turnstileRef.current,
+        siteKeySet: !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+      })
+
       try {
         // Wait for Turnstile token if widget hasn't produced one yet.
         // Invisible widget can take a moment, esp. in prod where CF runs more checks.
@@ -60,9 +68,17 @@ export default function ContactForm() {
           while (!turnstileToken.current && Date.now() - start < 8000) {
             await new Promise((r) => setTimeout(r, 100))
           }
+          // eslint-disable-next-line no-console
+          console.warn('[contact] after wait', {
+            elapsed: Date.now() - start,
+            gotToken: !!turnstileToken.current,
+            tokenLen: turnstileToken.current?.length ?? 0,
+          })
         }
 
         if (!turnstileToken.current) {
+          // eslint-disable-next-line no-console
+          console.warn('[contact] no token after 8s — aborting')
           setErrorCode('captcha_failed')
           setFormState('error')
           turnstileRef.current?.reset()
