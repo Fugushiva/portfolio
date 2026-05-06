@@ -42,7 +42,7 @@ const LINKS = [
 // ─── Glitch headline wrapper ───────────────────────────────────────────────────
 function GlitchHeadline({ text, outline = false }: { text: string; outline?: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '0px' })
 
   return (
     <m.div
