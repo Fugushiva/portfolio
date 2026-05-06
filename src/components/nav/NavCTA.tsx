@@ -19,11 +19,11 @@ interface NavCTAProps {
 export function NavCTA({ label }: NavCTAProps) {
   return (
     <a
-      href="mailto:jerome@delodder.dev"
+      href="#contact"
       className="nav-cta"
       data-magnetic
       data-cursor="cta"
-      aria-label={`${label} — jerome@delodder.dev`}
+      aria-label={label}
     >
       <span className="nav-cta-sweep" aria-hidden="true" />
 

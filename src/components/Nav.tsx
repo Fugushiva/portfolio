@@ -193,10 +193,13 @@ export default function Nav({ isReady }: NavProps) {
       id:     'action-email',
       type:   'action' as const,
       icon:   '✉',
-      label:  'Send email',
-      hint:   'jerome@delodder.dev',
+      label:  'Contact',
+      hint:   'Go to contact form',
       shortcut: '⌘E',
-      action: () => { window.location.href = 'mailto:jerome@delodder.dev' },
+      action: () => {
+        const el = document.getElementById('contact')
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      },
     },
     {
       id:     'action-copy-email',

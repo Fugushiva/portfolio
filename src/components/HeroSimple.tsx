@@ -79,8 +79,8 @@ const SOCIALS = [
   },
   {
     Icon: MailIcon,
-    label: 'Email',
-    href: 'mailto:jerome@delodder.dev',
+    label: 'Contact',
+    href: '#contact',
   },
 ]
 

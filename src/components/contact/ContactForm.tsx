@@ -221,20 +221,7 @@ export default function ContactForm() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {getSpecificErrorMessage() ? (
-                getSpecificErrorMessage()
-              ) : (
-                <>
-                  {t('error_generic')}{' '}
-                  <a
-                    href="mailto:jerome@delodder.dev"
-                    className="text-accent underline underline-offset-2 hover:text-accent-light transition-colors"
-                  >
-                    {t('error_fallback_link')}
-                  </a>
-                  .
-                </>
-              )}
+              {getSpecificErrorMessage() ?? t('error_generic')}
             </m.div>
           )}
 
