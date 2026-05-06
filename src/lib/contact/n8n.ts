@@ -1,10 +1,10 @@
 /**
- * n8n webhook — fire-and-forget.
- * Runs in parallel with the Resend sends but NEVER blocks the response.
- * If N8N_WEBHOOK_URL is not set, this is a no-op.
+ * n8n webhook — awaited, returns success boolean.
+ * n8n is responsible for sending all emails (owner notification + auto-reply).
+ * If N8N_WEBHOOK_URL is not set, returns false immediately.
  *
  * Auth: x-portfolio-secret header (shared secret, must match n8n workflow config).
- * Timeout: 3 seconds abort — keeps UX snappy regardless of n8n health.
+ * Timeout: 5 seconds — n8n must respond within this window.
  */
 
 export interface N8nPayload {
@@ -16,23 +16,31 @@ export interface N8nPayload {
   source: 'portfolio'
 }
 
-export function postN8nWebhook(payload: N8nPayload): void {
+export async function postN8nWebhook(payload: N8nPayload): Promise<boolean> {
   const url = process.env.N8N_WEBHOOK_URL
-  if (!url) return // n8n not configured yet — no-op
+  if (!url) return false
 
   const secret = process.env.N8N_WEBHOOK_SECRET ?? ''
 
-  // Fire and forget — we do NOT await this
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'x-portfolio-secret': secret,
-    },
-    body: JSON.stringify(payload),
-    signal: AbortSignal.timeout(3000),
-  }).catch((err) => {
-    // Log only — never surface this to the user
-    console.warn('[n8n] webhook failed:', err instanceof Error ? err.message : err)
-  })
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-portfolio-secret': secret,
+      },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(5000),
+    })
+
+    if (!res.ok) {
+      console.error('[n8n] webhook returned', res.status)
+      return false
+    }
+
+    return true
+  } catch (err) {
+    console.error('[n8n] webhook failed:', err instanceof Error ? err.message : err)
+    return false
+  }
 }

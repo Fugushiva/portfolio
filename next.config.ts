@@ -33,29 +33,13 @@ const config: NextConfig = {
 
   productionBrowserSourceMaps: false,
 
-  webpack(config, { isServer, nextRuntime }) {
+  webpack(config, { nextRuntime }) {
     // The Edge Runtime (middleware) forbids eval() — which webpack's default
     // devtool `eval-source-map` uses for source maps in development.
     // Switch to `cheap-module-source-map` for Edge chunks: same line-level
     // accuracy, no eval(), middleware works in both dev and prod.
     if (nextRuntime === 'edge') {
       config.devtool = 'cheap-module-source-map'
-    }
-
-    // Resend imports @react-email/render as an optional peer dep for HTML emails.
-    // We only send text/plain — stub the module to silence the build warning.
-    if (isServer) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const externals = config.externals as any
-      config.externals = [
-        ...(Array.isArray(externals) ? externals : externals ? [externals] : []),
-        ({ request }: { request?: string }, callback: (err?: Error | null, result?: string) => void) => {
-          if (request === '@react-email/render') {
-            return callback(null, 'commonjs @react-email/render')
-          }
-          callback()
-        },
-      ]
     }
 
     return config
