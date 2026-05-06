@@ -13,7 +13,8 @@
  *
  * Email sending is delegated entirely to n8n — no email provider needed here.
  */
-export const runtime = 'edge'
+// No explicit runtime declaration — Cloudflare Workers runs everything on the edge by default.
+// Declaring runtime='edge' breaks the OpenNext build pipeline.
 export const dynamic = 'force-dynamic'
 
 import { contactSchema } from '@/lib/contact/schema'
