@@ -51,6 +51,24 @@ export default function ContactForm() {
       setErrorCode('generic')
 
       try {
+        // Wait for Turnstile token if widget hasn't produced one yet.
+        // Invisible widget can take a moment, esp. in prod where CF runs more checks.
+        if (!turnstileToken.current) {
+          // Try to execute the widget explicitly and wait up to 8s
+          turnstileRef.current?.execute()
+          const start = Date.now()
+          while (!turnstileToken.current && Date.now() - start < 8000) {
+            await new Promise((r) => setTimeout(r, 100))
+          }
+        }
+
+        if (!turnstileToken.current) {
+          setErrorCode('captcha_failed')
+          setFormState('error')
+          turnstileRef.current?.reset()
+          return
+        }
+
         const payload = {
           ...data,
           locale,

@@ -27,6 +27,11 @@ export async function verifyTurnstile(token: string): Promise<boolean> {
     return false
   }
 
+  if (!token) {
+    console.warn('[turnstile] empty token from client — widget did not run')
+    return false
+  }
+
   try {
     const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
@@ -43,6 +48,9 @@ export async function verifyTurnstile(token: string): Promise<boolean> {
     }
 
     const data = (await res.json()) as TurnstileVerifyResponse
+    if (!data.success) {
+      console.warn('[turnstile] siteverify failed', data['error-codes'])
+    }
     return data.success === true
   } catch (err) {
     console.warn('[turnstile] siteverify fetch failed', err)
