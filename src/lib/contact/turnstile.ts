@@ -43,7 +43,14 @@ export async function verifyTurnstile(token: string): Promise<boolean> {
     })
 
     if (!res.ok) {
-      console.warn('[turnstile] siteverify HTTP error', res.status)
+      const text = await res.text().catch(() => '<no body>')
+      console.warn('[turnstile] siteverify HTTP error', res.status, {
+        bodyPreview: text.slice(0, 300),
+        secretLen: secret.length,
+        secretPrefix: secret.slice(0, 12),
+        tokenLen: token.length,
+        tokenPrefix: token.slice(0, 16),
+      })
       return false
     }
 
