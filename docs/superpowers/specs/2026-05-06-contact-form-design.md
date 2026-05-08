@@ -135,18 +135,90 @@ To: {email}
 Body: Locale-specific plain text, mentions 24–48h reply time
 ```
 
-**n8n payload:**
+**n8n payload (enriched — updated 2026-05-08):**
+
+The payload is built by `buildN8nPayload()` in `src/lib/contact/n8n.ts`.
+All groups are pre-computed server-side so n8n nodes need zero string concatenation.
+
 ```json
 {
-  "name": "...",
-  "email": "...",
-  "message": "...",
-  "locale": "fr|en",
-  "ts": 1234567890,
-  "source": "portfolio"
+  "name": "Jean Dupont",
+  "email": "jean@example.com",
+  "message": "Bonjour, je voudrais...",
+  "locale": "fr",
+  "ts": 1746700000000,
+  "source": "portfolio",
+
+  "form": {
+    "type": "contact",
+    "source": "portfolio",
+    "locale": "fr",
+    "submittedAt": "2026-05-08T10:00:00.000Z",
+    "submittedAtUnix": 1746694800
+  },
+
+  "contact": {
+    "name": "Jean Dupont",
+    "email": "jean@example.com",
+    "message": "Bonjour, je voudrais...",
+    "messagePreview": "Bonjour, je voudrais...",
+    "messageLength": 23
+  },
+
+  "labels": {
+    "subjectOwner": "[Portfolio] Nouveau message de Jean Dupont",
+    "subjectAutoReply": "Votre message a bien été reçu",
+    "ownerGreeting": "Nouveau message de Jean Dupont",
+    "autoReplyGreeting": "Bonjour Jean Dupont,"
+  },
+
+  "emails": {
+    "ownerTo": "jerome@delodder.dev",
+    "ownerFrom": "hello@jeromedelodder.com",
+    "ownerReplyTo": "jean@example.com",
+    "ownerBodyText": "Nom: Jean Dupont\nEmail: jean@example.com\nDate: 2026-05-08T10:00:00.000Z\n\nMessage:\nBonjour, je voudrais...",
+    "autoReplyTo": "jean@example.com",
+    "autoReplyFrom": "hello@jeromedelodder.com",
+    "autoReplyBodyText": "Bonjour Jean Dupont,\n\nMerci pour votre message..."
+  },
+
+  "meta": {
+    "country": "FR",
+    "userAgent": "Mozilla/5.0 ...",
+    "ipHash": "sha256:a1b2c3d4..."
+  }
 }
 ```
-Auth via `x-portfolio-secret` header. 3s abort timeout. Skip if `N8N_WEBHOOK_URL` absent.
+
+> **Backward compat:** root-level `name`, `email`, `message`, `locale`, `ts`, `source` are
+> kept alongside the new groups so existing n8n nodes still work unchanged.
+
+**n8n node mapping cheat-sheet:**
+
+| n8n field                | Expression                              |
+|--------------------------|-----------------------------------------|
+| Owner email → To         | `{{ $json.emails.ownerTo }}`            |
+| Owner email → From       | `{{ $json.emails.ownerFrom }}`          |
+| Owner email → Subject    | `{{ $json.labels.subjectOwner }}`       |
+| Owner email → Reply-To   | `{{ $json.emails.ownerReplyTo }}`       |
+| Owner email → Body       | `{{ $json.emails.ownerBodyText }}`      |
+| Auto-reply → To          | `{{ $json.emails.autoReplyTo }}`        |
+| Auto-reply → From        | `{{ $json.emails.autoReplyFrom }}`      |
+| Auto-reply → Subject     | `{{ $json.labels.subjectAutoReply }}`   |
+| Auto-reply → Body        | `{{ $json.emails.autoReplyBodyText }}`  |
+| IF locale = fr/en        | `{{ $json.form.locale }}`               |
+| Submitted date           | `{{ $json.form.submittedAt }}`          |
+| Sender country           | `{{ $json.meta.country }}`              |
+
+**Auth:** `x-portfolio-secret` header (shared secret). Configure in n8n Webhook node →
+Authentication → Header Auth → Header name: `x-portfolio-secret`.
+
+**Timeout:** 10 s (increased from 3 s — email nodes can take 6-8 s with SMTP/OAuth).
+
+**Skip if `N8N_WEBHOOK_URL` absent:** yes — skipped silently in dev, 502 in prod.
+
+**URL format:** use `/webhook/<uuid>` (production) not `/webhook-test/<uuid>`.
+The workflow must be **activated** in n8n (green toggle top-right).
 
 ---
 

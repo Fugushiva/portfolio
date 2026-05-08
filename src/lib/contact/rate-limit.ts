@@ -22,21 +22,14 @@ function getKV(): KVNamespace | null {
   return kv ?? null
 }
 
-/** Hash IP to 16 hex chars (SHA-256 truncated) — never store IP in clear */
-async function hashIP(ip: string): Promise<string> {
-  const encoder = new TextEncoder()
-  const data = encoder.encode(ip)
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
-  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('').slice(0, 16)
-}
+import { hashIp } from './hash'
 
 const WINDOW_MS = 10 * 60 * 1000 // 10 minutes
 const MAX_REQUESTS = 5
 const TTL_SECONDS = 600
 
 export async function isRateLimited(ip: string): Promise<boolean> {
-  const hash = await hashIP(ip)
+  const hash = await hashIp(ip)
   const key = `rl:contact:${hash}`
 
   const kv = getKV()

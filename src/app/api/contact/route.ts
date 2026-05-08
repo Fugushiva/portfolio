@@ -8,11 +8,12 @@
  * 4. Rate-limit (KV sliding window: 5 req / IP-hash / 10 min)
  * 5. Zod validate
  * 6. Turnstile siteverify
- * 7. POST to n8n webhook (n8n handles email sending)
+ * 7. POST enriched payload to n8n webhook (n8n handles all email sending)
  * 8. Return { ok, code }
  *
  * Email sending is delegated entirely to n8n — no email provider needed here.
  */
+
 // No explicit runtime declaration — Cloudflare Workers runs everything on the edge by default.
 // Declaring runtime='edge' breaks the OpenNext build pipeline.
 export const dynamic = 'force-dynamic'
@@ -21,6 +22,7 @@ import { contactSchema } from '@/lib/contact/schema'
 import { isRateLimited } from '@/lib/contact/rate-limit'
 import { verifyTurnstile } from '@/lib/contact/turnstile'
 import { postN8nWebhook } from '@/lib/contact/n8n'
+import { sha256Prefixed } from '@/lib/contact/hash'
 
 type ApiCode =
   | 'sent'
@@ -92,11 +94,20 @@ export async function POST(req: Request) {
       return json({ ok: false, code: 'webhook_failed' }, 502)
     }
   } else {
+    // Build request metadata — nothing PII in cleartext
+    const ipHash = await sha256Prefixed(ip)
+    const country = req.headers.get('CF-IPCountry') ?? 'unknown'
+    const userAgent = req.headers.get('user-agent') ?? 'unknown'
+
     const success = await postN8nWebhook({
-      name, email, message, locale,
+      name,
+      email,
+      message,
+      locale,
       ts: Date.now(),
-      source: 'portfolio',
+      meta: { country, userAgent, ipHash },
     })
+
     if (!success) {
       return json({ ok: false, code: 'webhook_failed' }, 502)
     }
