@@ -75,6 +75,37 @@ function MetricCard({
   )
 }
 
+// ─── Client text with optional clickable URL ──────────────────────────────────
+// Splits on domain-like tokens (e.g. "jobnomad.app") and makes them links.
+function ClientText({ client, accent }: { client: string; accent: string }) {
+  // Capture groups in split() keep the delimiters in the resulting array
+  const parts = client.split(/([a-z0-9-]+\.[a-z]{2,}(?:\/[^\s]*)?)/i)
+  return (
+    <>
+      {parts.map((part, i) => {
+        const isDomain = i % 2 === 1 // odd indices = captured groups = domain tokens
+        if (isDomain) {
+          const href = part.startsWith('http') ? part : `https://${part}`
+          return (
+            <a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-200 underline underline-offset-2 decoration-dotted hover:no-underline"
+              style={{ color: accent }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {part}
+            </a>
+          )
+        }
+        return <span key={i}>{part}</span>
+      })}
+    </>
+  )
+}
+
 // ─── Architecture diagram pill ────────────────────────────────────────────────
 
 function ArchPill({
@@ -149,6 +180,13 @@ function ProjectCard({
 
   const [activeTab, setActiveTab] = useState<PanelTab>('overview')
 
+  // Badge click: open panel if collapsed, then jump to the right tab
+  const handleBadgeClick = (tab: PanelTab) => (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!isOpen) onToggle()
+    setActiveTab(tab)
+  }
+
   // Architecture pills — split by " · "
   const archPills = project.architecture.split(' · ').map((s) => s.trim()).filter(Boolean)
 
@@ -191,26 +229,55 @@ function ProjectCard({
                 {category_icon} {project.category}
               </span>
               <span className="font-mono text-[0.65rem] text-muted/60 uppercase tracking-wider">
-                {project.client} · {project.year}
+                <ClientText client={project.client} accent={accent} /> · {project.year}
               </span>
 
-              {/* Asset badges */}
+              {/* Asset badges — animated to signal interactivity */}
               {hasGallery && (
-                <span className="font-mono text-[0.6rem] text-muted/40 uppercase tracking-widest flex items-center gap-1">
-                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <rect x="0.5" y="0.5" width="3.5" height="3.5" rx="0.5" stroke="currentColor" strokeWidth="0.8" />
-                    <rect x="5" y="0.5" width="3.5" height="3.5" rx="0.5" stroke="currentColor" strokeWidth="0.8" />
-                    <rect x="0.5" y="5" width="3.5" height="3.5" rx="0.5" stroke="currentColor" strokeWidth="0.8" />
-                    <rect x="5" y="5" width="3.5" height="3.5" rx="0.5" stroke="currentColor" strokeWidth="0.8" />
-                  </svg>
+                <span
+                  className="font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none"
+                  style={{
+                    color: accent,
+                    borderColor: `${accent}50`,
+                    background: `rgba(${accentRgb},0.08)`,
+                  }}
+                  onClick={handleBadgeClick('assets')}
+                >
+                  {/* Animated ping dot */}
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
+                    <span
+                      className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
+                      style={{ background: accent }}
+                    />
+                    <span
+                      className="relative inline-flex rounded-full h-1.5 w-1.5"
+                      style={{ background: accent }}
+                    />
+                  </span>
                   Gallery
                 </span>
               )}
               {galleryType === 'workflow' && (
-                <span className="font-mono text-[0.6rem] text-muted/40 uppercase tracking-widest flex items-center gap-1">
-                  <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                    <path d="M1 2h7M1 4.5h5M1 7h3" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
-                  </svg>
+                <span
+                  className="font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none"
+                  style={{
+                    color: accent,
+                    borderColor: `${accent}50`,
+                    background: `rgba(${accentRgb},0.08)`,
+                  }}
+                  onClick={handleBadgeClick('code')}
+                >
+                  {/* Animated ping dot */}
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
+                    <span
+                      className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
+                      style={{ background: accent }}
+                    />
+                    <span
+                      className="relative inline-flex rounded-full h-1.5 w-1.5"
+                      style={{ background: accent }}
+                    />
+                  </span>
                   Source
                 </span>
               )}
