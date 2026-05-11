@@ -185,6 +185,7 @@ export default function HeroSimple({ isReady }: HeroSimpleProps) {
       id="hero"
       ref={sectionRef}
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-20 pt-32"
+      style={{ contain: 'paint' }}
     >
       {/* ── Background layers (z-0) ── */}
 

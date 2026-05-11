@@ -621,16 +621,16 @@ body.is-loading {
   0%, 100% {
     transform: scale(1);
     box-shadow:
-      0 0 40px rgba(124, 58, 237, 0.45),
-      0 0 80px rgba(124, 58, 237, 0.18),
-      0 0 120px rgba(99, 102, 241, 0.08);
+      0 0 30px rgba(124, 58, 237, 0.5),
+      0 0 60px rgba(124, 58, 237, 0.18),
+      0 0 90px rgba(99, 102, 241, 0.06);
   }
   50% {
     transform: scale(1.07);
     box-shadow:
-      0 0 55px rgba(124, 58, 237, 0.65),
-      0 0 110px rgba(124, 58, 237, 0.28),
-      0 0 180px rgba(99, 102, 241, 0.15);
+      0 0 40px rgba(124, 58, 237, 0.65),
+      0 0 80px rgba(124, 58, 237, 0.25),
+      0 0 120px rgba(99, 102, 241, 0.10);
   }
 }
 
@@ -1005,9 +1005,6 @@ body.is-loading {
   transition: border-color 500ms ease;
   position: relative;
   isolation: isolate;
-  /* smooth clip-path morph, not tied to scroll speed */
-  /* Note: clip-path itself is driven by CSS var from JS, transition handles
-     the smooth interpolation */
 }
 
 /* ─── Aurora conic gradient behind pill ─────────────────────────────────── */
@@ -1025,7 +1022,7 @@ body.is-loading {
 .nav-pill::before {
   content: '';
   position: absolute;
-  inset: -2px;
+  inset: 0;
   background: conic-gradient(
     from var(--aurora-angle),
     #7c3aed  0%,
@@ -1034,14 +1031,13 @@ body.is-loading {
     #c4b5fd 75%,
     #7c3aed 100%
   );
-  filter: blur(18px);
-  opacity: calc(var(--nav-pill) * 0.12);
+  filter: blur(12px);
+  opacity: calc(var(--nav-pill) * 0.14);
   border-radius: 999px;
   animation: aurora-spin 12s linear infinite;
   pointer-events: none;
   z-index: -1;
-  /* Fallback for browsers without @property support:
-     opacity stays low (0.12 max), gradient is static — still beautiful. */
+  /* inset: 0 keeps the aurora within the pill bounds. */
 }
 
 .nav-pill::after {
