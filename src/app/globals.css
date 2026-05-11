@@ -54,6 +54,7 @@ body.is-loading {
   overflow: hidden;
 }
 
+
 /* ─── Noise grain overlay ─────────────────────────────────────────────────
    Fixed pseudo-overlay promoted to its own compositor layer.
 

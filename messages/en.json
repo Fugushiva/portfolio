@@ -63,7 +63,7 @@
       {
         "title": "AI B2B Outreach Engine",
         "category": "AI Automation",
-        "year": "2024",
+        "year": "2026",
         "client": "SalesMind AI",
         "headline": "LinkedIn → hyper-personalized messages, fully automated.",
         "description": "End-to-end AI pipeline that transforms raw LinkedIn prospect data into multi-touchpoint outreach sequences. 9 sequential AI stages: dual-entry validation, 4 parallel branches (language detection, personalization hooks, knowledge base, touchpoint parsing), buyer classification, strategy generation, message generation, quality gate, and production API delivery with retry logic.",
@@ -78,7 +78,7 @@
       {
         "title": "AI Brand Identity Generator",
         "category": "Prompt Engineering",
-        "year": "2024",
+        "year": "2025",
         "client": "Google Opal",
         "headline": "Brief in → complete brand kit out. 14 specialist AI agents.",
         "description": "End-to-end brand identity generator orchestrating 14 specialized AI agents across a fan-out / fan-in topology. Takes a founder brief and produces a complete launch kit: visual identity board, logo concepts, flat label blueprint, packaging photography, retail environment, social media assets, and a website prompt — all cohesive, grounded in one upstream Visual Strategy node.",
@@ -93,7 +93,7 @@
       {
         "title": "AI Content Engine — SalesMind AI",
         "category": "AI Content & Brand",
-        "year": "2025",
+        "year": "2026",
         "client": "SalesMind AI",
         "headline": "1 theme/week → 30 platform-native pieces. 6 channels. 85% AI-produced.",
         "description": "12-month content strategy and production engine for SalesMind AI — an AI-powered B2B sales agent. Built the full system: ICP-aligned positioning, 12-month editorial roadmap, Figma design system (55 color tokens, 82 number variables, 49 text styles, light + dark), and a weekly AI-heavy production pipeline. One hero asset per week cascades into carousels, Reels, Threads hooks, YouTube Shorts, Stories, and paid ads across 6 channels — never copy-paste, always platform-native.",

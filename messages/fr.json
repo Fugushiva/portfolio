@@ -63,7 +63,7 @@
       {
         "title": "AI B2B Outreach Engine",
         "category": "AI Automation",
-        "year": "2024",
+        "year": "2026",
         "client": "SalesMind AI",
         "headline": "LinkedIn → messages hyper-personnalisés, 100% automatisé.",
         "description": "Pipeline IA de bout en bout qui transforme des données LinkedIn brutes en séquences de prospection multi-touchpoints. 9 étapes séquentielles : validation d'entrée, 4 branches parallèles (détection de langue, hooks de personnalisation, base de connaissances, parsing de touchpoints), classification acheteur, génération de stratégie, génération de messages, quality gate, et livraison API avec retry logic.",
@@ -78,7 +78,7 @@
       {
         "title": "AI Brand Identity Generator",
         "category": "Prompt Engineering",
-        "year": "2024",
+        "year": "2025",
         "client": "Google Opal",
         "headline": "Brief → kit de marque complet. 14 agents IA spécialisés.",
         "description": "Générateur d'identité de marque complet orchestrant 14 agents IA spécialisés en topologie fan-out / fan-in. Prend un brief fondateur et produit un kit de lancement : planche identité visuelle, concepts logo, blueprint étiquette, photographie packaging, environnement retail, assets réseaux sociaux et prompt site web — tous cohérents, tous ancrés dans un unique nœud Visual Strategy upstream.",
@@ -93,7 +93,7 @@
       {
         "title": "AI Content Engine — SalesMind AI",
         "category": "AI Content & Brand",
-        "year": "2025",
+        "year": "2026",
         "client": "SalesMind AI",
         "headline": "1 thème/semaine → 30 pièces platform-native. 6 canaux. 85% IA.",
         "description": "Stratégie de contenu 12 mois et moteur de production pour SalesMind AI. Système complet : positionnement ICP, roadmap éditoriale 12 mois, design system Figma (55 variables couleur, 82 variables numériques, 49 styles texte, light + dark), et pipeline de production AI-heavy. Un hero asset par semaine cascade en carousels, Reels, hooks Threads, YouTube Shorts, Stories, et annonces payantes sur 6 canaux — jamais copy-paste, toujours platform-native.",

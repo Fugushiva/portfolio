@@ -135,11 +135,18 @@ export default function HeroSimple({ isReady }: HeroSimpleProps) {
         el.style.transition = 'none'
         el.style.transform  = 'translate3d(0,60%,0)'
         el.style.opacity    = '0'
-        void el.offsetWidth // force reflow
-        el.style.transition = 'transform 480ms cubic-bezier(0.19,1,0.22,1), opacity 480ms ease-out'
-        el.style.transform  = 'translate3d(0,0,0)'
-        el.style.opacity    = '1'
-        timer = setTimeout(tick, 2400)
+        // Use double-rAF instead of `void el.offsetWidth` (forced reflow).
+        // Two frames guarantees the browser has committed the 'transition:none'
+        // style before we re-enable transitions — zero layout thrash.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (cancelled) return
+            el.style.transition = 'transform 480ms cubic-bezier(0.19,1,0.22,1), opacity 480ms ease-out'
+            el.style.transform  = 'translate3d(0,0,0)'
+            el.style.opacity    = '1'
+            timer = setTimeout(tick, 2400)
+          })
+        })
       }, 380)
     }
 

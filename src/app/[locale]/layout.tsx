@@ -208,6 +208,11 @@ export default async function LocaleLayout({
       <head>
         {/* JSON-LD structured data — injected server-side, zero JS cost */}
         <JsonLd locale={typedLocale} />
+        {/*
+          next/font self-hosts Geist at /_next/static/media/ and injects
+          a <link rel="preload"> for the woff2 automatically (preload:true).
+          No external preconnect needed — fonts are served from this domain.
+        */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-bg text-foreground`}
