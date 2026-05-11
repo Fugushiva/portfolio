@@ -4,24 +4,23 @@
  * ContactForm — main form client component.
  *
  * States: idle | submitting | success | error
- * Security: Turnstile (invisible) + honeypot + client-side zod + server-side re-validate
+ * Security: honeypot + client-side zod + server-side re-validate
  * i18n: locale passed in payload for localized auto-reply
  * a11y: labels, aria-invalid, aria-describedby, aria-live, prefers-reduced-motion
  */
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { m, useReducedMotion } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 
 import { contactClientSchema, type ContactClientPayload } from '@/lib/contact/schema'
 import ContactField from './ContactField'
 import ContactSuccess from './ContactSuccess'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
-type ErrorCode = 'rate_limited' | 'captcha_failed' | 'email_failed' | 'generic'
+type ErrorCode = 'rate_limited' | 'email_failed' | 'generic'
 
 export default function ContactForm() {
   const t = useTranslations('contact.form')
@@ -30,8 +29,6 @@ export default function ContactForm() {
 
   const [formState, setFormState] = useState<FormState>('idle')
   const [errorCode, setErrorCode] = useState<ErrorCode>('generic')
-  const turnstileToken = useRef<string>('')
-  const turnstileRef = useRef<TurnstileInstance>(null)
 
   const {
     register,
@@ -43,52 +40,15 @@ export default function ContactForm() {
     mode: 'onBlur',
   })
 
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ''
-
   const onSubmit: SubmitHandler<ContactClientPayload> = useCallback(
     async (data) => {
       setFormState('submitting')
       setErrorCode('generic')
 
-      // eslint-disable-next-line no-console
-      console.warn('[contact] submit start', {
-        hasInitialToken: !!turnstileToken.current,
-        tokenLen: turnstileToken.current?.length ?? 0,
-        hasRef: !!turnstileRef.current,
-        siteKeySet: !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-      })
-
       try {
-        // Wait for Turnstile token if widget hasn't produced one yet.
-        // Invisible widget can take a moment, esp. in prod where CF runs more checks.
-        if (!turnstileToken.current) {
-          // Try to execute the widget explicitly and wait up to 8s
-          turnstileRef.current?.execute()
-          const start = Date.now()
-          while (!turnstileToken.current && Date.now() - start < 8000) {
-            await new Promise((r) => setTimeout(r, 100))
-          }
-          // eslint-disable-next-line no-console
-          console.warn('[contact] after wait', {
-            elapsed: Date.now() - start,
-            gotToken: !!turnstileToken.current,
-            tokenLen: turnstileToken.current?.length ?? 0,
-          })
-        }
-
-        if (!turnstileToken.current) {
-          // eslint-disable-next-line no-console
-          console.warn('[contact] no token after 8s — aborting')
-          setErrorCode('captcha_failed')
-          setFormState('error')
-          turnstileRef.current?.reset()
-          return
-        }
-
         const payload = {
           ...data,
           locale,
-          turnstileToken: turnstileToken.current,
           company: '', // honeypot — always empty from legit client
         }
 
@@ -104,15 +64,11 @@ export default function ContactForm() {
           const code: ErrorCode =
             json.code === 'rate_limited'
               ? 'rate_limited'
-              : json.code === 'captcha_failed'
-                ? 'captcha_failed'
-                : json.code === 'email_failed'
-                  ? 'email_failed'
-                  : 'generic'
+              : json.code === 'email_failed'
+                ? 'email_failed'
+                : 'generic'
           setErrorCode(code)
           setFormState('error')
-          // Reset Turnstile after error so user can retry
-          turnstileRef.current?.reset()
           return
         }
 
@@ -120,7 +76,6 @@ export default function ContactForm() {
       } catch {
         setErrorCode('generic')
         setFormState('error')
-        turnstileRef.current?.reset()
       }
     },
     [locale],
@@ -130,7 +85,6 @@ export default function ContactForm() {
     resetForm()
     setFormState('idle')
     setErrorCode('generic')
-    turnstileToken.current = ''
   }, [resetForm])
 
   // ── Success state ──────────────────────────────────────────────────────────
@@ -143,7 +97,6 @@ export default function ContactForm() {
   // ── Error message helpers ──────────────────────────────────────────────────
   function getSpecificErrorMessage(): string | null {
     if (errorCode === 'rate_limited') return t('error_rate_limited')
-    if (errorCode === 'captcha_failed') return t('error_captcha')
     return null // generic uses link pattern below
   }
 
@@ -152,7 +105,7 @@ export default function ContactForm() {
     if (!code) return undefined
     const knownKeys = [
       'err_name_min', 'err_name_max', 'err_email_invalid',
-      'err_message_min', 'err_message_max', 'err_captcha',
+      'err_message_min', 'err_message_max',
     ] as const
     type KnownKey = (typeof knownKeys)[number]
     if (knownKeys.includes(code as KnownKey)) {
@@ -226,24 +179,6 @@ export default function ContactForm() {
             disabled={isDisabled}
             error={resolveFieldError(errors.message?.message)}
           />
-
-          {/* Turnstile — invisible widget */}
-          {siteKey && (
-            <Turnstile
-              ref={turnstileRef}
-              siteKey={siteKey}
-              onSuccess={(token) => {
-                turnstileToken.current = token
-              }}
-              onError={() => {
-                turnstileToken.current = ''
-              }}
-              onExpire={() => {
-                turnstileToken.current = ''
-              }}
-              options={{ size: 'invisible' }}
-            />
-          )}
 
           {/* Error banner */}
           {formState === 'error' && (

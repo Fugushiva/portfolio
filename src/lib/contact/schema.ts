@@ -2,6 +2,7 @@
  * Zod schema for the contact form.
  * Single source of truth — imported by both client (ContactForm) and server (route handler).
  * Strips control characters from name/email to prevent header injection.
+ * Security: honeypot field (company) + server-side re-validation.
  */
 import { z } from 'zod'
 
@@ -40,9 +41,6 @@ export const contactSchema = z.object({
 
   locale: z.enum(['fr', 'en']).default('fr'),
 
-  /** Turnstile challenge response token */
-  turnstileToken: z.string().min(1, 'err_captcha'),
-
   /**
    * Honeypot — must be empty string.
    * Any bot that auto-fills this will be silently dropped.
@@ -55,7 +53,7 @@ export type ContactPayload = z.infer<typeof contactSchema>
 
 /**
  * Client-side schema — only the fields the user fills in.
- * locale + turnstileToken + company are injected programmatically on submit.
+ * locale + company are injected programmatically on submit.
  */
 export const contactClientSchema = z.object({
   name: z

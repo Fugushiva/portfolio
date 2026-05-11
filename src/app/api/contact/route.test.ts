@@ -2,9 +2,9 @@
  * Integration tests for src/app/api/contact/route.ts
  *
  * Tests the full POST pipeline:
- *   1 Parse body → 2 Honeypot → 3 Zod → 4 Turnstile → 5 n8n → 6 OK
+ *   1 Parse body → 2 Honeypot → 3 Zod → 4 n8n → 5 OK
  *
- * All external dependencies (turnstile, n8n) are mocked via vi.mock.
+ * External dependency (n8n) is mocked via vi.mock.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
@@ -12,17 +12,12 @@ import { POST } from './route'
 
 // ─── Module mocks ─────────────────────────────────────────────────────────
 
-vi.mock('@/lib/contact/turnstile', () => ({
-  verifyTurnstile: vi.fn().mockResolvedValue(true),
-}))
-
 vi.mock('@/lib/contact/n8n', () => ({
   postN8nWebhook: vi.fn().mockResolvedValue(true),
 }))
 
 // ─── Imports after mocks ───────────────────────────────────────────────────
 
-import { verifyTurnstile } from '@/lib/contact/turnstile'
 import { postN8nWebhook } from '@/lib/contact/n8n'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -46,7 +41,6 @@ const VALID_BODY = {
   email: 'jean@example.com',
   message: 'Bonjour, ceci est un test suffisamment long.',
   locale: 'fr',
-  turnstileToken: 'valid-token-abc',
   company: '', // honeypot must be empty
 }
 
@@ -61,10 +55,8 @@ describe('POST /api/contact', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    vi.mocked(verifyTurnstile).mockResolvedValue(true)
     vi.mocked(postN8nWebhook).mockResolvedValue(true)
     process.env.N8N_WEBHOOK_URL = 'https://n8n.example.com/webhook/uuid'
-    process.env.TURNSTILE_SECRET = 'test-secret'
   })
 
   afterEach(() => {
@@ -134,27 +126,7 @@ describe('POST /api/contact', () => {
     expect(json.code).toBe('validation_error')
   })
 
-  it('returns 400 validation_error when turnstileToken is empty', async () => {
-    const req = makeRequest({ ...VALID_BODY, turnstileToken: '' })
-    const res = await POST(req)
-    expect(res.status).toBe(400)
-    const json = await parseJson(res)
-    expect(json.code).toBe('validation_error')
-  })
-
-  // ── Step 4: Turnstile ──────────────────────────────────────────────────
-
-  it('returns 403 captcha_failed when turnstile rejects token', async () => {
-    vi.mocked(verifyTurnstile).mockResolvedValueOnce(false)
-    const req = makeRequest(VALID_BODY)
-    const res = await POST(req)
-    expect(res.status).toBe(403)
-    const json = await parseJson(res)
-    expect(json.code).toBe('captcha_failed')
-    expect(postN8nWebhook).not.toHaveBeenCalled()
-  })
-
-  // ── Step 5: n8n webhook ────────────────────────────────────────────────
+  // ── Step 4: n8n webhook ────────────────────────────────────────────────
 
   it('returns 502 webhook_failed when n8n returns false', async () => {
     vi.mocked(postN8nWebhook).mockResolvedValueOnce(false)
@@ -228,7 +200,7 @@ describe('POST /api/contact', () => {
     vi.unstubAllEnvs()
   })
 
-  // ── Step 6: success ────────────────────────────────────────────────────
+  // ── Step 5: success ────────────────────────────────────────────────────
 
   it('returns 200 { ok: true, code: "sent" } on full happy path', async () => {
     const req = makeRequest(VALID_BODY)

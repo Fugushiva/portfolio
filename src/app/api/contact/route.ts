@@ -5,9 +5,8 @@
  * 1. Parse JSON body
  * 2. Honeypot check (company field must be empty → silent 200 on fail)
  * 3. Zod validate
- * 4. Turnstile siteverify
- * 5. POST enriched payload to n8n webhook (n8n handles all email sending)
- * 6. Return { ok, code }
+ * 4. POST enriched payload to n8n webhook (n8n handles all email sending)
+ * 5. Return { ok, code }
  *
  * Email sending is delegated entirely to n8n — no email provider needed here.
  */
@@ -15,7 +14,6 @@
 export const dynamic = 'force-dynamic'
 
 import { contactSchema } from '@/lib/contact/schema'
-import { verifyTurnstile } from '@/lib/contact/turnstile'
 import { postN8nWebhook } from '@/lib/contact/n8n'
 import { sha256Prefixed } from '@/lib/contact/hash'
 
@@ -23,7 +21,6 @@ type ApiCode =
   | 'sent'
   | 'bad_request'
   | 'validation_error'
-  | 'captcha_failed'
   | 'webhook_failed'
 
 function json(body: { ok: boolean; code: ApiCode; details?: unknown }, status: number) {
@@ -61,13 +58,7 @@ export async function POST(req: Request) {
 
   const { name, email, message, locale } = parsed.data
 
-  // ── 4. Turnstile verify ────────────────────────────────────────────────────
-  const captchaOk = await verifyTurnstile(parsed.data.turnstileToken)
-  if (!captchaOk) {
-    return json({ ok: false, code: 'captcha_failed' }, 403)
-  }
-
-  // ── 5. n8n webhook — n8n handles all email sending ────────────────────────
+  // ── 4. n8n webhook — n8n handles all email sending ────────────────────────
   const webhookUrl = process.env.N8N_WEBHOOK_URL
   if (!webhookUrl) {
     // n8n not configured — log and return success anyway in dev
@@ -97,6 +88,6 @@ export async function POST(req: Request) {
     }
   }
 
-  // ── 6. Success ─────────────────────────────────────────────────────────────
+  // ── 5. Success ─────────────────────────────────────────────────────────────
   return json({ ok: true, code: 'sent' }, 200)
 }

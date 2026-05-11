@@ -90,12 +90,11 @@ const config: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com", // unsafe-eval: Next.js dev; challenges.cloudflare.com: Turnstile widget
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-eval: Next.js dev
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https:",
-              "connect-src 'self' https://challenges.cloudflare.com", // Turnstile
-              "frame-src https://challenges.cloudflare.com", // Turnstile renders in an iframe
+              "connect-src 'self'",
               "frame-ancestors 'none'",
             ].join('; '),
           },
