@@ -78,3 +78,13 @@ dev.log
 dev.err.log
 prod.log
 prod.err.log
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+
+!.env.example
