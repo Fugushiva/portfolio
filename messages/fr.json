@@ -46,6 +46,21 @@
     "cta_case": "Case study",
     "projects": [
       {
+        "title": "JobNomad",
+        "category": "SaaS / Job Board",
+        "year": "2026",
+        "client": "Projet personnel · jobnomad.app",
+        "headline": "Le job board qui détecte les pièges timezone avant que tu postules.",
+        "description": "80 % des offres « remote » cachent dans leur texte des contraintes timezone ou refusent les contractors étrangers — hors métadonnées. JobNomad résout ça avec Gemini 2.5 Flash-Lite : chaque offre est analysée à l'ingestion, résultats stockés en DB. Le feed = SQL pur, < 200ms, zéro LLM au clic. MVP Phase 1 : auth magic-link (PKCE), onboarding 4 étapes avec reprise, feed filtrable pagination URL-persistée, bookmarks, tracking postulation, 3 sources (RemoteOK, WWR, Himalayas), dedup SHA-256, cron cleanup hebdo.",
+        "architecture": "Extraction IA à l'ingestion · Feed SQL < 200ms · Dedup SHA-256 · Auth PKCE magic-link · pgvector · Cron cleanup",
+        "metrics": [
+          { "value": "< 200ms", "label": "latence feed — SQL pur" },
+          { "value": "3", "label": "sources d'offres ingérées" },
+          { "value": "0", "label": "LLM au moment du clic" },
+          { "value": "100%", "label": "contraintes remote vérifiées" }
+        ]
+      },
+      {
         "title": "AI B2B Outreach Engine",
         "category": "AI Automation",
         "year": "2024",

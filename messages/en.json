@@ -46,6 +46,21 @@
     "cta_case": "Case study",
     "projects": [
       {
+        "title": "JobNomad",
+        "category": "SaaS / Job Board",
+        "year": "2026",
+        "client": "Personal project · jobnomad.app",
+        "headline": "The job board that catches timezone traps before you apply.",
+        "description": "80% of 'remote' jobs hide timezone constraints or foreign contractor blocks in their free text — not in metadata. JobNomad solves this with Gemini 2.5 Flash-Lite AI extraction at ingestion: every job is analyzed once, results stored in Supabase. The feed is pure SQL — sub-200ms, zero LLM at query time. Phase 1 MVP: magic-link auth (PKCE), 4-step onboarding with resume, filterable feed with URL-persisted pagination, bookmarks, application tracking, 3 ingestion sources (RemoteOK, WWR, Himalayas), SHA-256 dedup, and weekly cron cleanup keeping DB under Supabase free tier.",
+        "architecture": "AI extraction at ingestion · SQL feed < 200ms · SHA-256 dedup · PKCE magic-link · pgvector · cron cleanup",
+        "metrics": [
+          { "value": "< 200ms", "label": "feed latency — pure SQL" },
+          { "value": "3", "label": "job sources ingested" },
+          { "value": "0", "label": "LLM calls at query time" },
+          { "value": "100%", "label": "remote constraints checked" }
+        ]
+      },
+      {
         "title": "AI B2B Outreach Engine",
         "category": "AI Automation",
         "year": "2024",

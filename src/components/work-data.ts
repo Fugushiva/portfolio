@@ -229,6 +229,15 @@ export const CONTENT_PIECES: ContentPiece[] = [
 export const PROJECT_META = [
   {
     index: '01',
+    accent: '#10b981',
+    accentRgb: '16,185,129',
+    stack: ['Next.js 16.2', 'React 19', 'Tailwind v4', 'shadcn/ui', 'Supabase', 'pgvector', 'Gemini 2.5 Flash-Lite', 'OpenAI Embeddings', 'Stripe', 'Vercel'],
+    category_icon: '🌏',
+    hasGallery: false,
+    galleryType: 'none' as const,
+  },
+  {
+    index: '02',
     accent: '#7c3aed',
     accentRgb: '124,58,237',
     stack: ['n8n', 'Google Vertex AI', 'Gemini', 'LangChain', 'Python', 'REST APIs'],
@@ -237,18 +246,9 @@ export const PROJECT_META = [
     galleryType: 'workflow' as const,
   },
   {
-    index: '02',
+    index: '03',
     accent: '#06b6d4',
     accentRgb: '6,182,212',
-    stack: ['Next.js 15', 'React 19', 'Supabase', 'PostgreSQL', 'PL/pgSQL', 'Tailwind v4', 'OVH API'],
-    category_icon: '🏗️',
-    hasGallery: false,
-    galleryType: 'none' as const,
-  },
-  {
-    index: '03',
-    accent: '#a78bfa',
-    accentRgb: '167,139,250',
     stack: ['Google Opal', 'Nano Banana', 'Multi-agent orchestration', 'Structured outputs'],
     category_icon: '🧠',
     hasGallery: false,
