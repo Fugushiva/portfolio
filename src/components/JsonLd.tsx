@@ -57,7 +57,7 @@ export default function JsonLd({ locale }: JsonLdProps) {
       { '@type': 'Language', name: 'English' },
     ],
     sameAs: [
-      'https://www.linkedin.com/in/jerome-delodder',
+      'https://www.linkedin.com/in/jerome-delodder-a12b8a1b1',
       'https://github.com/jerome-delodder',
     ],
     worksFor: {

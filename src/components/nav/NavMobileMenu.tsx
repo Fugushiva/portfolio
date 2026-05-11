@@ -193,7 +193,7 @@ export function NavMobileMenu({
                   GH
                 </a>
                 <a
-                  href="https://linkedin.com/in/jerome-delodder"
+                  href="https://www.linkedin.com/in/jerome-delodder-a12b8a1b1/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-mono text-xs text-muted hover:text-foreground transition-colors duration-200"

@@ -75,7 +75,7 @@ const SOCIALS = [
   {
     Icon: LinkedinIcon,
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/jerome-delodder',
+    href: 'https://www.linkedin.com/in/jerome-delodder-a12b8a1b1/',
   },
   {
     Icon: MailIcon,

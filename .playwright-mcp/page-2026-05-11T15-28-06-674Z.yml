@@ -1,0 +1,392 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - paragraph [ref=e15]: Loading experience
+    - generic "Jérôme" [ref=e16]:
+      - generic [ref=e17]: J
+      - generic [ref=e18]: É
+      - generic [ref=e19]: R
+      - generic [ref=e20]: Ô
+      - generic [ref=e21]: M
+      - generic [ref=e22]: E
+    - paragraph [ref=e23]: Prompt Engineer & Developer
+    - generic [ref=e27]: "000"
+  - main [ref=e28]:
+    - generic [ref=e30]:
+      - generic [ref=e35]: Available for work — Remote & Freelance
+      - heading "Jérôme Delodder" [level=1] [ref=e38]:
+        - generic [ref=e40]: Jérôme
+        - generic [ref=e43]: Delodder
+      - paragraph [ref=e44]: Prompt Engineer · Fullstack Developer · Automation.
+      - paragraph [ref=e45]:
+        - text: I build
+        - generic [ref=e47]: fast.
+      - generic [ref=e48]:
+        - button "Get in touch" [ref=e49] [cursor=pointer]
+        - button "See projects" [ref=e50] [cursor=pointer]:
+          - text: See projects
+          - img [ref=e52]
+      - generic [ref=e54]:
+        - link "GitHub" [ref=e55] [cursor=pointer]:
+          - /url: https://github.com/Fugushiva
+          - img [ref=e56]
+        - link "LinkedIn" [ref=e58] [cursor=pointer]:
+          - /url: https://linkedin.com/in/jerome-delodder
+          - img [ref=e59]
+        - link "Contact" [ref=e61] [cursor=pointer]:
+          - /url: "#contact"
+          - img [ref=e62]
+    - generic [ref=e65]:
+      - generic [ref=e67]: 01 — About
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - img "Jérôme Delodder" [ref=e72]
+          - paragraph [ref=e73]: Jérôme Delodder — 2025
+        - generic [ref=e74]:
+          - heading "I turn complex ideas into products that actually ship." [level=2] [ref=e75]
+          - paragraph [ref=e76]: Fullstack developer specialized in prompt engineering and automation. I use Claude as a permanent co-pilot — which lets me deliver in days what normally takes weeks.
+          - paragraph [ref=e77]: "My playground: n8n workflows, Next.js apps, internal SaaS tools, and prompt systems that replace 10 emails with a single API call."
+          - link "Let's talk about your project" [ref=e79] [cursor=pointer]:
+            - /url: "#contact"
+            - text: Let's talk about your project
+            - img [ref=e80]
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: "0"
+            - generic [ref=e85]: years of experience
+          - generic [ref=e86]:
+            - generic [ref=e87]: "0"
+            - generic [ref=e88]: projects shipped
+          - generic [ref=e89]:
+            - generic [ref=e90]: "0"
+            - generic [ref=e91]: faster with AI
+          - generic [ref=e92]:
+            - generic [ref=e93]: "0"
+            - generic [ref=e94]: remote ready
+    - generic [ref=e95]:
+      - generic [ref=e96]:
+        - generic [ref=e98]: 02 — Stack
+        - heading "A stack built to ship fast, not to look good on a CV." [level=2] [ref=e101]
+        - generic [ref=e102]:
+          - generic [ref=e103]:
+            - generic [ref=e108]: AI & Prompt
+            - list [ref=e109]:
+              - listitem [ref=e110]: Claude
+              - listitem [ref=e112]: GPT-4
+              - listitem [ref=e114]: Prompt Engineering
+              - listitem [ref=e116]: RAG
+              - listitem [ref=e118]: Function Calling
+              - listitem [ref=e120]: Agents
+          - generic [ref=e122]:
+            - generic [ref=e127]: Frontend
+            - list [ref=e128]:
+              - listitem [ref=e129]: Next.js
+              - listitem [ref=e131]: React
+              - listitem [ref=e133]: TypeScript
+              - listitem [ref=e135]: Tailwind CSS
+              - listitem [ref=e137]: Framer Motion
+              - listitem [ref=e139]: GSAP
+          - generic [ref=e141]:
+            - generic [ref=e146]: Backend
+            - list [ref=e147]:
+              - listitem [ref=e148]: Node.js
+              - listitem [ref=e150]: Prisma
+              - listitem [ref=e152]: PostgreSQL
+              - listitem [ref=e154]: REST
+              - listitem [ref=e156]: GraphQL
+              - listitem [ref=e158]: Supabase
+          - generic [ref=e160]:
+            - generic [ref=e165]: Automation
+            - list [ref=e166]:
+              - listitem [ref=e167]: n8n
+              - listitem [ref=e169]: Make.com
+              - listitem [ref=e171]: Zapier
+              - listitem [ref=e173]: Webhooks
+              - listitem [ref=e175]: Cron Jobs
+              - listitem [ref=e177]: API Orchestration
+      - generic [ref=e179]:
+        - generic [ref=e181]:
+          - generic [ref=e182]: Claude
+          - generic [ref=e183]: GPT-4
+          - generic [ref=e184]: Prompt Engineering
+          - generic [ref=e185]: RAG
+          - generic [ref=e186]: Function Calling
+          - generic [ref=e187]: Agents
+          - generic [ref=e188]: Next.js
+          - generic [ref=e189]: React
+          - generic [ref=e190]: TypeScript
+          - generic [ref=e191]: Tailwind CSS
+          - generic [ref=e192]: Framer Motion
+          - generic [ref=e193]: GSAP
+          - generic [ref=e194]: Node.js
+          - generic [ref=e195]: Prisma
+          - generic [ref=e196]: PostgreSQL
+          - generic [ref=e197]: REST
+          - generic [ref=e198]: GraphQL
+          - generic [ref=e199]: Supabase
+          - generic [ref=e200]: n8n
+          - generic [ref=e201]: Make.com
+          - generic [ref=e202]: Zapier
+          - generic [ref=e203]: Webhooks
+          - generic [ref=e204]: Cron Jobs
+          - generic [ref=e205]: API Orchestration
+          - generic [ref=e206]: Claude
+          - generic [ref=e207]: GPT-4
+          - generic [ref=e208]: Prompt Engineering
+          - generic [ref=e209]: RAG
+          - generic [ref=e210]: Function Calling
+          - generic [ref=e211]: Agents
+          - generic [ref=e212]: Next.js
+          - generic [ref=e213]: React
+          - generic [ref=e214]: TypeScript
+          - generic [ref=e215]: Tailwind CSS
+          - generic [ref=e216]: Framer Motion
+          - generic [ref=e217]: GSAP
+          - generic [ref=e218]: Node.js
+          - generic [ref=e219]: Prisma
+          - generic [ref=e220]: PostgreSQL
+          - generic [ref=e221]: REST
+          - generic [ref=e222]: GraphQL
+          - generic [ref=e223]: Supabase
+          - generic [ref=e224]: n8n
+          - generic [ref=e225]: Make.com
+          - generic [ref=e226]: Zapier
+          - generic [ref=e227]: Webhooks
+          - generic [ref=e228]: Cron Jobs
+          - generic [ref=e229]: API Orchestration
+        - generic [ref=e231]:
+          - generic [ref=e232]: API Orchestration
+          - generic [ref=e233]: Cron Jobs
+          - generic [ref=e234]: Webhooks
+          - generic [ref=e235]: Zapier
+          - generic [ref=e236]: Make.com
+          - generic [ref=e237]: n8n
+          - generic [ref=e238]: Supabase
+          - generic [ref=e239]: GraphQL
+          - generic [ref=e240]: REST
+          - generic [ref=e241]: PostgreSQL
+          - generic [ref=e242]: Prisma
+          - generic [ref=e243]: Node.js
+          - generic [ref=e244]: GSAP
+          - generic [ref=e245]: Framer Motion
+          - generic [ref=e246]: Tailwind CSS
+          - generic [ref=e247]: TypeScript
+          - generic [ref=e248]: React
+          - generic [ref=e249]: Next.js
+          - generic [ref=e250]: Agents
+          - generic [ref=e251]: Function Calling
+          - generic [ref=e252]: RAG
+          - generic [ref=e253]: Prompt Engineering
+          - generic [ref=e254]: GPT-4
+          - generic [ref=e255]: Claude
+          - generic [ref=e256]: API Orchestration
+          - generic [ref=e257]: Cron Jobs
+          - generic [ref=e258]: Webhooks
+          - generic [ref=e259]: Zapier
+          - generic [ref=e260]: Make.com
+          - generic [ref=e261]: n8n
+          - generic [ref=e262]: Supabase
+          - generic [ref=e263]: GraphQL
+          - generic [ref=e264]: REST
+          - generic [ref=e265]: PostgreSQL
+          - generic [ref=e266]: Prisma
+          - generic [ref=e267]: Node.js
+          - generic [ref=e268]: GSAP
+          - generic [ref=e269]: Framer Motion
+          - generic [ref=e270]: Tailwind CSS
+          - generic [ref=e271]: TypeScript
+          - generic [ref=e272]: React
+          - generic [ref=e273]: Next.js
+          - generic [ref=e274]: Agents
+          - generic [ref=e275]: Function Calling
+          - generic [ref=e276]: RAG
+          - generic [ref=e277]: Prompt Engineering
+          - generic [ref=e278]: GPT-4
+          - generic [ref=e279]: Claude
+    - generic [ref=e280]:
+      - generic [ref=e282]: 03 — Work
+      - heading "Production systems. Real impact." [level=2] [ref=e285]
+      - generic [ref=e286]:
+        - generic [ref=e287]:
+          - button "01 🌏 SaaS / Job Board Personal project · jobnomad.app · 2026 JobNomad The job board that catches timezone traps before you apply." [expanded] [ref=e288] [cursor=pointer]:
+            - generic [ref=e289]:
+              - generic [ref=e290]: "01"
+              - generic [ref=e291]:
+                - generic [ref=e292]:
+                  - generic [ref=e293]: 🌏 SaaS / Job Board
+                  - generic [ref=e294]:
+                    - text: Personal project ·
+                    - link "jobnomad.app" [ref=e295]:
+                      - /url: https://jobnomad.app
+                    - text: · 2026
+                - heading "JobNomad" [level=3] [ref=e296]
+                - paragraph [ref=e297]: The job board that catches timezone traps before you apply.
+              - img [ref=e299]
+          - generic [ref=e303]:
+            - generic [ref=e304]:
+              - generic [ref=e305]:
+                - paragraph [ref=e306]: "80% of 'remote' jobs hide timezone constraints or foreign contractor blocks in their free text — not in metadata. JobNomad solves this with Gemini 2.5 Flash-Lite AI extraction at ingestion: every job is analyzed once, results stored in Supabase. The feed is pure SQL — sub-200ms, zero LLM at query time. Phase 1 MVP: magic-link auth (PKCE), 4-step onboarding with resume, filterable feed with URL-persisted pagination, bookmarks, application tracking, 3 ingestion sources (RemoteOK, WWR, Himalayas), SHA-256 dedup, and weekly cron cleanup keeping DB under Supabase free tier."
+                - generic [ref=e307]:
+                  - generic [ref=e308]: Architecture
+                  - generic [ref=e309]:
+                    - generic [ref=e310]: AI extraction at ingestion
+                    - generic [ref=e311]: SQL feed < 200ms
+                    - generic [ref=e312]: SHA-256 dedup
+                    - generic [ref=e313]: PKCE magic-link
+                    - generic [ref=e314]: pgvector
+                    - generic [ref=e315]: cron cleanup
+              - generic [ref=e316]:
+                - paragraph [ref=e317]: Key metrics
+                - generic [ref=e318]:
+                  - generic [ref=e319]:
+                    - generic [ref=e321]: "0"
+                    - generic [ref=e322]: feed latency — pure SQL
+                  - generic [ref=e323]:
+                    - generic [ref=e325]: "0"
+                    - generic [ref=e326]: job sources ingested
+                  - generic [ref=e327]:
+                    - generic [ref=e329]: "0"
+                    - generic [ref=e330]: LLM calls at query time
+                  - generic [ref=e331]:
+                    - generic [ref=e333]: "0"
+                    - generic [ref=e334]: remote constraints checked
+            - generic [ref=e335]:
+              - paragraph [ref=e336]: Stack
+              - generic [ref=e337]:
+                - generic [ref=e338]: Next.js 16.2
+                - generic [ref=e339]: React 19
+                - generic [ref=e340]: Tailwind v4
+                - generic [ref=e341]: shadcn/ui
+                - generic [ref=e342]: Supabase
+                - generic [ref=e343]: pgvector
+                - generic [ref=e344]: Gemini 2.5 Flash-Lite
+                - generic [ref=e345]: OpenAI Embeddings
+                - generic [ref=e346]: Stripe
+                - generic [ref=e347]: Vercel
+        - button "02 ⚡ AI Automation SalesMind AI · 2024 Gallery Source AI B2B Outreach Engine LinkedIn → hyper-personalized messages, fully automated." [ref=e350] [cursor=pointer]:
+          - generic [ref=e351]:
+            - generic [ref=e352]: "02"
+            - generic [ref=e353]:
+              - generic [ref=e354]:
+                - generic [ref=e355]: ⚡ AI Automation
+                - generic [ref=e356]: SalesMind AI · 2024
+                - generic [ref=e357]: Gallery
+                - generic [ref=e361]: Source
+              - heading "AI B2B Outreach Engine" [level=3] [ref=e365]
+              - paragraph [ref=e366]: LinkedIn → hyper-personalized messages, fully automated.
+            - img [ref=e368]
+        - button "03 🧠 Prompt Engineering Google Opal · 2024 AI Brand Identity Generator Brief in → complete brand kit out. 14 specialist AI agents." [ref=e371] [cursor=pointer]:
+          - generic [ref=e372]:
+            - generic [ref=e373]: "03"
+            - generic [ref=e374]:
+              - generic [ref=e375]:
+                - generic [ref=e376]: 🧠 Prompt Engineering
+                - generic [ref=e377]: Google Opal · 2024
+              - heading "AI Brand Identity Generator" [level=3] [ref=e378]
+              - paragraph [ref=e379]: Brief in → complete brand kit out. 14 specialist AI agents.
+            - img [ref=e381]
+        - button "04 🎨 AI Content & Brand SalesMind AI · 2025 Gallery AI Content Engine — SalesMind AI 1 theme/week → 30 platform-native pieces. 6 channels. 85% AI-produced." [ref=e384] [cursor=pointer]:
+          - generic [ref=e385]:
+            - generic [ref=e386]: "04"
+            - generic [ref=e387]:
+              - generic [ref=e388]:
+                - generic [ref=e389]: 🎨 AI Content & Brand
+                - generic [ref=e390]: SalesMind AI · 2025
+                - generic [ref=e391]: Gallery
+              - heading "AI Content Engine — SalesMind AI" [level=3] [ref=e395]
+              - paragraph [ref=e396]: 1 theme/week → 30 platform-native pieces. 6 channels. 85% AI-produced.
+            - img [ref=e398]
+    - generic [ref=e401]:
+      - generic [ref=e403]: 04 — Process
+      - generic [ref=e405]:
+        - generic [ref=e406]:
+          - heading "From idea to prod in days. Not months." [level=2] [ref=e407]
+          - paragraph [ref=e408]: "The difference between a standard dev and me: I use Claude at every step. Not as autocomplete — as a decision accelerator. The result is a velocity no solo dev can reach alone."
+          - generic [ref=e410]:
+            - generic [ref=e411]:
+              - paragraph [ref=e412]: Classic approach
+              - list [ref=e413]:
+                - listitem [ref=e414]: Weeks of dev
+                - listitem [ref=e416]: Back-and-forth emails
+                - listitem [ref=e418]: Costly revisions
+                - listitem [ref=e420]: Unpredictable delivery
+            - generic [ref=e422]:
+              - paragraph [ref=e423]: My approach
+              - list [ref=e424]:
+                - listitem [ref=e425]: Days, not weeks
+                - listitem [ref=e427]: Single clear brief
+                - listitem [ref=e429]: Fast iterations
+                - listitem [ref=e431]: Predictable ship
+        - generic [ref=e433]:
+          - generic [ref=e434]:
+            - img [ref=e437]
+            - generic [ref=e441]:
+              - generic [ref=e442]:
+                - heading "Brief & Scope" [level=3] [ref=e443]
+                - generic [ref=e444]: 1–2h
+              - paragraph [ref=e445]: We define the real problem, not the symptoms. A call or a Google doc is enough. I ask the right questions to avoid 3 weeks of pointless dev.
+          - generic [ref=e446]:
+            - img [ref=e449]
+            - generic [ref=e456]:
+              - generic [ref=e457]:
+                - heading "Architecture + Claude" [level=3] [ref=e458]
+                - generic [ref=e459]: 2–4h
+              - paragraph [ref=e460]: I structure the app or workflow with Claude as co-architect. Not to replace thinking — to accelerate it. We ship a solid technical plan in a few hours.
+          - generic [ref=e461]:
+            - img [ref=e464]
+            - generic [ref=e468]:
+              - generic [ref=e469]:
+                - heading "Iterative build" [level=3] [ref=e470]
+                - generic [ref=e471]: 2–5 days
+              - paragraph [ref=e472]: Short sprints, intermediate deliverables, tight feedback loop. Each feature is tested before moving on. No big bang delivery.
+          - generic [ref=e473]:
+            - img [ref=e476]
+            - generic [ref=e478]:
+              - generic [ref=e479]:
+                - heading "Ship & Transfer" [level=3] [ref=e480]
+                - generic [ref=e481]: 1 day
+              - paragraph [ref=e482]: Deploy, minimal technical doc, video walkthrough if needed. You take over something that runs, not a prototype.
+    - generic [ref=e484]:
+      - generic [ref=e486]: 05 — Contact
+      - generic [ref=e488]:
+        - generic [ref=e489]:
+          - generic [ref=e490]:
+            - heading "Let's build something" [level=2] [ref=e491]
+            - heading [level=2]: Let's build something
+            - heading [level=2]: Let's build something
+          - generic [ref=e492]:
+            - heading "together?" [level=2] [ref=e493]
+            - heading [level=2]: together?
+            - heading [level=2]: together?
+        - generic [ref=e494]:
+          - paragraph [ref=e495]: I'm available for freelance projects, remote full-time roles, or partnerships on AI/automation projects.
+          - generic [ref=e497]:
+            - generic [ref=e498]:
+              - text: Company
+              - textbox [ref=e499]
+            - generic [ref=e500]:
+              - generic [ref=e501]:
+                - generic [ref=e502]: Name*
+                - textbox "Name" [ref=e503]:
+                  - /placeholder: Your name
+              - generic [ref=e504]:
+                - generic [ref=e505]: Email*
+                - textbox "Email" [ref=e506]:
+                  - /placeholder: you@email.com
+              - generic [ref=e507]:
+                - generic [ref=e508]: Message*
+                - textbox "Message" [ref=e509]:
+                  - /placeholder: Describe your project, your need, or just say hello…
+              - button "Send message" [ref=e511] [cursor=pointer]:
+                - generic [ref=e512]: Send message
+                - img [ref=e514]
+        - generic [ref=e516]:
+          - generic [ref=e517]: © 2026 Jérôme Delodder — Built with Next.js & Claude
+          - generic [ref=e518]:
+            - link "LinkedIn" [ref=e519] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/j%C3%A9r%C3%B4me-delodder-a12b8a1b1/
+              - img [ref=e520]
+            - link "GitHub" [ref=e523] [cursor=pointer]:
+              - /url: https://github.com/Fugushiva
+              - img [ref=e524]
+          - generic [ref=e526]: Available · Remote · Freelance
+  - alert [ref=e530]

@@ -227,7 +227,7 @@ export default function Nav({ isReady }: NavProps) {
       icon:   '◉',
       label:  'LinkedIn',
       hint:   'jerome-delodder',
-      action: () => { window.open('https://linkedin.com/in/jerome-delodder', '_blank', 'noopener') },
+      action: () => { window.open('https://www.linkedin.com/in/jerome-delodder-a12b8a1b1/', '_blank', 'noopener') },
     },
     {
       id:     'action-lang',
