@@ -2,19 +2,15 @@
  * Integration tests for src/app/api/contact/route.ts
  *
  * Tests the full POST pipeline:
- *   1 Parse body → 2 Honeypot → 3 IP → 4 Rate-limit → 5 Zod → 6 Turnstile → 7 n8n → 8 OK
+ *   1 Parse body → 2 Honeypot → 3 Zod → 4 Turnstile → 5 n8n → 6 OK
  *
- * All external dependencies (rate-limit, turnstile, n8n) are mocked via vi.mock.
+ * All external dependencies (turnstile, n8n) are mocked via vi.mock.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { POST } from './route'
 
 // ─── Module mocks ─────────────────────────────────────────────────────────
-
-vi.mock('@/lib/contact/rate-limit', () => ({
-  isRateLimited: vi.fn().mockResolvedValue(false),
-}))
 
 vi.mock('@/lib/contact/turnstile', () => ({
   verifyTurnstile: vi.fn().mockResolvedValue(true),
@@ -26,7 +22,6 @@ vi.mock('@/lib/contact/n8n', () => ({
 
 // ─── Imports after mocks ───────────────────────────────────────────────────
 
-import { isRateLimited } from '@/lib/contact/rate-limit'
 import { verifyTurnstile } from '@/lib/contact/turnstile'
 import { postN8nWebhook } from '@/lib/contact/n8n'
 
@@ -37,7 +32,7 @@ function makeRequest(body: unknown, headers: Record<string, string> = {}): Reque
     method: 'POST',
     headers: {
       'content-type': 'application/json',
-      'CF-Connecting-IP': '203.0.113.42',
+      'X-Forwarded-For': '203.0.113.42',
       'CF-IPCountry': 'FR',
       'user-agent': 'vitest/1.0',
       ...headers,
@@ -66,7 +61,6 @@ describe('POST /api/contact', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    vi.mocked(isRateLimited).mockResolvedValue(false)
     vi.mocked(verifyTurnstile).mockResolvedValue(true)
     vi.mocked(postN8nWebhook).mockResolvedValue(true)
     process.env.N8N_WEBHOOK_URL = 'https://n8n.example.com/webhook/uuid'
@@ -114,19 +108,7 @@ describe('POST /api/contact', () => {
     expect(json.ok).toBe(true)
   })
 
-  // ── Step 4: rate-limit ─────────────────────────────────────────────────
-
-  it('returns 429 rate_limited when isRateLimited returns true', async () => {
-    vi.mocked(isRateLimited).mockResolvedValueOnce(true)
-    const req = makeRequest(VALID_BODY)
-    const res = await POST(req)
-    expect(res.status).toBe(429)
-    const json = await parseJson(res)
-    expect(json.code).toBe('rate_limited')
-    expect(postN8nWebhook).not.toHaveBeenCalled()
-  })
-
-  // ── Step 5: Zod validation ─────────────────────────────────────────────
+  // ── Step 3: Zod validation ─────────────────────────────────────────────
 
   it('returns 400 validation_error when name is missing', async () => {
     const req = makeRequest({ ...VALID_BODY, name: '' })
@@ -160,7 +142,7 @@ describe('POST /api/contact', () => {
     expect(json.code).toBe('validation_error')
   })
 
-  // ── Step 6: Turnstile ──────────────────────────────────────────────────
+  // ── Step 4: Turnstile ──────────────────────────────────────────────────
 
   it('returns 403 captcha_failed when turnstile rejects token', async () => {
     vi.mocked(verifyTurnstile).mockResolvedValueOnce(false)
@@ -172,7 +154,7 @@ describe('POST /api/contact', () => {
     expect(postN8nWebhook).not.toHaveBeenCalled()
   })
 
-  // ── Step 7: n8n webhook ────────────────────────────────────────────────
+  // ── Step 5: n8n webhook ────────────────────────────────────────────────
 
   it('returns 502 webhook_failed when n8n returns false', async () => {
     vi.mocked(postN8nWebhook).mockResolvedValueOnce(false)
@@ -214,7 +196,7 @@ describe('POST /api/contact', () => {
   })
 
   it('passes hashed IP in meta.ipHash (never plaintext)', async () => {
-    const req = makeRequest(VALID_BODY, { 'CF-Connecting-IP': '203.0.113.99' })
+    const req = makeRequest(VALID_BODY, { 'X-Forwarded-For': '203.0.113.99' })
     await POST(req)
 
     const [arg] = vi.mocked(postN8nWebhook).mock.calls[0]
@@ -246,7 +228,7 @@ describe('POST /api/contact', () => {
     vi.unstubAllEnvs()
   })
 
-  // ── Step 8: success ────────────────────────────────────────────────────
+  // ── Step 6: success ────────────────────────────────────────────────────
 
   it('returns 200 { ok: true, code: "sent" } on full happy path', async () => {
     const req = makeRequest(VALID_BODY)

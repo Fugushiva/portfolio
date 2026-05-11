@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import JsonLd from '@/components/JsonLd'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import '../globals.css'
 
 const BASE_URL = 'https://jeromedelodder.com'
@@ -213,6 +215,8 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
