@@ -25,7 +25,7 @@ export default function LangSwitcher() {
   return (
     <button
       onClick={switchLocale}
-      aria-label={`Switch to ${otherLabel}`}
+      aria-label={`${activeLabel} — Switch to ${otherLabel}`}
       data-magnetic
       className="magnetic-wrap relative overflow-hidden group"
       style={{ height: '1.2em', width: '2.4ch' }}

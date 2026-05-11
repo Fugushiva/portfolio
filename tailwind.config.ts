@@ -12,7 +12,7 @@ const config: Config = {
         'accent-light': '#a78bfa',
         'accent-dark': '#5b21b6',
         foreground: '#f5f5f0',
-        muted: '#6b6b6b',
+        muted: '#8c8c8c',
         border: '#222222',
       },
       fontFamily: {

@@ -27,7 +27,7 @@ export function NavLogo({ onNavigate }: NavLogoProps) {
     <a
       href="#hero"
       onClick={(e) => { e.preventDefault(); onNavigate('#hero') }}
-      aria-label="Jerome Delodder — retour en haut"
+      aria-label="JD — Jerome Delodder, retour en haut"
       className="nav-logo"
       data-magnetic
       data-cursor="link"
