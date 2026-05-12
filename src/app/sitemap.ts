@@ -43,5 +43,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
       alternates: hreflangAlternates,
     },
+    // Privacy Policy — French
+    {
+      url: `${BASE_URL}/fr/privacy-policy`,
+      lastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+      alternates: {
+        languages: {
+          fr: `${BASE_URL}/fr/privacy-policy`,
+          en: `${BASE_URL}/en/privacy-policy`,
+          'x-default': `${BASE_URL}/fr/privacy-policy`,
+        },
+      },
+    },
+    // Privacy Policy — English
+    {
+      url: `${BASE_URL}/en/privacy-policy`,
+      lastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+      alternates: {
+        languages: {
+          fr: `${BASE_URL}/fr/privacy-policy`,
+          en: `${BASE_URL}/en/privacy-policy`,
+          'x-default': `${BASE_URL}/fr/privacy-policy`,
+        },
+      },
+    },
   ]
 }

@@ -151,6 +151,7 @@
     "cta_copied": "Copié !",
     "footer_copy": "© 2026 Jérôme Delodder — Built with Next.js & Claude",
     "footer_availability": "Disponible · Remote · Freelance",
+    "footer_privacy": "Politique de Confidentialité",
     "form": {
       "name_label": "Nom",
       "name_placeholder": "Votre nom",
@@ -173,5 +174,128 @@
       "err_message_min": "Minimum 10 caractères",
       "err_message_max": "Maximum 2000 caractères"
     }
+  },
+  "privacyPolicy": {
+    "meta_title": "Politique de Confidentialité — Jérôme Delodder",
+    "meta_description": "Découvrez comment Jérôme Delodder collecte, utilise et protège vos données personnelles sur jeromedelodder.com.",
+    "last_updated": "Dernière mise à jour : 12 mai 2026",
+    "back": "Retour à l'accueil",
+    "intro": "Cette Politique de Confidentialité décrit nos règles et procédures concernant la collecte, l'utilisation et la divulgation de vos informations lorsque vous utilisez le Service. Nous utilisons vos Données Personnelles pour fournir et améliorer le Service. En utilisant le Service, vous acceptez la collecte et l'utilisation des informations conformément à cette Politique de Confidentialité.",
+    "sections": [
+      {
+        "title": "Interprétation et Définitions",
+        "subsections": [
+          {
+            "subtitle": "Interprétation",
+            "content": "Les mots dont la première lettre est en majuscule ont des significations définies dans les conditions suivantes. Les définitions suivantes ont la même signification qu'elles apparaissent au singulier ou au pluriel."
+          },
+          {
+            "subtitle": "Définitions",
+            "content": "Dans le cadre de cette Politique de Confidentialité, les termes suivants s'appliquent :",
+            "list": [
+              "<strong>Compte</strong> — un compte unique créé pour vous permettre d'accéder à notre Service ou à certaines de ses fonctionnalités.",
+              "<strong>Affilié</strong> — une entité qui contrôle, est contrôlée par, ou est sous contrôle commun avec une partie, où « contrôle » signifie la propriété d'au moins 50% des actions ou titres.",
+              "<strong>Société</strong> (désignée comme « Nous » ou « Notre ») — désigne le portfolio de Jérôme Delodder.",
+              "<strong>Cookies</strong> — petits fichiers placés sur votre appareil par un site web, contenant des informations sur votre historique de navigation.",
+              "<strong>Pays</strong> — Belgique.",
+              "<strong>Appareil</strong> — tout dispositif pouvant accéder au Service, tel qu'un ordinateur, un téléphone portable ou une tablette.",
+              "<strong>Données Personnelles</strong> — toute information relative à un individu identifié ou identifiable.",
+              "<strong>Service</strong> — désigne le Site Web.",
+              "<strong>Prestataire de Services</strong> — toute personne physique ou morale qui traite des données pour le compte de la Société.",
+              "<strong>Données d'Utilisation</strong> — données collectées automatiquement, générées par l'utilisation du Service ou depuis l'infrastructure du Service.",
+              "<strong>Site Web</strong> — le portfolio de Jérôme Delodder, accessible à jeromedelodder.com.",
+              "<strong>Vous</strong> — l'individu accédant ou utilisant le Service."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Collecte et Utilisation de vos Données Personnelles",
+        "subsections": [
+          {
+            "subtitle": "Types de Données Collectées",
+            "content": "Lors de l'utilisation de notre Service, nous pouvons vous demander de nous fournir certaines informations personnelles identifiables, notamment : adresse e-mail, prénom et nom, numéro de téléphone. Des Données d'Utilisation sont également collectées automatiquement et peuvent inclure l'adresse IP, le type de navigateur, les pages visitées, la date et l'heure de visite, le temps passé sur ces pages, et des identifiants d'appareils."
+          },
+          {
+            "subtitle": "Technologies de Suivi et Cookies",
+            "content": "Nous utilisons des Cookies et des technologies de suivi similaires pour suivre l'activité sur notre Service. Nous utilisons à la fois des Cookies de Session (supprimés à la fermeture du navigateur) et des Cookies Persistants pour les finalités suivantes :",
+            "list": [
+              "<strong>Cookies Nécessaires / Essentiels</strong> — indispensables pour vous fournir les services disponibles via le Site Web et pour activer certaines fonctionnalités. Ils permettent d'authentifier les utilisateurs et de prévenir l'utilisation frauduleuse des comptes.",
+              "<strong>Cookies d'Acceptation de la Politique des Cookies</strong> — permettent d'identifier si les utilisateurs ont accepté l'utilisation des cookies sur le Site Web.",
+              "<strong>Cookies de Fonctionnalité</strong> — permettent de mémoriser vos choix lors de l'utilisation du Site Web, comme vos préférences de langue."
+            ]
+          },
+          {
+            "subtitle": "Utilisation de vos Données Personnelles",
+            "content": "La Société peut utiliser les Données Personnelles aux fins suivantes :",
+            "list": [
+              "<strong>Fournir et maintenir notre Service</strong>, notamment pour surveiller son utilisation.",
+              "<strong>Gérer votre Compte</strong> — gérer votre inscription en tant qu'utilisateur du Service.",
+              "<strong>Exécution d'un contrat</strong> — le développement et le respect de tout contrat avec nous.",
+              "<strong>Vous contacter</strong> — par e-mail, appels téléphoniques, SMS ou autres formes équivalentes de communication électronique.",
+              "<strong>Vous fournir</strong> des actualités, offres spéciales et informations générales sur nos produits et services.",
+              "<strong>Gérer vos demandes</strong> — traiter et gérer vos demandes adressées à nous.",
+              "<strong>Transferts d'entreprise</strong> — évaluer ou réaliser une fusion, cession, restructuration ou autre vente ou transfert d'actifs.",
+              "<strong>Autres finalités</strong> — analyse de données, identification des tendances d'utilisation, évaluation et amélioration de notre Service."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Conservation de vos Données Personnelles",
+        "content": "La Société ne conservera vos Données Personnelles que le temps nécessaire aux finalités décrites dans cette Politique. Nous appliquons différentes durées de conservation selon les finalités et obligations légales :",
+        "list": [
+          "<strong>Informations de compte</strong> — conservées pendant la durée de votre relation avec nous, plus jusqu'à 24 mois après la fermeture du compte.",
+          "<strong>Données de support client</strong> — tickets et transcriptions de chat : jusqu'à 24 mois après la clôture du ticket.",
+          "<strong>Données analytiques du site web</strong> (cookies, adresses IP, identifiants d'appareils) — jusqu'à 24 mois à compter de la date de collecte.",
+          "<strong>Journaux serveur</strong> (adresses IP, heures d'accès) — jusqu'à 24 mois à des fins de surveillance de la sécurité."
+        ]
+      },
+      {
+        "title": "Transfert de vos Données Personnelles",
+        "content": "Vos informations, y compris les Données Personnelles, sont traitées dans les locaux opérationnels de la Société et dans tout autre endroit où se trouvent les parties impliquées dans le traitement. La Société prendra toutes les mesures raisonnablement nécessaires pour garantir que vos données sont traitées de manière sécurisée et conformément à cette Politique de Confidentialité."
+      },
+      {
+        "title": "Suppression de vos Données Personnelles",
+        "content": "Vous avez le droit de supprimer ou de demander que nous vous aidions à supprimer les Données Personnelles que nous avons collectées vous concernant. Vous pouvez mettre à jour, modifier ou supprimer vos informations à tout moment en vous connectant à votre Compte ou en nous contactant directement."
+      },
+      {
+        "title": "Divulgation de vos Données Personnelles",
+        "subsections": [
+          {
+            "subtitle": "Transactions Commerciales",
+            "content": "Si la Société est impliquée dans une fusion, une acquisition ou une vente d'actifs, vos Données Personnelles pourront être transférées. Nous vous informerons avant que vos Données Personnelles ne soient transférées et ne deviennent soumises à une Politique de Confidentialité différente."
+          },
+          {
+            "subtitle": "Application de la Loi",
+            "content": "Dans certaines circonstances, la Société peut être tenue de divulguer vos Données Personnelles si la loi l'exige ou en réponse à des demandes valides d'autorités publiques."
+          },
+          {
+            "subtitle": "Autres Exigences Légales",
+            "content": "La Société peut divulguer vos Données Personnelles de bonne foi lorsque cela est nécessaire pour se conformer à une obligation légale, protéger les droits ou la propriété de la Société, prévenir des actes répréhensibles en lien avec le Service, protéger la sécurité personnelle des utilisateurs, ou se protéger contre la responsabilité légale."
+          }
+        ]
+      },
+      {
+        "title": "Sécurité de vos Données Personnelles",
+        "content": "La sécurité de vos Données Personnelles est importante pour nous, mais rappelons qu'aucune méthode de transmission sur Internet ni méthode de stockage électronique n'est sécurisée à 100%. Bien que nous nous efforcions d'utiliser des moyens commercialement raisonnables pour protéger vos Données Personnelles, nous ne pouvons en garantir la sécurité absolue."
+      },
+      {
+        "title": "Confidentialité des Enfants",
+        "content": "Notre Service ne s'adresse pas aux personnes de moins de 16 ans. Nous ne collectons pas sciemment des informations personnelles identifiables auprès de personnes de moins de 16 ans. Si vous êtes parent ou tuteur et que vous savez que votre enfant nous a fourni des Données Personnelles, veuillez nous contacter."
+      },
+      {
+        "title": "Liens vers d'Autres Sites Web",
+        "content": "Notre Service peut contenir des liens vers d'autres sites web qui ne sont pas exploités par nous. Si vous cliquez sur un lien tiers, vous serez dirigé vers le site de ce tiers. Nous vous conseillons vivement de consulter la Politique de Confidentialité de chaque site que vous visitez. Nous n'avons aucun contrôle sur le contenu, les politiques de confidentialité ou les pratiques des sites ou services tiers."
+      },
+      {
+        "title": "Modifications de cette Politique de Confidentialité",
+        "content": "Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page et en mettant à jour la date de « Dernière mise à jour ». Nous vous conseillons de consulter régulièrement cette Politique de Confidentialité."
+      },
+      {
+        "title": "Nous Contacter",
+        "content": "Pour toute question concernant cette Politique de Confidentialité, vous pouvez nous contacter en visitant : jeromedelodder.com"
+      }
+    ]
   }
 }

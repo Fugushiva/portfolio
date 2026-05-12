@@ -3,7 +3,8 @@
 import { useRef } from 'react'
 import { m, useInView } from 'framer-motion'
 import { useGSAPReveal } from '@/hooks/useGSAPReveal'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
+import Link from 'next/link'
 import ContactForm from './contact/ContactForm'
 
 const SOCIAL_LINKS = [
@@ -86,6 +87,7 @@ function GlitchHeadline({ text, outline = false }: { text: string; outline?: boo
 
 export default function Contact() {
   const t = useTranslations('contact')
+  const locale = useLocale()
   const containerRef = useRef<HTMLElement>(null)
   useGSAPReveal(containerRef, { stagger: 0.12, duration: 1.1, y: 60, start: 'top 90%' })
 
@@ -137,9 +139,17 @@ export default function Contact() {
           className="mt-24 pt-8 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
           data-reveal
         >
-          <span className="font-mono text-xs text-muted/50 order-3 sm:order-1">
-            {t('footer_copy')}
-          </span>
+          <div className="flex flex-col gap-1 order-3 sm:order-1">
+            <span className="font-mono text-xs text-muted/50">
+              {t('footer_copy')}
+            </span>
+            <Link
+              href={`/${locale}/privacy-policy`}
+              className="font-mono text-xs text-muted/40 hover:text-accent transition-colors duration-200 w-fit"
+            >
+              {t('footer_privacy')}
+            </Link>
+          </div>
 
           {/* Social Links */}
           <div className="flex items-center gap-5 order-2">
