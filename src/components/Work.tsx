@@ -6,7 +6,7 @@ import { m, AnimatePresence, useInView } from 'framer-motion'
 import { useGSAPReveal } from '@/hooks/useGSAPReveal'
 import { useCountUp } from '@/hooks/useCountUp'
 import { useTranslations } from 'next-intl'
-import { N8N_IMAGES, N8N_CODE_FILES, CONTENT_PIECES, PROJECT_META } from '@/components/work-data'
+import { PROJECT_META } from '@/components/work-data'
 
 // Heavy sub-components — only load when a project's "Assets" or "Source"
 // tab is actually opened. Each gets its own JS chunk.
@@ -141,6 +141,18 @@ const TAB_LABELS: Record<PanelTab, string> = {
   code: 'Source',
 }
 
+// Per-project intros for the Assets and Source tabs.
+// Keyed by ProjectMeta.index ('01', '02', ...). Fallbacks exist in the render.
+const WORKFLOW_GALLERY_INTRO: Record<string, string> = {
+  '02': 'Real screenshots from the production n8n instance — two workflows, one Google Sheets registry, zero redeploy to add a new lead magnet. Click any image to open the full-resolution lightbox.',
+  '03': 'Real screenshots from the production n8n instance — 9 stages, 21 LLM nodes. Click any image to open the full-resolution lightbox.',
+}
+
+const CODE_TAB_INTRO: Record<string, string> = {
+  '02': 'Three sanitized excerpts from the production workflows: the event router that disambiguates comments from DMs, the dedupe + keyword-match core, and the DM-distributor sub-workflow. All webhook IDs, document IDs and credentials redacted.',
+  '03': 'Two real artifacts from the pipeline: the generation contract injected into every LLM call, and the deterministic sanitizer that runs post-generation before LinkedIn delivery.',
+}
+
 // ─── Single project card ──────────────────────────────────────────────────────
 
 function ProjectCard({
@@ -172,11 +184,12 @@ function ProjectCard({
   index: number
 }) {
   const { accent, accentRgb, stack, category_icon, hasGallery, galleryType } = meta
+  const hasCode = (meta.codeFiles?.length ?? 0) > 0
 
   // Determine available tabs
   const availableTabs: PanelTab[] = ['overview']
   if (hasGallery) availableTabs.push('assets')
-  if (galleryType === 'workflow') availableTabs.push('code')
+  if (hasCode) availableTabs.push('code')
 
   const [activeTab, setActiveTab] = useState<PanelTab>('overview')
 
@@ -257,7 +270,7 @@ function ProjectCard({
                   Gallery
                 </span>
               )}
-              {galleryType === 'workflow' && (
+              {hasCode && (
                 <span
                   className="font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none"
                   style={{
@@ -443,7 +456,7 @@ function ProjectCard({
                 )}
 
                 {/* ── Assets tab — workflow gallery ── */}
-                {activeTab === 'assets' && galleryType === 'workflow' && (
+                {activeTab === 'assets' && galleryType === 'workflow' && meta.images && (
                   <m.div
                     key="assets-workflow"
                     initial={{ opacity: 0, y: 12 }}
@@ -452,10 +465,10 @@ function ProjectCard({
                     transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
                   >
                     <p className="text-muted/70 text-sm mb-6 leading-relaxed max-w-2xl">
-                      Real screenshots from the production n8n instance — 9 stages, 21 LLM nodes. Click any image to open the full-resolution lightbox.
+                      {WORKFLOW_GALLERY_INTRO[meta.index] ?? 'Real screenshots from the production n8n instance. Click any image to open the full-resolution lightbox.'}
                     </p>
                     <WorkflowGallery
-                      images={N8N_IMAGES}
+                      images={meta.images}
                       accent={accent}
                       accentRgb={accentRgb}
                     />
@@ -463,7 +476,7 @@ function ProjectCard({
                 )}
 
                 {/* ── Assets tab — content grid ── */}
-                {activeTab === 'assets' && galleryType === 'content' && (
+                {activeTab === 'assets' && galleryType === 'content' && meta.contentPieces && (
                   <m.div
                     key="assets-content"
                     initial={{ opacity: 0, y: 12 }}
@@ -475,7 +488,7 @@ function ProjectCard({
                       A sample of the weekly output — ads, carousels, Stories, Threads posts — all platform-native. Never copy-paste between channels.
                     </p>
                     <ContentGrid
-                      pieces={CONTENT_PIECES}
+                      pieces={meta.contentPieces}
                       accent={accent}
                       accentRgb={accentRgb}
                     />
@@ -483,7 +496,7 @@ function ProjectCard({
                 )}
 
                 {/* ── Code / Source tab ── */}
-                {activeTab === 'code' && (
+                {activeTab === 'code' && meta.codeFiles && (
                   <m.div
                     key="code"
                     initial={{ opacity: 0, y: 12 }}
@@ -493,10 +506,10 @@ function ProjectCard({
                     className="space-y-4"
                   >
                     <p className="text-muted/70 text-sm mb-6 leading-relaxed max-w-2xl">
-                      Two real artifacts from the pipeline: the generation contract injected into every LLM call, and the deterministic sanitizer that runs post-generation before LinkedIn delivery.
+                      {CODE_TAB_INTRO[meta.index] ?? 'Real artifacts from the pipeline. Sensitive identifiers redacted.'}
                     </p>
                     <CodeViewer
-                      files={N8N_CODE_FILES}
+                      files={meta.codeFiles}
                       accent={accent}
                       accentRgb={accentRgb}
                       maxLines={32}

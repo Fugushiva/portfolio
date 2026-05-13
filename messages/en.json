@@ -61,6 +61,21 @@
         ]
       },
       {
+        "title": "Instagram Comment-to-DM Automation",
+        "category": "Social Automation",
+        "year": "2026",
+        "client": "Personal project",
+        "headline": "Comments become a distribution channel — keyword in, resource in DM.",
+        "description": "Real-time Instagram automation that turns post comments into a content distribution funnel. Webhook events are routed by type (comment vs DM) through a Switch node, then matched against a Google Sheets keyword registry. On match, the bot replies publicly to the comment AND triggers a dedicated sub-workflow that delivers the corresponding resource via DM through the Instagram Graph API. Anti-spam is built-in at the data layer: a commenter_id + media_id lookup blocks any second trigger on the same post. Adding a new lead magnet means appending a row in Google Sheets — no redeploy.",
+        "architecture": "Webhook event router · Google Sheets keyword registry · Sheets-based dedupe · Sub-workflow DM distributor",
+        "metrics": [
+          { "value": "2", "label": "workflows orchestrated" },
+          { "value": "1", "label": "trigger per user per post" },
+          { "value": "0", "label": "redeploys to add a resource" },
+          { "value": "2", "label": "Instagram event types routed" }
+        ]
+      },
+      {
         "title": "AI B2B Outreach Engine",
         "category": "AI Automation",
         "year": "2026",
@@ -149,7 +164,7 @@
     "cta_email": "Send a message",
     "cta_copy": "Copy email",
     "cta_copied": "Copied!",
-    "footer_copy": "© 2026 Jérôme Delodder — Built with Next.js & Claude",
+    "footer_copy": "© 2026 Jérôme Delodder — Built with Next.js",
     "footer_availability": "Available · Remote · Freelance",
     "footer_privacy": "Privacy Policy",
     "form": {

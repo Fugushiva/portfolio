@@ -203,6 +203,210 @@ return [{ json: { touchpoints: processedTouchpoints } }];`,
   },
 ]
 
+// ─── Instagram Comment-to-DM Automation ──────────────────────────────────────
+// Sanitized: webhookIds, documentIds, credentials.id, workflowIds, pinData
+// and instanceIds removed. Replaced by self-explanatory placeholders.
+
+export const INSTAGRAM_IMAGES: WorkflowImage[] = [
+  {
+    src: '/projects/instagram-bot/keyword-comment-workflow.png',
+    alt: 'Main n8n workflow — Instagram comment listener',
+    label: 'Workflow 1 — Comment listener',
+    description:
+      'Webhook entry point. A Switch node routes Instagram events by type (comment vs DM), then dedupe + keyword lookup against a Google Sheets registry.',
+    wide: true,
+  },
+  {
+    src: '/projects/instagram-bot/anwsr-message-workflow.png',
+    alt: 'Sub-workflow — DM distributor',
+    label: 'Workflow 2 — DM distributor',
+    description:
+      'Dedicated sub-workflow called by the main one. Looks up the resource URL for the matched keyword and delivers it via the Instagram Graph API.',
+    wide: true,
+  },
+  {
+    src: '/projects/instagram-bot/output-comment-example.png',
+    alt: 'Example of an automated public comment reply',
+    label: 'Public reply — in production',
+    description:
+      'The bot acknowledges the comment publicly and instructs the user to DM the keyword to receive the resource.',
+  },
+  {
+    src: '/projects/instagram-bot/output-message-example.png',
+    alt: 'Example of an automated DM delivering the resource',
+    label: 'DM with resource — in production',
+    description:
+      'Resource URL pulled from the Google Sheets mapping and delivered in DM via the Instagram Graph API.',
+  },
+]
+
+export const INSTAGRAM_CODE_FILES: CodeFile[] = [
+  {
+    filename: 'event-router.json',
+    language: 'json',
+    description:
+      'Switch node that splits the Instagram webhook into two routes: comments and direct messages. First point of intelligence — disambiguates the event type before any business logic runs.',
+    content: `// n8n Switch node — Instagram webhook event router
+// Splits a single Instagram webhook into 2 typed routes.
+
+{
+  "type": "n8n-nodes-base.switch",
+  "rules": {
+    "values": [
+      {
+        "outputKey": "Comment route",
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.entry[0].changes[0].value.media }}",
+              "operator": { "type": "object", "operation": "exists" }
+            }
+          ]
+        }
+      },
+      {
+        "outputKey": "Message route",
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.entry[0].messaging[0].message }}",
+              "operator": { "type": "object", "operation": "notEmpty" }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}`,
+  },
+  {
+    filename: 'dedupe-and-keyword-match.json',
+    language: 'json',
+    description:
+      'The business core: dedupe (one trigger per user per post) + keyword lookup against a Google Sheets registry. Adding a new lead magnet = appending a row, no redeploy.',
+    content: `// Pipeline excerpt — dedupe + keyword match
+// commenter_id + media_id is the dedupe key.
+// keyword lookup hits an "active=true" filter so rows can be paused
+// in Google Sheets without removing them.
+
+// 1) Extract canonical fields from the raw webhook payload
+{
+  "type": "n8n-nodes-base.set",
+  "name": "get data",
+  "assignments": [
+    { "name": "commenter_id",       "value": "={{ $json.body.entry[0].changes[0].value.from.id }}" },
+    { "name": "commenter_username", "value": "={{ $json.body.entry[0].changes[0].value.from.username }}" },
+    { "name": "comment_text",       "value": "={{ $json.body.entry[0].changes[0].value.text }}" },
+    { "name": "comment_id",         "value": "={{ $json.body.entry[0].changes[0].value.id }}" },
+    { "name": "media_id",           "value": "={{ $json.body.entry[0].changes[0].value.media.id }}" },
+    { "name": "media_type",         "value": "={{ $json.body.entry[0].changes[0].value.media.media_product_type }}" }
+  ]
+}
+
+// 2) DB check — lookup historical (commenter_id, media_id) in commenter_list
+{
+  "type": "n8n-nodes-base.googleSheets",
+  "name": "DB check",
+  "documentId": "[YOUR_SHEET_ID]",
+  "sheet": "commenter_list",
+  "filters": [
+    { "lookupColumn": "commenter_id", "lookupValue": "={{ $json.commenter_id }}" },
+    { "lookupColumn": "media_id",     "lookupValue": "={{ $json.media_id }}" }
+  ]
+}
+
+// 3) IF guard — proceed ONLY if no prior trigger exists for this (user, post)
+{
+  "type": "n8n-nodes-base.if",
+  "name": "Already commented this post?",
+  "combinator": "and",
+  "conditions": [
+    { "leftValue": "={{ $json.commenter_id }}", "operator": "notExists" },
+    { "leftValue": "={{ $json.media_id }}",     "operator": "notExists" }
+  ]
+}
+
+// 4) Keyword lookup — match the (lowercased, trimmed) comment text
+//    against the resource_map sheet, filtered to active rows only
+{
+  "type": "n8n-nodes-base.googleSheets",
+  "name": "Get row(s) in sheet",
+  "documentId": "[YOUR_SHEET_ID]",
+  "sheet": "resource_map",
+  "filters": [
+    { "lookupColumn": "active",  "lookupValue": "true" },
+    { "lookupColumn": "keyword", "lookupValue": "={{ $('get data').item.json.comment_text.toLowerCase().trim() }}" }
+  ]
+}
+
+// 5) IF guard — only continue if a keyword row was actually returned
+{
+  "type": "n8n-nodes-base.if",
+  "name": "keyword ?",
+  "combinator": "and",
+  "conditions": [
+    { "leftValue": "={{ $json.keyword }}", "operator": "notEmpty" }
+  ]
+}`,
+  },
+  {
+    filename: 'dm-distributor.json',
+    language: 'json',
+    description:
+      'The sub-workflow called once a keyword is matched. Looks up the resource URL by keyword and sends a DM through the Instagram Graph API. Lives in its own workflow file for separation of concerns.',
+    content: `// Sub-workflow — DM distributor
+// Triggered by the main workflow via Execute Workflow node.
+// Receives the raw Instagram event in passthrough mode.
+
+// 1) Trigger — entry from the calling workflow
+{
+  "type": "n8n-nodes-base.executeWorkflowTrigger",
+  "name": "When Executed by Another Workflow",
+  "inputSource": "passthrough"
+}
+
+// 2) Resolve resource_url from the keyword the user sent in DM
+{
+  "type": "n8n-nodes-base.googleSheets",
+  "name": "Get row(s) in sheet",
+  "documentId": "[YOUR_SHEET_ID]",
+  "sheet": "resource_map",
+  "options": { "returnFirstMatch": true },
+  "filters": [
+    { "lookupColumn": "keyword",
+      "lookupValue": "={{ $json.body.entry[0].messaging[0].message.text }}" }
+  ]
+}
+
+// 3) Project the fields needed by the Graph API call
+{
+  "type": "n8n-nodes-base.set",
+  "name": "Edit Fields",
+  "assignments": [
+    { "name": "timestamp",    "value": "={{ $('When Executed by Another Workflow').item.json.body.entry[0].messaging[0].timestamp }}" },
+    { "name": "sender_id",    "value": "={{ $('When Executed by Another Workflow').item.json.body.entry[0].messaging[0].sender.id }}" },
+    { "name": "recipient_id", "value": "={{ $('When Executed by Another Workflow').item.json.body.entry[0].messaging[0].recipient.id }}" },
+    { "name": "text_message", "value": "={{ $('When Executed by Another Workflow').item.json.body.entry[0].messaging[0].message.text }}" }
+  ]
+}
+
+// 4) Deliver the resource via Instagram Graph API
+{
+  "type": "n8n-nodes-base.httpRequest",
+  "name": "HTTP Request",
+  "method": "POST",
+  "url":    "=https://graph.instagram.com/{{ $json.recipient_id }}/messages",
+  "authentication": "[REDACTED — Bearer]",
+  "jsonBody": {
+    "recipient": { "id": "={{ $json.sender_id }}" },
+    "message":   { "text": "Voici la ressource 👉 {{ $('Get row(s) in sheet').item.json.resource_url }}" }
+  }
+}`,
+  },
+]
+
 export const CONTENT_PIECES: ContentPiece[] = [
   { src: '/projects/content-engine/img/Sales-Funnel-Overview-(1).png', alt: 'Sales funnel overview', platform: 'Sales', format: 'Funnel Overview', theme: 'light', span: 'wide' },
   { src: '/projects/content-engine/img/LI-C1-S1-Hook-Light.png', alt: 'LinkedIn carousel hook light', platform: 'LinkedIn', format: 'Carousel Hook', theme: 'light' },
@@ -226,7 +430,30 @@ export const CONTENT_PIECES: ContentPiece[] = [
   { src: '/projects/content-engine/img/THR-Portrait-S2-L2.2-DataStat-Dark.png', alt: 'Threads portrait data stat', platform: 'Threads', format: 'Portrait Stat', theme: 'dark', span: 'tall' },
 ]
 
-export const PROJECT_META = [
+// ─── Project registry ────────────────────────────────────────────────────────
+// Visual / structural metadata for each project, locale-agnostic.
+// Localized copy lives in messages/<locale>.json under `work.projects[i]`
+// and is zipped with this array by index — keep them in sync.
+
+export type GalleryType = 'none' | 'workflow' | 'content'
+
+export interface ProjectMeta {
+  index: string
+  accent: string
+  accentRgb: string
+  stack: string[]
+  category_icon: string
+  hasGallery: boolean
+  galleryType: GalleryType
+  /** Workflow screenshots — required when `galleryType === 'workflow'`. */
+  images?: WorkflowImage[]
+  /** Code snippets shown in the Source tab — optional even for workflow projects. */
+  codeFiles?: CodeFile[]
+  /** Content gallery pieces — required when `galleryType === 'content'`. */
+  contentPieces?: ContentPiece[]
+}
+
+export const PROJECT_META: ProjectMeta[] = [
   {
     index: '01',
     accent: '#10b981',
@@ -234,35 +461,47 @@ export const PROJECT_META = [
     stack: ['Next.js 16.2', 'React 19', 'Tailwind v4', 'shadcn/ui', 'Supabase', 'pgvector', 'Gemini 2.5 Flash-Lite', 'OpenAI Embeddings', 'Stripe', 'Vercel'],
     category_icon: '🌏',
     hasGallery: false,
-    galleryType: 'none' as const,
+    galleryType: 'none',
   },
   {
     index: '02',
+    accent: '#f97316',
+    accentRgb: '249,115,22',
+    stack: ['n8n', 'Instagram Graph API', 'Google Sheets API', 'Webhooks'],
+    category_icon: '📱',
+    hasGallery: true,
+    galleryType: 'workflow',
+    images: INSTAGRAM_IMAGES,
+    codeFiles: INSTAGRAM_CODE_FILES,
+  },
+  {
+    index: '03',
     accent: '#7c3aed',
     accentRgb: '124,58,237',
     stack: ['n8n', 'Google Vertex AI', 'Gemini', 'LangChain', 'Python', 'REST APIs'],
     category_icon: '⚡',
     hasGallery: true,
-    galleryType: 'workflow' as const,
+    galleryType: 'workflow',
+    images: N8N_IMAGES,
+    codeFiles: N8N_CODE_FILES,
   },
   {
-    index: '03',
+    index: '04',
     accent: '#06b6d4',
     accentRgb: '6,182,212',
     stack: ['Google Opal', 'Nano Banana', 'Multi-agent orchestration', 'Structured outputs'],
     category_icon: '🧠',
     hasGallery: false,
-    galleryType: 'none' as const,
+    galleryType: 'none',
   },
   {
-    index: '04',
+    index: '05',
     accent: '#f43f5e',
     accentRgb: '244,63,94',
     stack: ['Figma', 'Claude', 'CapCut', 'Notion', 'LinkedIn', 'Instagram', 'YouTube', 'Threads', 'Bluesky'],
     category_icon: '🎨',
     hasGallery: true,
-    galleryType: 'content' as const,
+    galleryType: 'content',
+    contentPieces: CONTENT_PIECES,
   },
-] as const
-
-export type ProjectMeta = (typeof PROJECT_META)[number]
+]

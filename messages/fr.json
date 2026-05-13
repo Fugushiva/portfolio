@@ -61,6 +61,21 @@
         ]
       },
       {
+        "title": "Instagram Comment-to-DM Automation",
+        "category": "Automation Social Media",
+        "year": "2026",
+        "client": "Projet personnel",
+        "headline": "Les commentaires deviennent un canal de distribution — keyword en input, ressource en DM.",
+        "description": "Système d'automation Instagram qui transforme les commentaires en funnel de distribution de ressources. Les events webhook sont routés par type (commentaire vs DM) via un Switch node, puis matchés contre un registre de mots-clés en Google Sheets. Sur match, le bot répond publiquement au commentaire ET déclenche un sous-workflow dédié qui livre la ressource correspondante en DM via l'Instagram Graph API. Protection anti-spam native au niveau data : un lookup commenter_id + media_id bloque tout second trigger sur le même post. Ajouter un nouveau lead magnet = ajouter une ligne dans Google Sheets — aucun redéploiement.",
+        "architecture": "Routeur d'events webhook · Registre keywords Google Sheets · Dédup via Sheets · Sous-workflow DM",
+        "metrics": [
+          { "value": "2", "label": "workflows orchestrés" },
+          { "value": "1", "label": "trigger par user par post" },
+          { "value": "0", "label": "redéploiement par ressource" },
+          { "value": "2", "label": "types d'events Instagram routés" }
+        ]
+      },
+      {
         "title": "AI B2B Outreach Engine",
         "category": "AI Automation",
         "year": "2026",
@@ -149,7 +164,7 @@
     "cta_email": "Envoyer un message",
     "cta_copy": "Copier l'email",
     "cta_copied": "Copié !",
-    "footer_copy": "© 2026 Jérôme Delodder — Built with Next.js & Claude",
+    "footer_copy": "© 2026 Jérôme Delodder — Built with Next.js",
     "footer_availability": "Disponible · Remote · Freelance",
     "footer_privacy": "Politique de Confidentialité",
     "form": {

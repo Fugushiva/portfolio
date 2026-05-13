@@ -40,7 +40,7 @@
       "source_file": "next-env.d.ts",
       "source_location": "L1",
       "id": "next_env_d_ts",
-      "community": 21,
+      "community": 45,
       "norm_label": "next-env.d.ts"
     },
     {
@@ -49,7 +49,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\next.config.ts",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_next_config_ts",
-      "community": 22,
+      "community": 46,
       "norm_label": "next.config.ts"
     },
     {
@@ -58,17 +58,26 @@
       "source_file": "postcss.config.js",
       "source_location": "L1",
       "id": "postcss_config_js",
-      "community": 23,
+      "community": 47,
       "norm_label": "postcss.config.js"
     },
     {
       "label": "tailwind.config.ts",
       "file_type": "code",
-      "source_file": "tailwind.config.ts",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\tailwind.config.ts",
       "source_location": "L1",
-      "id": "tailwind_config_ts",
-      "community": 24,
+      "id": "c_hub_work_personal_porfolio_tailwind_config_ts",
+      "community": 48,
       "norm_label": "tailwind.config.ts"
+    },
+    {
+      "label": "vitest.config.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\vitest.config.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_vitest_config_ts",
+      "community": 49,
+      "norm_label": "vitest.config.ts"
     },
     {
       "label": "sanitize.js",
@@ -76,7 +85,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\content\\initial outreach (n8n)\\json & scipt\\sanitize.js",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_content_initial_outreach_n8n_json_scipt_sanitize_js",
-      "community": 8,
+      "community": 10,
       "norm_label": "sanitize.js"
     },
     {
@@ -85,7 +94,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\content\\initial outreach (n8n)\\json & scipt\\sanitize.js",
       "source_location": "L22",
       "id": "sanitize_protecturls",
-      "community": 8,
+      "community": 10,
       "norm_label": "protecturls()"
     },
     {
@@ -94,7 +103,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\content\\initial outreach (n8n)\\json & scipt\\sanitize.js",
       "source_location": "L31",
       "id": "sanitize_restoreurls",
-      "community": 8,
+      "community": 10,
       "norm_label": "restoreurls()"
     },
     {
@@ -103,7 +112,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\scripts\\optimize-images.mjs",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_scripts_optimize_images_mjs",
-      "community": 9,
+      "community": 11,
       "norm_label": "optimize-images.mjs"
     },
     {
@@ -112,7 +121,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\scripts\\optimize-images.mjs",
       "source_location": "L34",
       "id": "optimize_images_processfile",
-      "community": 9,
+      "community": 11,
       "norm_label": "processfile()"
     },
     {
@@ -121,34 +130,34 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\scripts\\optimize-images.mjs",
       "source_location": "L72",
       "id": "optimize_images_main",
-      "community": 9,
+      "community": 11,
       "norm_label": "main()"
     },
     {
       "label": "middleware.ts",
       "file_type": "code",
-      "source_file": "src\\middleware.ts",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\middleware.ts",
       "source_location": "L1",
-      "id": "src_middleware_ts",
-      "community": 25,
+      "id": "c_hub_work_personal_porfolio_src_middleware_ts",
+      "community": 50,
       "norm_label": "middleware.ts"
     },
     {
       "label": "layout.tsx",
       "file_type": "code",
-      "source_file": "src\\app\\layout.tsx",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\layout.tsx",
       "source_location": "L1",
-      "id": "src_app_layout_tsx",
-      "community": 10,
+      "id": "c_hub_work_personal_porfolio_src_app_layout_tsx",
+      "community": 20,
       "norm_label": "layout.tsx"
     },
     {
       "label": "RootLayout()",
       "file_type": "code",
-      "source_file": "src\\app\\layout.tsx",
-      "source_location": "L2",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\layout.tsx",
+      "source_location": "L10",
       "id": "layout_rootlayout",
-      "community": 10,
+      "community": 20,
       "norm_label": "rootlayout()"
     },
     {
@@ -157,7 +166,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\not-found.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_app_not_found_tsx",
-      "community": 11,
+      "community": 21,
       "norm_label": "not-found.tsx"
     },
     {
@@ -166,7 +175,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\not-found.tsx",
       "source_location": "L12",
       "id": "not_found_rootnotfound",
-      "community": 11,
+      "community": 21,
       "norm_label": "rootnotfound()"
     },
     {
@@ -175,8 +184,98 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\opengraph-image.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_app_opengraph_image_tsx",
-      "community": 26,
+      "community": 51,
       "norm_label": "opengraph-image.tsx"
+    },
+    {
+      "label": "robots.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\robots.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_app_robots_ts",
+      "community": 22,
+      "norm_label": "robots.ts"
+    },
+    {
+      "label": "robots()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\robots.ts",
+      "source_location": "L5",
+      "id": "robots_robots",
+      "community": 22,
+      "norm_label": "robots()"
+    },
+    {
+      "label": "sitemap.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\sitemap.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_app_sitemap_ts",
+      "community": 23,
+      "norm_label": "sitemap.ts"
+    },
+    {
+      "label": "sitemap()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\sitemap.ts",
+      "source_location": "L19",
+      "id": "sitemap_sitemap",
+      "community": 23,
+      "norm_label": "sitemap()"
+    },
+    {
+      "label": "route.test.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.test.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_app_api_contact_route_test_ts",
+      "community": 1,
+      "norm_label": "route.test.ts"
+    },
+    {
+      "label": "makeRequest()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.test.ts",
+      "source_location": "L25",
+      "id": "route_test_makerequest",
+      "community": 1,
+      "norm_label": "makerequest()"
+    },
+    {
+      "label": "parseJson()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.test.ts",
+      "source_location": "L47",
+      "id": "route_test_parsejson",
+      "community": 1,
+      "norm_label": "parsejson()"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_app_api_contact_route_ts",
+      "community": 1,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "json()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
+      "source_location": "L26",
+      "id": "route_json",
+      "community": 1,
+      "norm_label": "json()"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
+      "source_location": "L33",
+      "id": "route_post",
+      "community": 1,
+      "norm_label": "post()"
     },
     {
       "label": "layout.tsx",
@@ -184,34 +283,34 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_app_locale_layout_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "layout.tsx"
     },
     {
       "label": "generateMetadata()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
-      "source_location": "L26",
+      "source_location": "L33",
       "id": "layout_generatemetadata",
-      "community": 1,
+      "community": 2,
       "norm_label": "generatemetadata()"
     },
     {
       "label": "generateStaticParams()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
-      "source_location": "L75",
+      "source_location": "L185",
       "id": "layout_generatestaticparams",
-      "community": 1,
+      "community": 2,
       "norm_label": "generatestaticparams()"
     },
     {
       "label": "LocaleLayout()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
-      "source_location": "L79",
+      "source_location": "L189",
       "id": "layout_localelayout",
-      "community": 1,
+      "community": 2,
       "norm_label": "localelayout()"
     },
     {
@@ -220,7 +319,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\not-found.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_app_locale_not_found_tsx",
-      "community": 12,
+      "community": 24,
       "norm_label": "not-found.tsx"
     },
     {
@@ -229,7 +328,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\not-found.tsx",
       "source_location": "L3",
       "id": "not_found_notfoundpage",
-      "community": 12,
+      "community": 24,
       "norm_label": "notfoundpage()"
     },
     {
@@ -238,7 +337,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\page.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_app_locale_page_tsx",
-      "community": 13,
+      "community": 25,
       "norm_label": "page.tsx"
     },
     {
@@ -247,8 +346,35 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\page.tsx",
       "source_location": "L3",
       "id": "page_home",
-      "community": 13,
+      "community": 25,
       "norm_label": "home()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\privacy-policy\\page.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_app_locale_privacy_policy_page_tsx",
+      "community": 12,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "generateMetadata()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\privacy-policy\\page.tsx",
+      "source_location": "L5",
+      "id": "page_generatemetadata",
+      "community": 12,
+      "norm_label": "generatemetadata()"
+    },
+    {
+      "label": "PrivacyPolicyPage()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\privacy-policy\\page.tsx",
+      "source_location": "L35",
+      "id": "page_privacypolicypage",
+      "community": 12,
+      "norm_label": "privacypolicypage()"
     },
     {
       "label": "About.tsx",
@@ -256,7 +382,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\About.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_about_tsx",
-      "community": 27,
+      "community": 52,
       "norm_label": "about.tsx"
     },
     {
@@ -265,7 +391,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\CodeViewer.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_codeviewer_tsx",
-      "community": 14,
+      "community": 26,
       "norm_label": "codeviewer.tsx"
     },
     {
@@ -274,7 +400,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\CodeViewer.tsx",
       "source_location": "L10",
       "id": "codeviewer_tokenizeline",
-      "community": 14,
+      "community": 26,
       "norm_label": "tokenizeline()"
     },
     {
@@ -283,17 +409,8 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Contact.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_contact_tsx",
-      "community": 15,
+      "community": 53,
       "norm_label": "contact.tsx"
-    },
-    {
-      "label": "copyEmail()",
-      "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Contact.tsx",
-      "source_location": "L48",
-      "id": "contact_copyemail",
-      "community": 15,
-      "norm_label": "copyemail()"
     },
     {
       "label": "ContentGrid.tsx",
@@ -301,7 +418,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\ContentGrid.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_contentgrid_tsx",
-      "community": 3,
+      "community": 8,
       "norm_label": "contentgrid.tsx"
     },
     {
@@ -310,7 +427,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\ContentGrid.tsx",
       "source_location": "L34",
       "id": "contentgrid_getplatformcolor",
-      "community": 3,
+      "community": 8,
       "norm_label": "getplatformcolor()"
     },
     {
@@ -319,7 +436,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\ContentGrid.tsx",
       "source_location": "L45",
       "id": "contentgrid_contentcard",
-      "community": 3,
+      "community": 8,
       "norm_label": "contentcard()"
     },
     {
@@ -328,7 +445,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\ContentGrid.tsx",
       "source_location": "L188",
       "id": "contentgrid_prev",
-      "community": 3,
+      "community": 8,
       "norm_label": "prev()"
     },
     {
@@ -337,89 +454,89 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\ContentGrid.tsx",
       "source_location": "L189",
       "id": "contentgrid_next",
-      "community": 3,
+      "community": 8,
       "norm_label": "next()"
     },
     {
-      "label": "Hero.tsx",
+      "label": "HeroSimple.tsx",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
       "source_location": "L1",
-      "id": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "community": 4,
-      "norm_label": "hero.tsx"
+      "id": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "community": 3,
+      "norm_label": "herosimple.tsx"
     },
     {
-      "label": "onMove()",
+      "label": "GithubIcon()",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L45",
-      "id": "hero_onmove",
-      "community": 4,
-      "norm_label": "onmove()"
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L48",
+      "id": "herosimple_githubicon",
+      "community": 3,
+      "norm_label": "githubicon()"
     },
     {
-      "label": "loop()",
+      "label": "LinkedinIcon()",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L51",
-      "id": "hero_loop",
-      "community": 4,
-      "norm_label": "loop()"
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L56",
+      "id": "herosimple_linkedinicon",
+      "community": 3,
+      "norm_label": "linkedinicon()"
+    },
+    {
+      "label": "MailIcon()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L64",
+      "id": "herosimple_mailicon",
+      "community": 3,
+      "norm_label": "mailicon()"
     },
     {
       "label": "tick()",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L87",
-      "id": "hero_tick",
-      "community": 4,
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L126",
+      "id": "herosimple_tick",
+      "community": 3,
       "norm_label": "tick()"
     },
     {
-      "label": "onVisibility()",
+      "label": "onVis()",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L113",
-      "id": "hero_onvisibility",
-      "community": 4,
-      "norm_label": "onvisibility()"
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L155",
+      "id": "herosimple_onvis",
+      "community": 3,
+      "norm_label": "onvis()"
     },
     {
-      "label": "HeroParticles.tsx",
+      "label": "scrollTo()",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroParticles.tsx",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L169",
+      "id": "herosimple_scrollto",
+      "community": 3,
+      "norm_label": "scrollto()"
+    },
+    {
+      "label": "JsonLd.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\JsonLd.tsx",
       "source_location": "L1",
-      "id": "c_hub_work_personal_porfolio_src_components_heroparticles_tsx",
-      "community": 5,
-      "norm_label": "heroparticles.tsx"
+      "id": "c_hub_work_personal_porfolio_src_components_jsonld_tsx",
+      "community": 27,
+      "norm_label": "jsonld.tsx"
     },
     {
-      "label": "hsl2rgb()",
+      "label": "JsonLd()",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroParticles.tsx",
-      "source_location": "L190",
-      "id": "heroparticles_hsl2rgb",
-      "community": 5,
-      "norm_label": "hsl2rgb()"
-    },
-    {
-      "label": "rand()",
-      "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroParticles.tsx",
-      "source_location": "L199",
-      "id": "heroparticles_rand",
-      "community": 5,
-      "norm_label": "rand()"
-    },
-    {
-      "label": "HeroParticles()",
-      "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroParticles.tsx",
-      "source_location": "L210",
-      "id": "heroparticles_heroparticles",
-      "community": 5,
-      "norm_label": "heroparticles()"
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\JsonLd.tsx",
+      "source_location": "L20",
+      "id": "jsonld_jsonld",
+      "community": 27,
+      "norm_label": "jsonld()"
     },
     {
       "label": "LangSwitcher.tsx",
@@ -427,7 +544,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\LangSwitcher.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_langswitcher_tsx",
-      "community": 16,
+      "community": 28,
       "norm_label": "langswitcher.tsx"
     },
     {
@@ -436,7 +553,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\LangSwitcher.tsx",
       "source_location": "L8",
       "id": "langswitcher_langswitcher",
-      "community": 16,
+      "community": 28,
       "norm_label": "langswitcher()"
     },
     {
@@ -445,35 +562,26 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_nav_tsx",
-      "community": 2,
+      "community": 13,
       "norm_label": "nav.tsx"
     },
     {
-      "label": "onScroll()",
+      "label": "ProgressBar()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
-      "source_location": "L28",
-      "id": "nav_onscroll",
-      "community": 2,
-      "norm_label": "onscroll()"
+      "source_location": "L55",
+      "id": "nav_progressbar",
+      "community": 13,
+      "norm_label": "progressbar()"
     },
     {
-      "label": "handleNavClick()",
+      "label": "onResize()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
-      "source_location": "L35",
-      "id": "nav_handlenavclick",
-      "community": 2,
-      "norm_label": "handlenavclick()"
-    },
-    {
-      "label": "menuOpen()",
-      "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
-      "source_location": "L111",
-      "id": "nav_menuopen",
-      "community": 2,
-      "norm_label": "menuopen()"
+      "source_location": "L135",
+      "id": "nav_onresize",
+      "community": 13,
+      "norm_label": "onresize()"
     },
     {
       "label": "NotFound.tsx",
@@ -481,7 +589,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\NotFound.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_notfound_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "notfound.tsx"
     },
     {
@@ -490,7 +598,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\NotFound.tsx",
       "source_location": "L44",
       "id": "notfound_makeprng",
-      "community": 1,
+      "community": 2,
       "norm_label": "makeprng()"
     },
     {
@@ -499,7 +607,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\NotFound.tsx",
       "source_location": "L52",
       "id": "notfound_buildparticles",
-      "community": 1,
+      "community": 2,
       "norm_label": "buildparticles()"
     },
     {
@@ -508,7 +616,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\NotFound.tsx",
       "source_location": "L64",
       "id": "notfound_builddebris",
-      "community": 1,
+      "community": 2,
       "norm_label": "builddebris()"
     },
     {
@@ -517,7 +625,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\NotFound.tsx",
       "source_location": "L85",
       "id": "notfound_depth_px",
-      "community": 1,
+      "community": 2,
       "norm_label": "depth_px()"
     },
     {
@@ -526,7 +634,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\NotFound.tsx",
       "source_location": "L89",
       "id": "notfound_notfound",
-      "community": 1,
+      "community": 2,
       "norm_label": "notfound()"
     },
     {
@@ -535,8 +643,26 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\NotFound.tsx",
       "source_location": "L159",
       "id": "notfound_schedule",
-      "community": 1,
+      "community": 2,
       "norm_label": "schedule()"
+    },
+    {
+      "label": "PerfHUD.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\PerfHUD.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_perfhud_tsx",
+      "community": 29,
+      "norm_label": "perfhud.tsx"
+    },
+    {
+      "label": "loop()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\PerfHUD.tsx",
+      "source_location": "L48",
+      "id": "perfhud_loop",
+      "community": 29,
+      "norm_label": "loop()"
     },
     {
       "label": "Preloader.tsx",
@@ -544,17 +670,17 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Preloader.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_preloader_tsx",
-      "community": 17,
+      "community": 54,
       "norm_label": "preloader.tsx"
     },
     {
-      "label": "step()",
+      "label": "PrivacyPolicy.tsx",
       "file_type": "code",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Preloader.tsx",
-      "source_location": "L42",
-      "id": "preloader_step",
-      "community": 17,
-      "norm_label": "step()"
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\PrivacyPolicy.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_privacypolicy_tsx",
+      "community": 55,
+      "norm_label": "privacypolicy.tsx"
     },
     {
       "label": "Process.tsx",
@@ -562,7 +688,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Process.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_process_tsx",
-      "community": 28,
+      "community": 56,
       "norm_label": "process.tsx"
     },
     {
@@ -571,7 +697,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Providers.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_providers_tsx",
-      "community": 2,
+      "community": 6,
       "norm_label": "providers.tsx"
     },
     {
@@ -580,7 +706,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Providers.tsx",
       "source_location": "L14",
       "id": "providers_providers",
-      "community": 2,
+      "community": 6,
       "norm_label": "providers()"
     },
     {
@@ -589,16 +715,16 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\SiteShell.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_siteshell_tsx",
-      "community": 18,
+      "community": 30,
       "norm_label": "siteshell.tsx"
     },
     {
       "label": "SiteShell()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\SiteShell.tsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "id": "siteshell_siteshell",
-      "community": 18,
+      "community": 30,
       "norm_label": "siteshell()"
     },
     {
@@ -607,7 +733,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Stack.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_stack_tsx",
-      "community": 29,
+      "community": 57,
       "norm_label": "stack.tsx"
     },
     {
@@ -616,7 +742,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\work-data.ts",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_work_data_ts",
-      "community": 30,
+      "community": 58,
       "norm_label": "work-data.ts"
     },
     {
@@ -625,35 +751,35 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_work_tsx",
-      "community": 6,
+      "community": 7,
       "norm_label": "work.tsx"
     },
     {
       "label": "ChunkLoading()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "id": "work_chunkloading",
-      "community": 6,
+      "community": 7,
       "norm_label": "chunkloading()"
     },
     {
       "label": "MetricCard()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "id": "work_metriccard",
-      "community": 6,
+      "community": 7,
       "norm_label": "metriccard()"
     },
     {
-      "label": "ArchPill()",
+      "label": "handleBadgeClick()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
-      "source_location": "L78",
-      "id": "work_archpill",
-      "community": 6,
-      "norm_label": "archpill()"
+      "source_location": "L197",
+      "id": "work_handlebadgeclick",
+      "community": 7,
+      "norm_label": "handlebadgeclick()"
     },
     {
       "label": "WorkflowGallery.tsx",
@@ -661,7 +787,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\WorkflowGallery.tsx",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_components_workflowgallery_tsx",
-      "community": 19,
+      "community": 31,
       "norm_label": "workflowgallery.tsx"
     },
     {
@@ -670,8 +796,422 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\WorkflowGallery.tsx",
       "source_location": "L23",
       "id": "workflowgallery_lightbox",
-      "community": 19,
+      "community": 31,
       "norm_label": "lightbox()"
+    },
+    {
+      "label": "ContactField.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\contact\\ContactField.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_contact_contactfield_tsx",
+      "community": 59,
+      "norm_label": "contactfield.tsx"
+    },
+    {
+      "label": "ContactForm.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\contact\\ContactForm.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_contact_contactform_tsx",
+      "community": 32,
+      "norm_label": "contactform.tsx"
+    },
+    {
+      "label": "ContactForm()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\contact\\ContactForm.tsx",
+      "source_location": "L25",
+      "id": "contactform_contactform",
+      "community": 32,
+      "norm_label": "contactform()"
+    },
+    {
+      "label": "ContactSuccess.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\contact\\ContactSuccess.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_contact_contactsuccess_tsx",
+      "community": 60,
+      "norm_label": "contactsuccess.tsx"
+    },
+    {
+      "label": "HeroAvatar.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroAvatar.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_hero_heroavatar_tsx",
+      "community": 33,
+      "norm_label": "heroavatar.tsx"
+    },
+    {
+      "label": "HeroAvatar()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroAvatar.tsx",
+      "source_location": "L23",
+      "id": "heroavatar_heroavatar",
+      "community": 33,
+      "norm_label": "heroavatar()"
+    },
+    {
+      "label": "HeroGrid3D.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "community": 4,
+      "norm_label": "herogrid3d.tsx"
+    },
+    {
+      "label": "setupCanvas()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L91",
+      "id": "herogrid3d_setupcanvas",
+      "community": 4,
+      "norm_label": "setupcanvas()"
+    },
+    {
+      "label": "onResize()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L105",
+      "id": "herogrid3d_onresize",
+      "community": 4,
+      "norm_label": "onresize()"
+    },
+    {
+      "label": "onMouseMove()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L116",
+      "id": "herogrid3d_onmousemove",
+      "community": 4,
+      "norm_label": "onmousemove()"
+    },
+    {
+      "label": "onMouseLeave()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L125",
+      "id": "herogrid3d_onmouseleave",
+      "community": 4,
+      "norm_label": "onmouseleave()"
+    },
+    {
+      "label": "draw()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L136",
+      "id": "herogrid3d_draw",
+      "community": 4,
+      "norm_label": "draw()"
+    },
+    {
+      "label": "loop()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L186",
+      "id": "herogrid3d_loop",
+      "community": 4,
+      "norm_label": "loop()"
+    },
+    {
+      "label": "resume()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L203",
+      "id": "herogrid3d_resume",
+      "community": 4,
+      "norm_label": "resume()"
+    },
+    {
+      "label": "onVisChange()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L224",
+      "id": "herogrid3d_onvischange",
+      "community": 4,
+      "norm_label": "onvischange()"
+    },
+    {
+      "label": "HeroName.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroName.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_hero_heroname_tsx",
+      "community": 3,
+      "norm_label": "heroname.tsx"
+    },
+    {
+      "label": "runScramble()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroName.tsx",
+      "source_location": "L71",
+      "id": "heroname_runscramble",
+      "community": 3,
+      "norm_label": "runscramble()"
+    },
+    {
+      "label": "HeroName()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroName.tsx",
+      "source_location": "L133",
+      "id": "heroname_heroname",
+      "community": 3,
+      "norm_label": "heroname()"
+    },
+    {
+      "label": "HeroParticles.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroParticles.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_hero_heroparticles_tsx",
+      "community": 34,
+      "norm_label": "heroparticles.tsx"
+    },
+    {
+      "label": "HeroParticles()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroParticles.tsx",
+      "source_location": "L23",
+      "id": "heroparticles_heroparticles",
+      "community": 34,
+      "norm_label": "heroparticles()"
+    },
+    {
+      "label": "HeroSpotlight.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroSpotlight.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_hero_herospotlight_tsx",
+      "community": 35,
+      "norm_label": "herospotlight.tsx"
+    },
+    {
+      "label": "HeroSpotlight()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroSpotlight.tsx",
+      "source_location": "L32",
+      "id": "herospotlight_herospotlight",
+      "community": 35,
+      "norm_label": "herospotlight()"
+    },
+    {
+      "label": "CommandPalette.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\CommandPalette.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_nav_commandpalette_tsx",
+      "community": 61,
+      "norm_label": "commandpalette.tsx"
+    },
+    {
+      "label": "NavBurger.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavBurger.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_nav_navburger_tsx",
+      "community": 62,
+      "norm_label": "navburger.tsx"
+    },
+    {
+      "label": "NavCTA.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavCTA.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_nav_navcta_tsx",
+      "community": 36,
+      "norm_label": "navcta.tsx"
+    },
+    {
+      "label": "NavCTA()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavCTA.tsx",
+      "source_location": "L19",
+      "id": "navcta_navcta",
+      "community": 36,
+      "norm_label": "navcta()"
+    },
+    {
+      "label": "NavLink.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavLink.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_nav_navlink_tsx",
+      "community": 37,
+      "norm_label": "navlink.tsx"
+    },
+    {
+      "label": "NavLink()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavLink.tsx",
+      "source_location": "L29",
+      "id": "navlink_navlink",
+      "community": 37,
+      "norm_label": "navlink()"
+    },
+    {
+      "label": "NavLogo.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavLogo.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_nav_navlogo_tsx",
+      "community": 38,
+      "norm_label": "navlogo.tsx"
+    },
+    {
+      "label": "NavLogo()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavLogo.tsx",
+      "source_location": "L25",
+      "id": "navlogo_navlogo",
+      "community": 38,
+      "norm_label": "navlogo()"
+    },
+    {
+      "label": "NavMobileMenu.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavMobileMenu.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_nav_navmobilemenu_tsx",
+      "community": 14,
+      "norm_label": "navmobilemenu.tsx"
+    },
+    {
+      "label": "onKeyDown()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavMobileMenu.tsx",
+      "source_location": "L76",
+      "id": "navmobilemenu_onkeydown",
+      "community": 14,
+      "norm_label": "onkeydown()"
+    },
+    {
+      "label": "handleItemClick()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavMobileMenu.tsx",
+      "source_location": "L111",
+      "id": "navmobilemenu_handleitemclick",
+      "community": 14,
+      "norm_label": "handleitemclick()"
+    },
+    {
+      "label": "NavStatus.tsx",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavStatus.tsx",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_components_nav_navstatus_tsx",
+      "community": 15,
+      "norm_label": "navstatus.tsx"
+    },
+    {
+      "label": "getParisTZ()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavStatus.tsx",
+      "source_location": "L24",
+      "id": "navstatus_getparistz",
+      "community": 15,
+      "norm_label": "getparistz()"
+    },
+    {
+      "label": "NavStatus()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavStatus.tsx",
+      "source_location": "L44",
+      "id": "navstatus_navstatus",
+      "community": 15,
+      "norm_label": "navstatus()"
+    },
+    {
+      "label": "useActiveSection.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useActiveSection.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_useactivesection_ts",
+      "community": 39,
+      "norm_label": "useactivesection.ts"
+    },
+    {
+      "label": "useActiveSection()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useActiveSection.ts",
+      "source_location": "L28",
+      "id": "useactivesection_useactivesection",
+      "community": 39,
+      "norm_label": "useactivesection()"
+    },
+    {
+      "label": "useCommandPalette.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCommandPalette.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usecommandpalette_ts",
+      "community": 40,
+      "norm_label": "usecommandpalette.ts"
+    },
+    {
+      "label": "useCommandPalette()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCommandPalette.ts",
+      "source_location": "L33",
+      "id": "usecommandpalette_usecommandpalette",
+      "community": 40,
+      "norm_label": "usecommandpalette()"
+    },
+    {
+      "label": "useCountUp.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCountUp.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usecountup_ts",
+      "community": 7,
+      "norm_label": "usecountup.ts"
+    },
+    {
+      "label": "parseValue()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCountUp.ts",
+      "source_location": "L10",
+      "id": "usecountup_parsevalue",
+      "community": 7,
+      "norm_label": "parsevalue()"
+    },
+    {
+      "label": "useCountUp()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCountUp.ts",
+      "source_location": "L17",
+      "id": "usecountup_usecountup",
+      "community": 7,
+      "norm_label": "usecountup()"
+    },
+    {
+      "label": "useGPUClass.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGPUClass.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usegpuclass_ts",
+      "community": 16,
+      "norm_label": "usegpuclass.ts"
+    },
+    {
+      "label": "detectGPUClass()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGPUClass.ts",
+      "source_location": "L18",
+      "id": "usegpuclass_detectgpuclass",
+      "community": 16,
+      "norm_label": "detectgpuclass()"
+    },
+    {
+      "label": "isLowEndGPU()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGPUClass.ts",
+      "source_location": "L48",
+      "id": "usegpuclass_islowendgpu",
+      "community": 16,
+      "norm_label": "islowendgpu()"
     },
     {
       "label": "useGSAPReveal.ts",
@@ -679,7 +1219,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGSAPReveal.ts",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_hooks_usegsapreveal_ts",
-      "community": 7,
+      "community": 9,
       "norm_label": "usegsapreveal.ts"
     },
     {
@@ -688,7 +1228,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGSAPReveal.ts",
       "source_location": "L45",
       "id": "usegsapreveal_initgsap",
-      "community": 7,
+      "community": 9,
       "norm_label": "initgsap()"
     },
     {
@@ -697,7 +1237,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGSAPReveal.ts",
       "source_location": "L73",
       "id": "usegsapreveal_splitintolines",
-      "community": 7,
+      "community": 9,
       "norm_label": "splitintolines()"
     },
     {
@@ -706,7 +1246,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGSAPReveal.ts",
       "source_location": "L223",
       "id": "usegsapreveal_usegsapreveal",
-      "community": 7,
+      "community": 9,
       "norm_label": "usegsapreveal()"
     },
     {
@@ -715,7 +1255,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useLenis.ts",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_hooks_uselenis_ts",
-      "community": 2,
+      "community": 6,
       "norm_label": "uselenis.ts"
     },
     {
@@ -724,7 +1264,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useLenis.ts",
       "source_location": "L9",
       "id": "uselenis_getlenis",
-      "community": 2,
+      "community": 6,
       "norm_label": "getlenis()"
     },
     {
@@ -733,7 +1273,7 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useLenis.ts",
       "source_location": "L33",
       "id": "uselenis_uselenis",
-      "community": 2,
+      "community": 6,
       "norm_label": "uselenis()"
     },
     {
@@ -742,17 +1282,206 @@
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useMagneticCursor.ts",
       "source_location": "L1",
       "id": "c_hub_work_personal_porfolio_src_hooks_usemagneticcursor_ts",
-      "community": 2,
+      "community": 6,
       "norm_label": "usemagneticcursor.ts"
     },
     {
       "label": "useMagneticCursor()",
       "file_type": "code",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useMagneticCursor.ts",
-      "source_location": "L22",
+      "source_location": "L29",
       "id": "usemagneticcursor_usemagneticcursor",
-      "community": 2,
+      "community": 6,
       "norm_label": "usemagneticcursor()"
+    },
+    {
+      "label": "useNavSound.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useNavSound.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usenavsound_ts",
+      "community": 17,
+      "norm_label": "usenavsound.ts"
+    },
+    {
+      "label": "playTone()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useNavSound.ts",
+      "source_location": "L26",
+      "id": "usenavsound_playtone",
+      "community": 17,
+      "norm_label": "playtone()"
+    },
+    {
+      "label": "useNavSound()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useNavSound.ts",
+      "source_location": "L53",
+      "id": "usenavsound_usenavsound",
+      "community": 17,
+      "norm_label": "usenavsound()"
+    },
+    {
+      "label": "usePointerNDC.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "community": 5,
+      "norm_label": "usepointerndc.ts"
+    },
+    {
+      "label": "tickSmooth()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L45",
+      "id": "usepointerndc_ticksmooth",
+      "community": 5,
+      "norm_label": "ticksmooth()"
+    },
+    {
+      "label": "onMouseMove()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L59",
+      "id": "usepointerndc_onmousemove",
+      "community": 5,
+      "norm_label": "onmousemove()"
+    },
+    {
+      "label": "onMouseEnter()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L77",
+      "id": "usepointerndc_onmouseenter",
+      "community": 5,
+      "norm_label": "onmouseenter()"
+    },
+    {
+      "label": "onMouseLeave()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L78",
+      "id": "usepointerndc_onmouseleave",
+      "community": 5,
+      "norm_label": "onmouseleave()"
+    },
+    {
+      "label": "attach()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L80",
+      "id": "usepointerndc_attach",
+      "community": 5,
+      "norm_label": "attach()"
+    },
+    {
+      "label": "detach()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L92",
+      "id": "usepointerndc_detach",
+      "community": 5,
+      "norm_label": "detach()"
+    },
+    {
+      "label": "usePointerNDC()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L101",
+      "id": "usepointerndc_usepointerndc",
+      "community": 5,
+      "norm_label": "usepointerndc()"
+    },
+    {
+      "label": "useScrollProgress.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollProgress.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usescrollprogress_ts",
+      "community": 18,
+      "norm_label": "usescrollprogress.ts"
+    },
+    {
+      "label": "setProp()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollProgress.ts",
+      "source_location": "L38",
+      "id": "usescrollprogress_setprop",
+      "community": 18,
+      "norm_label": "setprop()"
+    },
+    {
+      "label": "useScrollProgress()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollProgress.ts",
+      "source_location": "L44",
+      "id": "usescrollprogress_usescrollprogress",
+      "community": 18,
+      "norm_label": "usescrollprogress()"
+    },
+    {
+      "label": "useScrollVelocity.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollVelocity.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usescrollvelocity_ts",
+      "community": 41,
+      "norm_label": "usescrollvelocity.ts"
+    },
+    {
+      "label": "useScrollVelocity()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollVelocity.ts",
+      "source_location": "L16",
+      "id": "usescrollvelocity_usescrollvelocity",
+      "community": 41,
+      "norm_label": "usescrollvelocity()"
+    },
+    {
+      "label": "useTextScramble.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTextScramble.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usetextscramble_ts",
+      "community": 19,
+      "norm_label": "usetextscramble.ts"
+    },
+    {
+      "label": "rand()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTextScramble.ts",
+      "source_location": "L15",
+      "id": "usetextscramble_rand",
+      "community": 19,
+      "norm_label": "rand()"
+    },
+    {
+      "label": "useTextScramble()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTextScramble.ts",
+      "source_location": "L17",
+      "id": "usetextscramble_usetextscramble",
+      "community": 19,
+      "norm_label": "usetextscramble()"
+    },
+    {
+      "label": "useTilt3D.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTilt3D.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_hooks_usetilt3d_ts",
+      "community": 42,
+      "norm_label": "usetilt3d.ts"
+    },
+    {
+      "label": "useTilt3D()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTilt3D.ts",
+      "source_location": "L22",
+      "id": "usetilt3d_usetilt3d",
+      "community": 42,
+      "norm_label": "usetilt3d()"
     },
     {
       "label": "request.ts",
@@ -760,7 +1489,7 @@
       "source_file": "src\\i18n\\request.ts",
       "source_location": "L1",
       "id": "src_i18n_request_ts",
-      "community": 31,
+      "community": 63,
       "norm_label": "request.ts"
     },
     {
@@ -769,8 +1498,98 @@
       "source_file": "src\\i18n\\routing.ts",
       "source_location": "L1",
       "id": "src_i18n_routing_ts",
-      "community": 32,
+      "community": 64,
       "norm_label": "routing.ts"
+    },
+    {
+      "label": "hash.test.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\hash.test.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_lib_contact_hash_test_ts",
+      "community": 65,
+      "norm_label": "hash.test.ts"
+    },
+    {
+      "label": "hash.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\hash.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_lib_contact_hash_ts",
+      "community": 1,
+      "norm_label": "hash.ts"
+    },
+    {
+      "label": "sha256Prefixed()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\hash.ts",
+      "source_location": "L13",
+      "id": "hash_sha256prefixed",
+      "community": 1,
+      "norm_label": "sha256prefixed()"
+    },
+    {
+      "label": "hashIp()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\hash.ts",
+      "source_location": "L30",
+      "id": "hash_haship",
+      "community": 1,
+      "norm_label": "haship()"
+    },
+    {
+      "label": "n8n.test.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\n8n.test.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_lib_contact_n8n_test_ts",
+      "community": 66,
+      "norm_label": "n8n.test.ts"
+    },
+    {
+      "label": "n8n.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\n8n.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_lib_contact_n8n_ts",
+      "community": 1,
+      "norm_label": "n8n.ts"
+    },
+    {
+      "label": "buildN8nPayload()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\n8n.ts",
+      "source_location": "L207",
+      "id": "n8n_buildn8npayload",
+      "community": 1,
+      "norm_label": "buildn8npayload()"
+    },
+    {
+      "label": "postN8nWebhook()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\n8n.ts",
+      "source_location": "L287",
+      "id": "n8n_postn8nwebhook",
+      "community": 1,
+      "norm_label": "postn8nwebhook()"
+    },
+    {
+      "label": "schema.ts",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\schema.ts",
+      "source_location": "L1",
+      "id": "c_hub_work_personal_porfolio_src_lib_contact_schema_ts",
+      "community": 43,
+      "norm_label": "schema.ts"
+    },
+    {
+      "label": "stripControl()",
+      "file_type": "code",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\schema.ts",
+      "source_location": "L10",
+      "id": "schema_stripcontrol",
+      "community": 43,
+      "norm_label": "stripcontrol()"
     },
     {
       "label": "Portfolio Jerome Delodder",
@@ -950,7 +1769,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 44,
       "norm_label": "n8n automation workflows",
       "id": "claude_n8n_workflows"
     },
@@ -963,7 +1782,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 44,
       "norm_label": "prompt engineering systems",
       "id": "claude_prompt_engineering"
     },
@@ -1071,12 +1890,12 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src\\app\\layout.tsx",
-      "source_location": "L2",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\layout.tsx",
+      "source_location": "L10",
       "weight": 1.0,
-      "_src": "src_app_layout_tsx",
+      "_src": "c_hub_work_personal_porfolio_src_app_layout_tsx",
       "_tgt": "layout_rootlayout",
-      "source": "src_app_layout_tsx",
+      "source": "c_hub_work_personal_porfolio_src_app_layout_tsx",
       "target": "layout_rootlayout",
       "confidence_score": 1.0
     },
@@ -1095,8 +1914,128 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\robots.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_robots_ts",
+      "_tgt": "robots_robots",
+      "source": "c_hub_work_personal_porfolio_src_app_robots_ts",
+      "target": "robots_robots",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\sitemap.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_sitemap_ts",
+      "_tgt": "sitemap_sitemap",
+      "source": "c_hub_work_personal_porfolio_src_app_sitemap_ts",
+      "target": "sitemap_sitemap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.test.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_api_contact_route_test_ts",
+      "_tgt": "route_test_makerequest",
+      "source": "c_hub_work_personal_porfolio_src_app_api_contact_route_test_ts",
+      "target": "route_test_makerequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.test.ts",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_api_contact_route_test_ts",
+      "_tgt": "route_test_parsejson",
+      "source": "c_hub_work_personal_porfolio_src_app_api_contact_route_test_ts",
+      "target": "route_test_parsejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.test.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_src": "route_test_parsejson",
+      "_tgt": "route_json",
+      "source": "route_test_parsejson",
+      "target": "route_json"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
       "source_location": "L26",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_api_contact_route_ts",
+      "_tgt": "route_json",
+      "source": "c_hub_work_personal_porfolio_src_app_api_contact_route_ts",
+      "target": "route_json",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_api_contact_route_ts",
+      "_tgt": "route_post",
+      "source": "c_hub_work_personal_porfolio_src_app_api_contact_route_ts",
+      "target": "route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "route_post",
+      "_tgt": "route_json",
+      "source": "route_json",
+      "target": "route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_src": "route_post",
+      "_tgt": "hash_sha256prefixed",
+      "source": "route_post",
+      "target": "hash_sha256prefixed"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\api\\contact\\route.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_src": "route_post",
+      "_tgt": "n8n_postn8nwebhook",
+      "source": "route_post",
+      "target": "n8n_postn8nwebhook"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
+      "source_location": "L33",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_app_locale_layout_tsx",
       "_tgt": "layout_generatemetadata",
@@ -1108,7 +2047,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
-      "source_location": "L75",
+      "source_location": "L185",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_app_locale_layout_tsx",
       "_tgt": "layout_generatestaticparams",
@@ -1120,7 +2059,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\layout.tsx",
-      "source_location": "L79",
+      "source_location": "L189",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_app_locale_layout_tsx",
       "_tgt": "layout_localelayout",
@@ -1167,6 +2106,30 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\privacy-policy\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_locale_privacy_policy_page_tsx",
+      "_tgt": "page_generatemetadata",
+      "source": "c_hub_work_personal_porfolio_src_app_locale_privacy_policy_page_tsx",
+      "target": "page_generatemetadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\app\\[locale]\\privacy-policy\\page.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_app_locale_privacy_policy_page_tsx",
+      "_tgt": "page_privacypolicypage",
+      "source": "c_hub_work_personal_porfolio_src_app_locale_privacy_policy_page_tsx",
+      "target": "page_privacypolicypage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\CodeViewer.tsx",
       "source_location": "L10",
       "weight": 1.0,
@@ -1174,18 +2137,6 @@
       "_tgt": "codeviewer_tokenizeline",
       "source": "c_hub_work_personal_porfolio_src_components_codeviewer_tsx",
       "target": "codeviewer_tokenizeline",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Contact.tsx",
-      "source_location": "L48",
-      "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_contact_tsx",
-      "_tgt": "contact_copyemail",
-      "source": "c_hub_work_personal_porfolio_src_components_contact_tsx",
-      "target": "contact_copyemail",
       "confidence_score": 1.0
     },
     {
@@ -1251,85 +2202,97 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L45",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L48",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "_tgt": "hero_onmove",
-      "source": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "target": "hero_onmove",
+      "_src": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "_tgt": "herosimple_githubicon",
+      "source": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "target": "herosimple_githubicon",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L51",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L56",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "_tgt": "hero_loop",
-      "source": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "target": "hero_loop",
+      "_src": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "_tgt": "herosimple_linkedinicon",
+      "source": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "target": "herosimple_linkedinicon",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L87",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L64",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "_tgt": "hero_tick",
-      "source": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "target": "hero_tick",
+      "_src": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "_tgt": "herosimple_mailicon",
+      "source": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "target": "herosimple_mailicon",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Hero.tsx",
-      "source_location": "L113",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L126",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "_tgt": "hero_onvisibility",
-      "source": "c_hub_work_personal_porfolio_src_components_hero_tsx",
-      "target": "hero_onvisibility",
+      "_src": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "_tgt": "herosimple_tick",
+      "source": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "target": "herosimple_tick",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroParticles.tsx",
-      "source_location": "L190",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L155",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_heroparticles_tsx",
-      "_tgt": "heroparticles_hsl2rgb",
-      "source": "c_hub_work_personal_porfolio_src_components_heroparticles_tsx",
-      "target": "heroparticles_hsl2rgb",
+      "_src": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "_tgt": "herosimple_onvis",
+      "source": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "target": "herosimple_onvis",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroParticles.tsx",
-      "source_location": "L199",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroSimple.tsx",
+      "source_location": "L169",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_heroparticles_tsx",
-      "_tgt": "heroparticles_rand",
-      "source": "c_hub_work_personal_porfolio_src_components_heroparticles_tsx",
-      "target": "heroparticles_rand",
+      "_src": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "_tgt": "herosimple_scrollto",
+      "source": "c_hub_work_personal_porfolio_src_components_herosimple_tsx",
+      "target": "herosimple_scrollto",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroName.tsx",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_src": "heroname_runscramble",
+      "_tgt": "herosimple_tick",
+      "source": "herosimple_tick",
+      "target": "heroname_runscramble"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\HeroParticles.tsx",
-      "source_location": "L210",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\JsonLd.tsx",
+      "source_location": "L20",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_heroparticles_tsx",
-      "_tgt": "heroparticles_heroparticles",
-      "source": "c_hub_work_personal_porfolio_src_components_heroparticles_tsx",
-      "target": "heroparticles_heroparticles",
+      "_src": "c_hub_work_personal_porfolio_src_components_jsonld_tsx",
+      "_tgt": "jsonld_jsonld",
+      "source": "c_hub_work_personal_porfolio_src_components_jsonld_tsx",
+      "target": "jsonld_jsonld",
       "confidence_score": 1.0
     },
     {
@@ -1348,49 +2311,25 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
-      "source_location": "L28",
+      "source_location": "L55",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_components_nav_tsx",
-      "_tgt": "nav_onscroll",
+      "_tgt": "nav_progressbar",
       "source": "c_hub_work_personal_porfolio_src_components_nav_tsx",
-      "target": "nav_onscroll",
+      "target": "nav_progressbar",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
-      "source_location": "L35",
+      "source_location": "L135",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_components_nav_tsx",
-      "_tgt": "nav_handlenavclick",
+      "_tgt": "nav_onresize",
       "source": "c_hub_work_personal_porfolio_src_components_nav_tsx",
-      "target": "nav_handlenavclick",
+      "target": "nav_onresize",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
-      "source_location": "L111",
-      "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_nav_tsx",
-      "_tgt": "nav_menuopen",
-      "source": "c_hub_work_personal_porfolio_src_components_nav_tsx",
-      "target": "nav_menuopen",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Nav.tsx",
-      "source_location": "L40",
-      "weight": 1.0,
-      "_src": "nav_handlenavclick",
-      "_tgt": "uselenis_getlenis",
-      "source": "nav_handlenavclick",
-      "target": "uselenis_getlenis"
     },
     {
       "relation": "contains",
@@ -1491,13 +2430,13 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Preloader.tsx",
-      "source_location": "L42",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\PerfHUD.tsx",
+      "source_location": "L48",
       "weight": 1.0,
-      "_src": "c_hub_work_personal_porfolio_src_components_preloader_tsx",
-      "_tgt": "preloader_step",
-      "source": "c_hub_work_personal_porfolio_src_components_preloader_tsx",
-      "target": "preloader_step",
+      "_src": "c_hub_work_personal_porfolio_src_components_perfhud_tsx",
+      "_tgt": "perfhud_loop",
+      "source": "c_hub_work_personal_porfolio_src_components_perfhud_tsx",
+      "target": "perfhud_loop",
       "confidence_score": 1.0
     },
     {
@@ -1540,7 +2479,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\SiteShell.tsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_components_siteshell_tsx",
       "_tgt": "siteshell_siteshell",
@@ -1552,7 +2491,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_components_work_tsx",
       "_tgt": "work_chunkloading",
@@ -1564,7 +2503,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_components_work_tsx",
       "_tgt": "work_metriccard",
@@ -1576,13 +2515,25 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
-      "source_location": "L78",
+      "source_location": "L197",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_components_work_tsx",
-      "_tgt": "work_archpill",
+      "_tgt": "work_handlebadgeclick",
       "source": "c_hub_work_personal_porfolio_src_components_work_tsx",
-      "target": "work_archpill",
+      "target": "work_handlebadgeclick",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\Work.tsx",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_src": "work_metriccard",
+      "_tgt": "usecountup_usecountup",
+      "source": "work_metriccard",
+      "target": "usecountup_usecountup"
     },
     {
       "relation": "contains",
@@ -1594,6 +2545,378 @@
       "_tgt": "workflowgallery_lightbox",
       "source": "c_hub_work_personal_porfolio_src_components_workflowgallery_tsx",
       "target": "workflowgallery_lightbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\contact\\ContactForm.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_contact_contactform_tsx",
+      "_tgt": "contactform_contactform",
+      "source": "c_hub_work_personal_porfolio_src_components_contact_contactform_tsx",
+      "target": "contactform_contactform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroAvatar.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_heroavatar_tsx",
+      "_tgt": "heroavatar_heroavatar",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_heroavatar_tsx",
+      "target": "heroavatar_heroavatar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_setupcanvas",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_setupcanvas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_onresize",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_onresize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_onmousemove",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_onmousemove",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_onmouseleave",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_onmouseleave",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L136",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_draw",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_draw",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L186",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_loop",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_loop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L203",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_resume",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_resume",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L224",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "_tgt": "herogrid3d_onvischange",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herogrid3d_tsx",
+      "target": "herogrid3d_onvischange",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_src": "herogrid3d_onmousemove",
+      "_tgt": "herogrid3d_resume",
+      "source": "herogrid3d_onmousemove",
+      "target": "herogrid3d_resume",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L190",
+      "weight": 1.0,
+      "_src": "herogrid3d_loop",
+      "_tgt": "herogrid3d_draw",
+      "source": "herogrid3d_draw",
+      "target": "herogrid3d_loop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroGrid3D.tsx",
+      "source_location": "L226",
+      "weight": 1.0,
+      "_src": "herogrid3d_onvischange",
+      "_tgt": "herogrid3d_resume",
+      "source": "herogrid3d_resume",
+      "target": "herogrid3d_onvischange",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroName.tsx",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_heroname_tsx",
+      "_tgt": "heroname_runscramble",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_heroname_tsx",
+      "target": "heroname_runscramble",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroName.tsx",
+      "source_location": "L133",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_heroname_tsx",
+      "_tgt": "heroname_heroname",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_heroname_tsx",
+      "target": "heroname_heroname",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroParticles.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_heroparticles_tsx",
+      "_tgt": "heroparticles_heroparticles",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_heroparticles_tsx",
+      "target": "heroparticles_heroparticles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\hero\\HeroSpotlight.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_hero_herospotlight_tsx",
+      "_tgt": "herospotlight_herospotlight",
+      "source": "c_hub_work_personal_porfolio_src_components_hero_herospotlight_tsx",
+      "target": "herospotlight_herospotlight",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavCTA.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_nav_navcta_tsx",
+      "_tgt": "navcta_navcta",
+      "source": "c_hub_work_personal_porfolio_src_components_nav_navcta_tsx",
+      "target": "navcta_navcta",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavLink.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_nav_navlink_tsx",
+      "_tgt": "navlink_navlink",
+      "source": "c_hub_work_personal_porfolio_src_components_nav_navlink_tsx",
+      "target": "navlink_navlink",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavLogo.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_nav_navlogo_tsx",
+      "_tgt": "navlogo_navlogo",
+      "source": "c_hub_work_personal_porfolio_src_components_nav_navlogo_tsx",
+      "target": "navlogo_navlogo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavMobileMenu.tsx",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_nav_navmobilemenu_tsx",
+      "_tgt": "navmobilemenu_onkeydown",
+      "source": "c_hub_work_personal_porfolio_src_components_nav_navmobilemenu_tsx",
+      "target": "navmobilemenu_onkeydown",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavMobileMenu.tsx",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_nav_navmobilemenu_tsx",
+      "_tgt": "navmobilemenu_handleitemclick",
+      "source": "c_hub_work_personal_porfolio_src_components_nav_navmobilemenu_tsx",
+      "target": "navmobilemenu_handleitemclick",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavStatus.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_nav_navstatus_tsx",
+      "_tgt": "navstatus_getparistz",
+      "source": "c_hub_work_personal_porfolio_src_components_nav_navstatus_tsx",
+      "target": "navstatus_getparistz",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\components\\nav\\NavStatus.tsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_components_nav_navstatus_tsx",
+      "_tgt": "navstatus_navstatus",
+      "source": "c_hub_work_personal_porfolio_src_components_nav_navstatus_tsx",
+      "target": "navstatus_navstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useActiveSection.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_useactivesection_ts",
+      "_tgt": "useactivesection_useactivesection",
+      "source": "c_hub_work_personal_porfolio_src_hooks_useactivesection_ts",
+      "target": "useactivesection_useactivesection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCommandPalette.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usecommandpalette_ts",
+      "_tgt": "usecommandpalette_usecommandpalette",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usecommandpalette_ts",
+      "target": "usecommandpalette_usecommandpalette",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCountUp.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usecountup_ts",
+      "_tgt": "usecountup_parsevalue",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usecountup_ts",
+      "target": "usecountup_parsevalue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useCountUp.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usecountup_ts",
+      "_tgt": "usecountup_usecountup",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usecountup_ts",
+      "target": "usecountup_usecountup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGPUClass.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usegpuclass_ts",
+      "_tgt": "usegpuclass_detectgpuclass",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usegpuclass_ts",
+      "target": "usegpuclass_detectgpuclass",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGPUClass.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usegpuclass_ts",
+      "_tgt": "usegpuclass_islowendgpu",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usegpuclass_ts",
+      "target": "usegpuclass_islowendgpu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useGPUClass.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_src": "usegpuclass_islowendgpu",
+      "_tgt": "usegpuclass_detectgpuclass",
+      "source": "usegpuclass_detectgpuclass",
+      "target": "usegpuclass_islowendgpu",
       "confidence_score": 1.0
     },
     {
@@ -1660,12 +2983,264 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useMagneticCursor.ts",
-      "source_location": "L22",
+      "source_location": "L29",
       "weight": 1.0,
       "_src": "c_hub_work_personal_porfolio_src_hooks_usemagneticcursor_ts",
       "_tgt": "usemagneticcursor_usemagneticcursor",
       "source": "c_hub_work_personal_porfolio_src_hooks_usemagneticcursor_ts",
       "target": "usemagneticcursor_usemagneticcursor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useNavSound.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usenavsound_ts",
+      "_tgt": "usenavsound_playtone",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usenavsound_ts",
+      "target": "usenavsound_playtone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useNavSound.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usenavsound_ts",
+      "_tgt": "usenavsound_usenavsound",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usenavsound_ts",
+      "target": "usenavsound_usenavsound",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "_tgt": "usepointerndc_ticksmooth",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "target": "usepointerndc_ticksmooth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "_tgt": "usepointerndc_onmousemove",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "target": "usepointerndc_onmousemove",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "_tgt": "usepointerndc_onmouseenter",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "target": "usepointerndc_onmouseenter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "_tgt": "usepointerndc_onmouseleave",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "target": "usepointerndc_onmouseleave",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "_tgt": "usepointerndc_attach",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "target": "usepointerndc_attach",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "_tgt": "usepointerndc_detach",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "target": "usepointerndc_detach",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\usePointerNDC.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "_tgt": "usepointerndc_usepointerndc",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usepointerndc_ts",
+      "target": "usepointerndc_usepointerndc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollProgress.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usescrollprogress_ts",
+      "_tgt": "usescrollprogress_setprop",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usescrollprogress_ts",
+      "target": "usescrollprogress_setprop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollProgress.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usescrollprogress_ts",
+      "_tgt": "usescrollprogress_usescrollprogress",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usescrollprogress_ts",
+      "target": "usescrollprogress_usescrollprogress",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useScrollVelocity.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usescrollvelocity_ts",
+      "_tgt": "usescrollvelocity_usescrollvelocity",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usescrollvelocity_ts",
+      "target": "usescrollvelocity_usescrollvelocity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTextScramble.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usetextscramble_ts",
+      "_tgt": "usetextscramble_rand",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usetextscramble_ts",
+      "target": "usetextscramble_rand",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTextScramble.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usetextscramble_ts",
+      "_tgt": "usetextscramble_usetextscramble",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usetextscramble_ts",
+      "target": "usetextscramble_usetextscramble",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\hooks\\useTilt3D.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_hooks_usetilt3d_ts",
+      "_tgt": "usetilt3d_usetilt3d",
+      "source": "c_hub_work_personal_porfolio_src_hooks_usetilt3d_ts",
+      "target": "usetilt3d_usetilt3d",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\hash.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_lib_contact_hash_ts",
+      "_tgt": "hash_sha256prefixed",
+      "source": "c_hub_work_personal_porfolio_src_lib_contact_hash_ts",
+      "target": "hash_sha256prefixed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\hash.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_lib_contact_hash_ts",
+      "_tgt": "hash_haship",
+      "source": "c_hub_work_personal_porfolio_src_lib_contact_hash_ts",
+      "target": "hash_haship",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\n8n.ts",
+      "source_location": "L207",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_lib_contact_n8n_ts",
+      "_tgt": "n8n_buildn8npayload",
+      "source": "c_hub_work_personal_porfolio_src_lib_contact_n8n_ts",
+      "target": "n8n_buildn8npayload",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\n8n.ts",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_lib_contact_n8n_ts",
+      "_tgt": "n8n_postn8nwebhook",
+      "source": "c_hub_work_personal_porfolio_src_lib_contact_n8n_ts",
+      "target": "n8n_postn8nwebhook",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\n8n.ts",
+      "source_location": "L292",
+      "weight": 1.0,
+      "_src": "n8n_postn8nwebhook",
+      "_tgt": "n8n_buildn8npayload",
+      "source": "n8n_buildn8npayload",
+      "target": "n8n_postn8nwebhook",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\_HUB\\_WORK\\_personal\\porfolio\\src\\lib\\contact\\schema.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "c_hub_work_personal_porfolio_src_lib_contact_schema_ts",
+      "_tgt": "schema_stripcontrol",
+      "source": "c_hub_work_personal_porfolio_src_lib_contact_schema_ts",
+      "target": "schema_stripcontrol",
       "confidence_score": 1.0
     },
     {
