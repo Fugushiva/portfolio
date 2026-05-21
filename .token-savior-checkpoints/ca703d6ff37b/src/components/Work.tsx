@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { m, AnimatePresence, useInView } from 'framer-motion'
 import { useGSAPReveal } from '@/hooks/useGSAPReveal'
@@ -77,9 +77,6 @@ function MetricCard({
 
 // ─── Client text with optional clickable URL ──────────────────────────────────
 // Splits on domain-like tokens (e.g. "jobnomad.app") and makes them links.
-// `pointer-events-auto` is required because the parent header overlay is
-// `pointer-events-none` so the stretched toggle button below catches clicks
-// on empty header areas. Interactive children opt back in.
 function ClientText({ client, accent }: { client: string; accent: string }) {
   // Capture groups in split() keep the delimiters in the resulting array
   const parts = client.split(/([a-z0-9-]+\.[a-z]{2,}(?:\/[^\s]*)?)/i)
@@ -95,7 +92,7 @@ function ClientText({ client, accent }: { client: string; accent: string }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative pointer-events-auto transition-colors duration-200 underline underline-offset-2 decoration-dotted hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)] rounded-sm"
+              className="transition-colors duration-200 underline underline-offset-2 decoration-dotted hover:no-underline"
               style={{ color: accent }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -195,38 +192,12 @@ function ProjectCard({
   if (hasCode) availableTabs.push('code')
 
   const [activeTab, setActiveTab] = useState<PanelTab>('overview')
-  const tabRefs = useRef<Record<PanelTab, HTMLButtonElement | null>>({
-    overview: null,
-    assets: null,
-    code: null,
-  })
-
-  // Stable IDs for ARIA wiring (panel, tabs, tabpanels). Keyed by project.
-  const idBase = useId()
-  const panelId = `${idBase}-panel`
-  const tabIdFor = (t: PanelTab) => `${idBase}-tab-${t}`
-  const panelIdFor = (t: PanelTab) => `${idBase}-tabpanel-${t}`
 
   // Badge click: open panel if collapsed, then jump to the right tab
   const handleBadgeClick = (tab: PanelTab) => (e: React.MouseEvent) => {
     e.stopPropagation()
     if (!isOpen) onToggle()
     setActiveTab(tab)
-  }
-
-  // Tablist roving-tabindex keyboard nav (WAI-ARIA Authoring Practices: Tabs).
-  const handleTabKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    const idx = availableTabs.indexOf(activeTab)
-    let nextIdx = idx
-    if (e.key === 'ArrowRight') nextIdx = (idx + 1) % availableTabs.length
-    else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + availableTabs.length) % availableTabs.length
-    else if (e.key === 'Home') nextIdx = 0
-    else if (e.key === 'End') nextIdx = availableTabs.length - 1
-    else return
-    e.preventDefault()
-    const nextTab = availableTabs[nextIdx]
-    setActiveTab(nextTab)
-    tabRefs.current[nextTab]?.focus()
   }
 
   // Architecture pills — split by " · "
@@ -243,30 +214,14 @@ function ProjectCard({
         className="absolute left-0 top-0 w-0 h-px group-hover:w-full transition-all duration-500 ease-out pointer-events-none"
         style={{ background: accent }}
       />
-
-      {/* ── Header row ──
-          Stretched-button pattern: the disclosure trigger is a real <button>
-          absolutely positioned across the whole header (z-0). The visible
-          content sits on top (z-10) but is pointer-events-none, so clicks on
-          empty/text areas fall through to the toggle. The inline badges &
-          links re-enable pointer events on themselves. This lets us:
-            1. Keep "click anywhere on the row to toggle" UX
-            2. Promote the badges to real <button>s (no nested interactives)
-            3. Keep the ClientText <a> functional (no nested anchor-in-button)
-            4. Give the toggle proper aria-expanded / aria-controls
-      */}
-      <div className="relative py-7 md:py-9">
-        <button
-          type="button"
-          onClick={onToggle}
-          data-magnetic
-          aria-expanded={isOpen}
-          aria-controls={panelId}
-          aria-label={`${project.title}: ${isOpen ? 'collapse' : 'expand'} details`}
-          className="absolute inset-0 w-full rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-all duration-300 z-0"
-        />
-
-        <div className="relative z-10 flex items-start md:items-center gap-4 md:gap-8 pointer-events-none">
+      {/* ── Header row ── */}
+      <button
+        onClick={onToggle}
+        data-magnetic
+        className="w-full text-left py-7 md:py-9 transition-all duration-300 focus-visible:outline-none"
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-start md:items-center gap-4 md:gap-8">
           {/* Index */}
           <span className="font-mono text-xs text-muted shrink-0 pt-[2px] md:pt-0 select-none tabular-nums">
             {meta.index}
@@ -290,21 +245,19 @@ function ProjectCard({
                 <ClientText client={project.client} accent={accent} /> · {project.year}
               </span>
 
-              {/* Asset badges — real buttons, focusable & keyboard-operable */}
+              {/* Asset badges — animated to signal interactivity */}
               {hasGallery && (
-                <button
-                  type="button"
-                  onClick={handleBadgeClick('assets')}
-                  aria-label={`Open ${project.title} assets`}
-                  className="tap-target font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none pointer-events-auto hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)]"
+                <span
+                  className="font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none"
                   style={{
                     color: accent,
                     borderColor: `${accent}50`,
                     background: `rgba(${accentRgb},0.08)`,
                   }}
+                  onClick={handleBadgeClick('assets')}
                 >
                   {/* Animated ping dot */}
-                  <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
                     <span
                       className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
                       style={{ background: accent }}
@@ -315,22 +268,20 @@ function ProjectCard({
                     />
                   </span>
                   Gallery
-                </button>
+                </span>
               )}
               {hasCode && (
-                <button
-                  type="button"
-                  onClick={handleBadgeClick('code')}
-                  aria-label={`Open ${project.title} source code`}
-                  className="tap-target font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none pointer-events-auto hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)]"
+                <span
+                  className="font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none"
                   style={{
                     color: accent,
                     borderColor: `${accent}50`,
                     background: `rgba(${accentRgb},0.08)`,
                   }}
+                  onClick={handleBadgeClick('code')}
                 >
                   {/* Animated ping dot */}
-                  <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
                     <span
                       className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
                       style={{ background: accent }}
@@ -341,7 +292,7 @@ function ProjectCard({
                     />
                   </span>
                   Source
-                </button>
+                </span>
               )}
             </div>
 
@@ -362,9 +313,8 @@ function ProjectCard({
             </p>
           </div>
 
-          {/* Toggle arrow — purely decorative; the real trigger is the stretched button above */}
+          {/* Toggle arrow */}
           <m.div
-            aria-hidden="true"
             className="shrink-0 w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300"
             style={isOpen
               ? { borderColor: accent, color: accent, background: `rgba(${accentRgb},0.1)` }
@@ -379,16 +329,13 @@ function ProjectCard({
             </svg>
           </m.div>
         </div>
-      </div>
+      </button>
 
       {/* ── Expanded panel ── */}
       <AnimatePresence initial={false}>
         {isOpen && (
           <m.div
             key="panel"
-            id={panelId}
-            role="region"
-            aria-label={`${project.title} details`}
             initial={{ height: 0, opacity: 0, y: -10 }}
             animate={{ height: 'auto', opacity: 1, y: 0 }}
             exit={{ height: 0, opacity: 0, y: -10 }}
@@ -398,45 +345,28 @@ function ProjectCard({
             <div className="pb-14 pl-0 md:pl-16">
               {/* ── Tab bar (only when multiple tabs) ── */}
               {availableTabs.length > 1 && (
-                <div
-                  role="tablist"
-                  aria-label={`${project.title} sections`}
-                  aria-orientation="horizontal"
-                  className="flex items-center gap-1 mb-8 p-1 rounded-xl border border-border/40 w-fit"
-                  style={{ background: 'rgba(255,255,255,0.02)' }}
-                >
-                  {availableTabs.map((tab) => {
-                    const selected = activeTab === tab
-                    return (
-                      <button
-                        key={tab}
-                        ref={(el) => { tabRefs.current[tab] = el }}
-                        type="button"
-                        role="tab"
-                        id={tabIdFor(tab)}
-                        aria-selected={selected}
-                        aria-controls={panelIdFor(tab)}
-                        tabIndex={selected ? 0 : -1}
-                        onClick={() => setActiveTab(tab)}
-                        onKeyDown={handleTabKeyDown}
-                        className="relative px-4 py-1.5 rounded-lg font-mono text-[0.68rem] uppercase tracking-widest transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)]"
-                        style={{
-                          color: selected ? accent : '#6b6b6b',
-                          background: selected ? `rgba(${accentRgb},0.1)` : 'transparent',
-                        }}
-                      >
-                        {selected && (
-                          <m.div
-                            layoutId={`tab-${index}`}
-                            className="absolute inset-0 rounded-lg"
-                            style={{ background: `rgba(${accentRgb},0.1)` }}
-                            aria-hidden="true"
-                          />
-                        )}
-                        <span className="relative">{TAB_LABELS[tab]}</span>
-                      </button>
-                    )
-                  })}
+                <div className="flex items-center gap-1 mb-8 p-1 rounded-xl border border-border/40 w-fit"
+                  style={{ background: 'rgba(255,255,255,0.02)' }}>
+                  {availableTabs.map((tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      className="relative px-4 py-1.5 rounded-lg font-mono text-[0.68rem] uppercase tracking-widest transition-all duration-200"
+                      style={{
+                        color: activeTab === tab ? accent : '#6b6b6b',
+                        background: activeTab === tab ? `rgba(${accentRgb},0.1)` : 'transparent',
+                      }}
+                    >
+                      {activeTab === tab && (
+                        <m.div
+                          layoutId={`tab-${index}`}
+                          className="absolute inset-0 rounded-lg"
+                          style={{ background: `rgba(${accentRgb},0.1)` }}
+                        />
+                      )}
+                      <span className="relative">{TAB_LABELS[tab]}</span>
+                    </button>
+                  ))}
                 </div>
               )}
 
@@ -445,9 +375,6 @@ function ProjectCard({
                 {activeTab === 'overview' && (
                   <m.div
                     key="overview"
-                    role="tabpanel"
-                    id={panelIdFor('overview')}
-                    aria-labelledby={tabIdFor('overview')}
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
@@ -457,7 +384,7 @@ function ProjectCard({
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-10">
                       {/* Left: description + architecture */}
                       <div className="lg:col-span-3 space-y-6">
-                        <p className="text-muted text-[0.95rem] xl:text-base 2xl:text-lg leading-relaxed max-w-prose">
+                        <p className="text-muted text-[0.95rem] leading-relaxed">
                           {project.description}
                         </p>
 
@@ -532,9 +459,6 @@ function ProjectCard({
                 {activeTab === 'assets' && galleryType === 'workflow' && meta.images && (
                   <m.div
                     key="assets-workflow"
-                    role="tabpanel"
-                    id={panelIdFor('assets')}
-                    aria-labelledby={tabIdFor('assets')}
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
@@ -555,9 +479,6 @@ function ProjectCard({
                 {activeTab === 'assets' && galleryType === 'content' && meta.contentPieces && (
                   <m.div
                     key="assets-content"
-                    role="tabpanel"
-                    id={panelIdFor('assets')}
-                    aria-labelledby={tabIdFor('assets')}
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
@@ -578,9 +499,6 @@ function ProjectCard({
                 {activeTab === 'code' && meta.codeFiles && (
                   <m.div
                     key="code"
-                    role="tabpanel"
-                    id={panelIdFor('code')}
-                    aria-labelledby={tabIdFor('code')}
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
@@ -630,7 +548,7 @@ export default function Work() {
     <section
       id="work"
       ref={containerRef}
-      className="section-pad px-6 md:px-12 lg:px-20 xl:px-24 2xl:px-32 relative"
+      className="section-pad px-6 md:px-12 lg:px-20 relative"
     >
       {/* Section label */}
       <div className="flex items-center gap-4 mb-16 md:mb-20" data-reveal>

@@ -46,44 +46,6 @@ const config: NextConfig = {
   },
 
   async headers() {
-    // ── CSP, environment-aware ──────────────────────────────────────────────
-    // Next.js dev requires `'unsafe-eval'` for HMR; production must not.
-    // Vercel Analytics + Speed Insights need:
-    //   script-src   https://va.vercel-scripts.com
-    //   connect-src  https://vitals.vercel-insights.com
-    //                https://*.vercel-insights.com  (region beacons)
-    // Fonts are self-hosted by next/font, so we keep the Google Fonts host
-    // out of style-src/font-src (used to allow it; was dead weight).
-    const isDev = process.env.NODE_ENV === 'development'
-
-    const scriptSrc = [
-      "'self'",
-      "'unsafe-inline'",                   // next/script + RSC inline hydration
-      isDev ? "'unsafe-eval'" : null,      // dev-only: webpack HMR / eval-source-map
-      'https://va.vercel-scripts.com',     // Vercel Analytics loader
-    ].filter(Boolean).join(' ')
-
-    const connectSrc = [
-      "'self'",
-      'https://vitals.vercel-insights.com',
-      'https://*.vercel-insights.com',
-      isDev ? 'ws:' : null,                // HMR websocket
-      isDev ? 'wss:' : null,
-    ].filter(Boolean).join(' ')
-
-    const csp = [
-      "default-src 'self'",
-      `script-src ${scriptSrc}`,
-      "style-src 'self' 'unsafe-inline'",  // Tailwind + CSS-in-JS
-      "font-src 'self' data:",
-      "img-src 'self' data: blob:",        // tightened: no broad https:
-      `connect-src ${connectSrc}`,
-      "frame-ancestors 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "object-src 'none'",
-    ].join('; ')
-
     return [
       // ── Static asset cache ─────────────────────────────────────
       {
@@ -122,8 +84,20 @@ const config: NextConfig = {
             key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains; preload',
           },
-          // CSP — env-aware (see above)
-          { key: 'Content-Security-Policy', value: csp },
+          // CSP — strict but compatible with Next.js inline styles / scripts
+          // Adjust if you add 3rd-party embeds.
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-eval: Next.js dev
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: blob: https:",
+              "connect-src 'self'",
+              "frame-ancestors 'none'",
+            ].join('; '),
+          },
         ],
       },
     ]

@@ -188,9 +188,7 @@ function Lightbox({
 
 export default function WorkflowGallery({
   images,
-  // Brand fallback (see :root in globals.css); per-project meta overrides.
-  // `accentRgb` must stay comma-separated for `rgba()` template literals.
-  accent = 'var(--accent)',
+  accent = '#7c3aed',
   accentRgb = '124,58,237',
 }: WorkflowGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)

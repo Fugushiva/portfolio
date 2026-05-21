@@ -46,12 +46,12 @@ function GlitchHeadline({ text, outline = false }: { text: string; outline?: boo
         className="font-black leading-tight tracking-tighter"
         style={{
           fontSize: 'clamp(2.5rem, 7vw, 8rem)',
-            ...(outline
+          ...(outline
             ? {
-                WebkitTextStroke: '1px rgb(var(--foreground-rgb) / 0.3)',
+                WebkitTextStroke: '1px rgba(245,245,240,0.3)',
                 color: 'transparent',
               }
-            : { color: 'var(--foreground)' }),
+            : { color: '#f5f5f0' }),
         }}
       >
         {text}
@@ -95,7 +95,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={containerRef}
-      className="section-pad px-6 md:px-12 lg:px-20 xl:px-24 2xl:px-32 relative"
+      className="section-pad px-6 md:px-12 lg:px-20 relative"
     >
       {/* Background glow */}
       <div
@@ -103,7 +103,7 @@ export default function Contact() {
         style={{
           width: '80vw',
           height: '50vw',
-          background: 'radial-gradient(circle at 50% 100%, rgb(var(--accent-rgb) / 0.18) 0%, rgb(var(--accent-rgb) / 0.06) 40%, transparent 70%)',
+          background: 'radial-gradient(circle at 50% 100%, rgba(124,58,237,0.18) 0%, rgba(124,58,237,0.06) 40%, transparent 70%)',
           filter: 'blur(60px)',
           transform: 'translate(-50%, 20%)',
           willChange: 'transform',
@@ -162,12 +162,7 @@ export default function Contact() {
                 data-magnetic
                 aria-label={label}
                 className="magnetic-wrap w-12 h-12 rounded-full border border-foreground/20 !flex items-center justify-center text-foreground/50 transition-all duration-300 cursor-pointer"
-                whileHover={{
-  scale: 1.1,
-  borderColor: 'rgb(var(--accent-rgb) / 1)',
-  color: 'rgb(var(--accent-rgb) / 1)',
-  backgroundColor: 'rgb(var(--accent-rgb) / 0.08)',
-}}
+                whileHover={{ scale: 1.1, borderColor: '#7c3aed', color: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.08)' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >

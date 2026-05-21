@@ -58,13 +58,13 @@ function StepRow({
       <div className="flex flex-col items-center shrink-0">
         <m.div
           className="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300"
-          style={{ borderColor: 'rgb(var(--foreground-rgb) / 0.1)', color: 'var(--muted)' }}
+          style={{ borderColor: 'rgba(255,255,255,0.1)', color: '#6b6b6b' }}
           animate={isInView ? {
-            borderColor: 'rgb(var(--accent-rgb) / 0.5)',
-            color: 'var(--accent-light)',
+            borderColor: 'rgba(124,58,237,0.5)',
+            color: '#a78bfa',
           } : {}}
           transition={{ delay: index * 0.12 + 0.3, duration: 0.5 }}
-          whileHover={{ scale: 1.15, borderColor: 'var(--accent)', color: 'var(--accent)' }}
+          whileHover={{ scale: 1.15, borderColor: '#7c3aed', color: '#7c3aed' }}
         >
           {icon}
         </m.div>
@@ -75,7 +75,7 @@ function StepRow({
             <div className="absolute inset-0 bg-border" />
             <m.div
               className="absolute top-0 left-0 w-full origin-top"
-              style={{ background: 'linear-gradient(to bottom, var(--accent), transparent)' }}
+              style={{ background: 'linear-gradient(to bottom, #7c3aed, transparent)' }}
               initial={{ scaleY: 0 }}
               animate={isInView ? { scaleY: 1 } : {}}
               transition={{ delay: index * 0.12 + 0.5, duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
@@ -152,7 +152,7 @@ export default function Process() {
             <m.div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'linear-gradient(90deg, transparent, rgb(var(--accent-rgb) / 0.06), transparent)',
+                background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.06), transparent)',
               }}
               initial={{ x: '-100%' }}
               animate={diffInView ? { x: '200%' } : {}}

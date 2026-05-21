@@ -181,11 +181,18 @@ function NotFoundInner() {
   const glyphYArr = [g0y, g1y, g2y]
 
   return (
+    // Decorative parallax tracker: onMouseMove drives the chromatic aberration
+    // and digit tilt for sighted users. There is no keyboard equivalent because
+    // the effect is purely visual; the page's accessible content (heading, CTAs)
+    // is reachable independently. The role="main" + aria-label give AT users a
+    // proper landmark instead of an unlabelled <div>.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- decorative parallax on landmark; no keyboard analog needed
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       className="nf-root"
-      aria-label="Erreur 404 — page introuvable"
+      role="main"
+      aria-label="Erreur 404, page introuvable"
     >
       {/* ── Grain overlay (same as site) ─── */}
       <div className="grain-overlay" aria-hidden="true" />
@@ -263,7 +270,7 @@ function NotFoundInner() {
               rotateX: 0,
               filter: glitchActive
                 ? 'drop-shadow(-8px 0 0 rgba(6,182,212,0.95)) drop-shadow(8px 0 0 rgba(239,68,68,0.95))'
-                : 'drop-shadow(0 0 60px rgba(124,58,237,0.55))',
+                : 'drop-shadow(0 0 60px rgb(var(--accent-rgb) / 0.55))',
             }}
             transition={glitchActive
               ? { duration: 0.04 }
@@ -282,7 +289,7 @@ function NotFoundInner() {
               rotateX: 0,
               filter: glitchActive
                 ? 'drop-shadow(-6px 0 0 rgba(239,68,68,0.95)) drop-shadow(6px 0 0 rgba(6,182,212,0.95))'
-                : 'drop-shadow(0 0 80px rgba(124,58,237,0.65))',
+                : 'drop-shadow(0 0 80px rgb(var(--accent-rgb) / 0.65))',
             }}
             transition={glitchActive
               ? { duration: 0.04 }
@@ -301,7 +308,7 @@ function NotFoundInner() {
               rotateX: 0,
               filter: glitchActive
                 ? 'drop-shadow(-5px 0 0 rgba(6,182,212,0.95)) drop-shadow(5px 0 0 rgba(239,68,68,0.95))'
-                : 'drop-shadow(0 0 60px rgba(124,58,237,0.55))',
+                : 'drop-shadow(0 0 60px rgb(var(--accent-rgb) / 0.55))',
             }}
             transition={glitchActive
               ? { duration: 0.04 }
@@ -321,10 +328,12 @@ function NotFoundInner() {
                 aria-hidden="true"
               >
                 {[
+                  // Cyan + red are intentional non-brand "channel separation"
+                  // colors for the CRT-style glitch fringe; purple is brand.
                   { top: '12%', left: '5%', w: '70%', h: 2, c: 'rgba(6,182,212,0.8)' },
                   { top: '31%', left: '20%', w: '45%', h: 1, c: 'rgba(239,68,68,0.7)' },
-                  { top: '49%', left: '8%', w: '82%', h: 3, c: 'rgba(245,245,240,0.15)' },
-                  { top: '63%', left: '30%', w: '35%', h: 1, c: 'rgba(124,58,237,0.8)' },
+                  { top: '49%', left: '8%', w: '82%', h: 3, c: 'rgb(var(--foreground-rgb) / 0.15)' },
+                  { top: '63%', left: '30%', w: '35%', h: 1, c: 'rgb(var(--accent-rgb) / 0.8)' },
                   { top: '77%', left: '12%', w: '60%', h: 2, c: 'rgba(6,182,212,0.6)' },
                   { top: '88%', left: '42%', w: '28%', h: 1, c: 'rgba(239,68,68,0.5)' },
                 ].map((bar, i) => (

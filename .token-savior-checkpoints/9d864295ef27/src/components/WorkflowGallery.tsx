@@ -168,7 +168,7 @@ function Lightbox({
             onClick={(e) => { e.stopPropagation(); setCurrent(i) }}
             aria-label={`Show ${img.label || `screenshot ${i + 1}`}`}
             aria-current={current === i}
-            className="tap-target pointer-events-auto relative overflow-hidden rounded-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="pointer-events-auto relative overflow-hidden rounded-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             style={{
               width: current === i ? 52 : 36,
               height: 28,
@@ -188,9 +188,7 @@ function Lightbox({
 
 export default function WorkflowGallery({
   images,
-  // Brand fallback (see :root in globals.css); per-project meta overrides.
-  // `accentRgb` must stay comma-separated for `rgba()` template literals.
-  accent = 'var(--accent)',
+  accent = '#7c3aed',
   accentRgb = '124,58,237',
 }: WorkflowGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)

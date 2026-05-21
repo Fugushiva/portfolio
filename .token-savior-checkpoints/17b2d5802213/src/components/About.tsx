@@ -90,7 +90,7 @@ export default function About() {
             <div
               className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
               style={{
-                background: 'linear-gradient(135deg, transparent 30%, rgb(var(--accent-rgb) / 0.08) 50%, transparent 70%)',
+                background: 'linear-gradient(135deg, transparent 30%, rgba(124,58,237,0.08) 50%, transparent 70%)',
               }}
             />
           </div>

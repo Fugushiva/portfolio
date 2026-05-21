@@ -201,14 +201,10 @@ export default function HeroSimple({ isReady }: HeroSimpleProps) {
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
-          // Atmospheric depth: violet-900 + indigo-900 wash over the canonical
-          // bg. The two halo hues (#581c87, #312e81) are creative one-offs for
-          // this specific scene, deliberately not tokenized — they sit just
-          // outside the brand triad to widen the gamut without diluting it.
           background: [
             'radial-gradient(ellipse 100% 60% at 70% 20%, rgba(88,28,135,0.12) 0%, transparent 60%)',
             'radial-gradient(ellipse 70% 70% at 20% 80%, rgba(49,46,129,0.08) 0%, transparent 60%)',
-            'linear-gradient(180deg, var(--bg) 0%, #060318 50%, var(--bg) 100%)',
+            'linear-gradient(180deg, #020208 0%, #060318 50%, #020208 100%)',
           ].join(','),
         }}
       />
@@ -229,7 +225,7 @@ export default function HeroSimple({ isReady }: HeroSimpleProps) {
           width: 'clamp(350px, 55vw, 750px)',
           height: 'clamp(350px, 55vw, 750px)',
           borderRadius: '50%',
-          background: 'radial-gradient(circle at 40% 40%, rgb(var(--accent-rgb) / 0.18) 0%, rgb(var(--accent-indigo-rgb) / 0.06) 45%, transparent 70%)',
+          background: 'radial-gradient(circle at 40% 40%, rgba(124,58,237,0.18) 0%, rgba(99,102,241,0.06) 45%, transparent 70%)',
           filter: 'blur(60px)',
           zIndex: 1,
         }}
@@ -244,9 +240,7 @@ export default function HeroSimple({ isReady }: HeroSimpleProps) {
           width: 'clamp(200px, 35vw, 500px)',
           height: 'clamp(200px, 35vw, 500px)',
           borderRadius: '50%',
-          // Deep-indigo flake (rgba(67,56,202)) is a creative atmospheric
-          // shade, sister to --accent-indigo but darker; left as hex literal.
-          background: 'radial-gradient(circle at 60% 60%, rgb(var(--accent-indigo-rgb) / 0.11) 0%, rgba(67,56,202,0.04) 55%, transparent 75%)',
+          background: 'radial-gradient(circle at 60% 60%, rgba(99,102,241,0.11) 0%, rgba(67,56,202,0.04) 55%, transparent 75%)',
           filter: 'blur(80px)',
           zIndex: 1,
         }}
@@ -385,7 +379,7 @@ export default function HeroSimple({ isReady }: HeroSimpleProps) {
       <div
         className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
         style={{
-          background: 'linear-gradient(to right, transparent, rgb(var(--accent-rgb) / 0.3), rgb(var(--accent-indigo-rgb) / 0.2), transparent)',
+          background: 'linear-gradient(to right, transparent, rgba(124,58,237,0.3), rgba(99,102,241,0.2), transparent)',
           zIndex: 10,
         }}
       />

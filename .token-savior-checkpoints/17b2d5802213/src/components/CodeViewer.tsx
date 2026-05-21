@@ -115,12 +115,7 @@ interface CodeViewerProps {
 
 export default function CodeViewer({
   files,
-  // Defaults match the brand tokens defined in src/app/globals.css :root.
-  // `accent` accepts any CSS color expression (so `var(--accent)` works);
-  // `accentRgb` must stay as a comma-separated channel string because
-  // consumers compose it inside `rgba()` template literals (no var()
-  // interpolation possible without rewriting every call site).
-  accent = 'var(--accent)',
+  accent = '#7c3aed',
   accentRgb = '124,58,237',
   maxLines = 28,
 }: CodeViewerProps) {

@@ -2,51 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ───────────────────────────────────────────────────────────────────────
-   Design tokens
-
-   Every brand color is declared TWICE: as a final color (hex) and as a
-   space-separated RGB channel list. Inline styles and SVG fills consume
-   the hex form (`var(--accent)`); Tailwind utilities and any alpha-aware
-   surface use the channel form via `rgb(var(--accent-rgb) / <alpha>)`.
-
-   Tailwind 3 reads the channel form through `<alpha-value>` in
-   tailwind.config.ts, which is what makes `bg-accent/40`, `text-muted/60`,
-   `border-foreground/20`, etc. compile to the right rgb() expressions.
-
-   This is the only place brand colors are authored. Future palette shifts
-   (live-mode color-amount param, seasonal accents, A/B tests) flip here.
-   ─────────────────────────────────────────────────────────────────────── */
-:root {
-  /* Brand purple — the load-bearing identity color. */
-  --accent: #7c3aed;
-  --accent-rgb: 124 58 237;
-  --accent-light: #a78bfa;
-  --accent-light-rgb: 167 139 250;
-  --accent-dark: #5b21b6;
-  --accent-soft: #c4b5fd;
-  /* Secondary indigo used in hero gradients to widen the gamut without
-     drifting off-brand. */
-  --accent-indigo: #6366f1;
-  --accent-indigo-rgb: 99 102 241;
-
-  /* Surfaces — dark cinematic baseline, very subtly violet-tinted. */
-  --bg: #020208;
-  --bg-rgb: 2 2 8;
-  --surface: #0d0d18;
-  --surface-2: #161628;
-
-  /* Text */
-  --foreground: #f5f5f0;
-  --foreground-rgb: 245 245 240;
-  --muted: #8c8c8c;
-  --border: #222222;
-
-  /* Status — only used by the availability dot in the nav. */
-  --status-online: #22c55e;
-  --status-away: #f59e0b;
-}
-
 /* ─── Custom cursor ───────────────────────────────────────────────────────
    `cursor: none` on `*` triggers a recalc on every element. Setting it on
    <html> covers the whole page just as well and is way cheaper.
@@ -63,17 +18,17 @@
   width: 3px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg);
+  background: #020208;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: #7c3aed;
   border-radius: 999px;
 }
 
 /* ─── Selection ─── */
 ::selection {
-  background: var(--accent);
-  color: var(--foreground);
+  background: #7c3aed;
+  color: #f5f5f0;
 }
 
 /* ─── Touch hit-area utility ────────────────────────────────────────────
@@ -102,8 +57,8 @@
 
 /* ─── Base ─── */
 html {
-  background: var(--bg);
-  color: var(--foreground);
+  background: #020208;
+  color: #f5f5f0;
   /* Smooth scroll handled by Lenis when JS is ready; native fallback only */
   scroll-behavior: auto;
   /* Lenis recommended baseline is actually auto, not 100% */
@@ -111,8 +66,8 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--foreground);
+  background: #020208;
+  color: #f5f5f0;
   overflow-x: hidden;
   /* iOS bounce control + smoother momentum on trackpads */
   overscroll-behavior-y: none;

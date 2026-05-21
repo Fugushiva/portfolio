@@ -296,7 +296,7 @@ function ProjectCard({
                   type="button"
                   onClick={handleBadgeClick('assets')}
                   aria-label={`Open ${project.title} assets`}
-                  className="tap-target font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none pointer-events-auto hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)]"
+                  className="font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none pointer-events-auto hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)]"
                   style={{
                     color: accent,
                     borderColor: `${accent}50`,
@@ -322,7 +322,7 @@ function ProjectCard({
                   type="button"
                   onClick={handleBadgeClick('code')}
                   aria-label={`Open ${project.title} source code`}
-                  className="tap-target font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none pointer-events-auto hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)]"
+                  className="font-mono text-[0.6rem] uppercase tracking-widest flex items-center gap-1.5 px-2 py-0.5 rounded-full border transition-all duration-200 cursor-pointer select-none pointer-events-auto hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--project-accent)]"
                   style={{
                     color: accent,
                     borderColor: `${accent}50`,
@@ -457,7 +457,7 @@ function ProjectCard({
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-10">
                       {/* Left: description + architecture */}
                       <div className="lg:col-span-3 space-y-6">
-                        <p className="text-muted text-[0.95rem] xl:text-base 2xl:text-lg leading-relaxed max-w-prose">
+                        <p className="text-muted text-[0.95rem] leading-relaxed">
                           {project.description}
                         </p>
 
@@ -630,7 +630,7 @@ export default function Work() {
     <section
       id="work"
       ref={containerRef}
-      className="section-pad px-6 md:px-12 lg:px-20 xl:px-24 2xl:px-32 relative"
+      className="section-pad px-6 md:px-12 lg:px-20 relative"
     >
       {/* Section label */}
       <div className="flex items-center gap-4 mb-16 md:mb-20" data-reveal>

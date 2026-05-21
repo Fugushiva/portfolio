@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useId, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { m, AnimatePresence } from 'framer-motion'
 
@@ -32,8 +32,6 @@ function Lightbox({
   accent: string
 }) {
   const [current, setCurrent] = useState(startIndex)
-  const closeRef = useRef<HTMLButtonElement>(null)
-  const titleId = useId()
 
   const prev = useCallback(() => setCurrent((c) => (c - 1 + images.length) % images.length), [images.length])
   const next = useCallback(() => setCurrent((c) => (c + 1) % images.length), [images.length])
@@ -48,10 +46,9 @@ function Lightbox({
     return () => window.removeEventListener('keydown', handler)
   }, [onClose, prev, next])
 
-  // Lock scroll + move focus into the dialog for SR users.
+  // Lock scroll
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    closeRef.current?.focus()
     return () => { document.body.style.overflow = '' }
   }, [])
 
@@ -66,20 +63,11 @@ function Lightbox({
       className="fixed inset-0 z-[200] flex flex-col items-center justify-center"
       style={{ background: 'rgba(0,0,0,0.93)', backdropFilter: 'blur(8px)' }}
       onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={titleId}
     >
-      {/* SR-only dialog title — pinned to current image for context */}
-      <span id={titleId} className="sr-only">
-        {`${img.label || 'Workflow screenshot'}, ${current + 1} of ${images.length}`}
-      </span>
       {/* Close */}
       <button
-        ref={closeRef}
-        type="button"
         onClick={onClose}
-        className="absolute top-6 right-6 w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+        className="absolute top-6 right-6 w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200 z-10"
         aria-label="Close"
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -132,43 +120,40 @@ function Lightbox({
         )}
       </m.div>
 
-      {/* Nav arrows — stopPropagation lives on the buttons themselves so the
-          backdrop's onClose doesn't fire when arrows are clicked. */}
-      <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+      {/* Nav arrows */}
+      <div className="absolute inset-y-0 left-4 flex items-center" onClick={(e) => e.stopPropagation()}>
         <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); prev() }}
-          className="pointer-events-auto w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          onClick={prev}
+          className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200"
           aria-label="Previous"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>
-      <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+      <div className="absolute inset-y-0 right-4 flex items-center" onClick={(e) => e.stopPropagation()}>
         <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); next() }}
-          className="pointer-events-auto w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          onClick={next}
+          className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200"
           aria-label="Next"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>
 
-      {/* Thumbnail strip — same pointer-events approach */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 items-center pointer-events-none">
+      {/* Thumbnail strip */}
+      <div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 items-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         {images.map((img, i) => (
           <button
             key={i}
-            type="button"
-            onClick={(e) => { e.stopPropagation(); setCurrent(i) }}
-            aria-label={`Show ${img.label || `screenshot ${i + 1}`}`}
-            aria-current={current === i}
-            className="tap-target pointer-events-auto relative overflow-hidden rounded-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            onClick={() => setCurrent(i)}
+            className="relative overflow-hidden rounded-lg transition-all duration-300"
             style={{
               width: current === i ? 52 : 36,
               height: 28,
@@ -176,7 +161,7 @@ function Lightbox({
               outline: current === i ? `1.5px solid ${accent}` : 'none',
             }}
           >
-            <Image src={img.src} alt="" fill className="object-cover" sizes="60px" quality={50} />
+            <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="60px" quality={50} />
           </button>
         ))}
       </div>
@@ -188,9 +173,7 @@ function Lightbox({
 
 export default function WorkflowGallery({
   images,
-  // Brand fallback (see :root in globals.css); per-project meta overrides.
-  // `accentRgb` must stay comma-separated for `rgba()` template literals.
-  accent = 'var(--accent)',
+  accent = '#7c3aed',
   accentRgb = '124,58,237',
 }: WorkflowGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
@@ -205,18 +188,16 @@ export default function WorkflowGallery({
     <>
       <div ref={containerRef} className="space-y-3">
         {/* ── Hero image (full workflow) ── */}
-        <m.button
-          type="button"
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.7, ease: [0.19, 1, 0.22, 1] }}
-          className="relative group cursor-pointer overflow-hidden rounded-2xl border border-border/40 block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+          className="relative group cursor-pointer overflow-hidden rounded-2xl border border-border/40"
           style={{ aspectRatio: '16/6' }}
           onClick={() => setLightboxIndex(0)}
           onMouseEnter={() => setHoveredIndex(0)}
           onMouseLeave={() => setHoveredIndex(null)}
-          aria-label={`Open ${heroImage.label || 'workflow overview'}`}
         >
           <Image
             src={heroImage.src}
@@ -259,31 +240,29 @@ export default function WorkflowGallery({
                 transform: hoveredIndex === 0 ? 'scale(1.1)' : 'scale(1)',
               }}
             >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M1.5 1.5h9v9M1.5 10.5l9-9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           </div>
-        </m.button>
+        </m.div>
 
         {/* ── Grid images ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {gridImages.map((img, i) => {
             const absIdx = i + 1
             return (
-              <m.button
+              <m.div
                 key={absIdx}
-                type="button"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-20px' }}
                 transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1], delay: i * 0.06 }}
-                className="relative group cursor-pointer overflow-hidden rounded-xl border border-border/40 block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                className="relative group cursor-pointer overflow-hidden rounded-xl border border-border/40"
                 style={{ aspectRatio: '4/3' }}
                 onClick={() => setLightboxIndex(absIdx)}
                 onMouseEnter={() => setHoveredIndex(absIdx)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                aria-label={`Open ${img.label || `screenshot ${absIdx}`}`}
               >
                 <Image
                   src={img.src}
@@ -324,13 +303,12 @@ export default function WorkflowGallery({
                     opacity: hoveredIndex === absIdx ? 1 : 0,
                     transform: hoveredIndex === absIdx ? 'scale(1)' : 'scale(0.7)',
                   }}
-                  aria-hidden="true"
                 >
                   <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
                     <path d="M1 1h7v7M1 8l7-7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-              </m.button>
+              </m.div>
             )
           })}
         </div>

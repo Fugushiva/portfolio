@@ -5,23 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // All brand colors source from CSS variables defined in
-        // src/app/globals.css :root. Channel-form vars (e.g. --accent-rgb)
-        // power the <alpha-value> syntax so utilities like `bg-accent/40`,
-        // `text-muted/60`, `border-foreground/20` compose alpha correctly.
-        bg: 'rgb(var(--bg-rgb) / <alpha-value>)',
-        surface: 'var(--surface)',
-        'surface-2': 'var(--surface-2)',
-        accent: 'rgb(var(--accent-rgb) / <alpha-value>)',
-        'accent-light': 'rgb(var(--accent-light-rgb) / <alpha-value>)',
-        'accent-dark': 'var(--accent-dark)',
-        'accent-soft': 'var(--accent-soft)',
-        'accent-indigo': 'rgb(var(--accent-indigo-rgb) / <alpha-value>)',
-        foreground: 'rgb(var(--foreground-rgb) / <alpha-value>)',
-        muted: 'var(--muted)',
-        border: 'var(--border)',
-        'status-online': 'var(--status-online)',
-        'status-away': 'var(--status-away)',
+        bg: '#020208',
+        surface: '#0d0d18',
+        'surface-2': '#161628',
+        accent: '#7c3aed',
+        'accent-light': '#a78bfa',
+        'accent-dark': '#5b21b6',
+        foreground: '#f5f5f0',
+        muted: '#8c8c8c',
+        border: '#222222',
       },
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],

@@ -256,32 +256,17 @@ export default function HeroName({ isReady }: HeroNameProps) {
   return (
     <h1
       className="hero-name-h1 mb-2 font-black leading-none tracking-tighter text-foreground"
-      // Clamp ceiling lifted from 8rem to 11rem so the name keeps growing on
-      // widescreen (≥1920px) instead of stalling at 128px. The 9vw middle term
-      // is unchanged, so behavior below 1422px is identical.
-      style={{ fontSize: 'clamp(3rem, 9vw, 11rem)' }}
+      style={{ fontSize: 'clamp(3rem, 9vw, 8rem)' }}
       aria-label={`${FIRST_NAME} ${LAST_NAME}`}
     >
-      {/*
-        Accessible name is provided by the parent <h1 aria-label>. All visible
-        spans below are decorative (split-text gradient + scramble effect), so
-        each overlay span carries aria-hidden="true". This stops AT from reading
-        the same name twice as fragments, and replaces the previous (invalid)
-        role="text" workaround.
-
-        The onMouseEnter handlers below are intentional decorative hover triggers
-        on aria-hidden subtrees: they re-run the scramble for sighted users only.
-        They have no keyboard equivalent because keyboard users do not need a
-        decorative animation. Lint disable scoped per-line and documented.
-      */}
       {/* ── First name slot — gradient ── */}
-      <span className="hero-name-slot" aria-hidden="true">
-        <span className="hero-name-spacer">{FIRST_NAME}</span>
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- decorative hover on aria-hidden span; sighted-only easter egg */}
+      <span className="hero-name-slot">
+        <span className="hero-name-spacer" aria-hidden="true">{FIRST_NAME}</span>
         <span
           className="hero-name-gradient hero-name-overlay"
           ref={jeromeRef}
           onMouseEnter={handleJeromeHover}
+          role="text"
         >
           {phase === 'scramble' ? '' : FIRST_NAME}
         </span>
@@ -290,13 +275,13 @@ export default function HeroName({ isReady }: HeroNameProps) {
       <span className="hero-name-space" aria-hidden="true">&nbsp;</span>
 
       {/* ── Last name slot — plain white ── */}
-      <span className="hero-name-slot" aria-hidden="true">
-        <span className="hero-name-spacer">{LAST_NAME}</span>
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- decorative hover on aria-hidden span; sighted-only easter egg */}
+      <span className="hero-name-slot">
+        <span className="hero-name-spacer" aria-hidden="true">{LAST_NAME}</span>
         <span
           className="hero-name-plain hero-name-overlay"
           ref={delodderRef}
           onMouseEnter={handleDelodderHover}
+          role="text"
         >
           {phase === 'scramble' ? '' : LAST_NAME}
         </span>

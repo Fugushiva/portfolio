@@ -176,10 +176,7 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  // Sync with --bg in globals.css :root. Mobile browser chrome (Safari address
-// bar, Chrome status bar) now tints to exactly the page background, removing
-// the visible seam that #0a0a0a used to create on iOS.
-themeColor: '#020208',
+  themeColor: '#0a0a0a',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,

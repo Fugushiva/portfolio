@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
           className="mb-16 h-px w-full"
           style={{
             background:
-              'linear-gradient(to right, rgb(var(--accent-rgb) / 0.4), rgb(var(--accent-indigo-rgb) / 0.2), transparent)',
+              'linear-gradient(to right, rgba(124,58,237,0.4), rgba(99,102,241,0.2), transparent)',
           }}
         />
 
@@ -119,7 +119,7 @@ export default function PrivacyPolicy() {
           className="mt-20 mb-10 h-px w-full"
           style={{
             background:
-              'linear-gradient(to right, rgb(var(--accent-rgb) / 0.4), rgb(var(--accent-indigo-rgb) / 0.2), transparent)',
+              'linear-gradient(to right, rgba(124,58,237,0.4), rgba(99,102,241,0.2), transparent)',
           }}
         />
 

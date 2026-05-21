@@ -47,7 +47,7 @@ export default function ContactSuccess({ onReset }: ContactSuccessProps) {
         >
           <m.polyline
             points="6,14 11,19 22,9"
-            stroke="var(--accent)"
+            stroke="#7c3aed"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"

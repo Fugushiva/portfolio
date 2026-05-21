@@ -147,7 +147,7 @@ export default function Stack() {
       ref={containerRef}
       className="section-pad relative overflow-hidden"
     >
-      <div className="px-6 md:px-12 lg:px-20 xl:px-24 2xl:px-32">
+      <div className="px-6 md:px-12 lg:px-20">
         {/* Section label */}
         <div className="flex items-center gap-4 mb-16 md:mb-20" data-reveal>
           <span className="font-mono text-xs text-accent tracking-widest uppercase">{t('section')}</span>

@@ -148,7 +148,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             <m.div
               className="absolute -bottom-2 left-0 right-0 h-px origin-left"
               style={{
-                background: 'linear-gradient(90deg, var(--accent), var(--accent-light), transparent)',
+                background: 'linear-gradient(90deg, #7c3aed, #a78bfa, transparent)',
               }}
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -211,7 +211,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             style={{
               width: '70vw',
               height: '70vw',
-              background: 'radial-gradient(circle, rgb(var(--accent-rgb) / 0.12) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)',
               filter: 'blur(40px)',
             }}
             initial={{ scale: 0.5, opacity: 0 }}

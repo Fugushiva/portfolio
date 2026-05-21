@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useId, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { m, AnimatePresence } from 'framer-motion'
 
@@ -71,8 +71,7 @@ function ContentCard({
       : '1/1'
 
   return (
-    <m.button
-      type="button"
+    <m.div
       initial={{ opacity: 0, y: 24, scale: 0.97 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-20px' }}
@@ -81,12 +80,11 @@ function ContentCard({
         ease: [0.19, 1, 0.22, 1],
         delay: (index % 5) * 0.07,
       }}
-      className="relative group cursor-pointer overflow-hidden rounded-2xl border border-border/30 block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+      className="relative group cursor-pointer overflow-hidden rounded-2xl border border-border/30"
       style={{ aspectRatio, background: '#0d0d0d' }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      aria-label={`Open preview: ${piece.platform} ${piece.format}`}
     >
       {/* Image — quality 70 is plenty for thumbnails; saves ~30% per file */}
       <Image
@@ -163,12 +161,12 @@ function ContentCard({
             color: accent,
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M1.5 1.5h11v11M1.5 12.5l11-11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       </div>
-    </m.button>
+    </m.div>
   )
 }
 
@@ -178,39 +176,21 @@ function ContentLightbox({
   pieces,
   startIndex,
   onClose,
+  accent,
 }: {
   pieces: ContentPiece[]
   startIndex: number
   onClose: () => void
+  accent: string
 }) {
   const [current, setCurrent] = useState(startIndex)
-  const closeRef = useRef<HTMLButtonElement>(null)
-  const titleId = useId()
 
-  const prev = useCallback(
-    () => setCurrent((c) => (c - 1 + pieces.length) % pieces.length),
-    [pieces.length]
-  )
-  const next = useCallback(
-    () => setCurrent((c) => (c + 1) % pieces.length),
-    [pieces.length]
-  )
+  const prev = () => setCurrent((c) => (c - 1 + pieces.length) % pieces.length)
+  const next = () => setCurrent((c) => (c + 1) % pieces.length)
 
-  // Keyboard: Escape closes, arrows navigate. Matches WorkflowGallery contract.
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-      else if (e.key === 'ArrowLeft') prev()
-      else if (e.key === 'ArrowRight') next()
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [onClose, prev, next])
-
-  // Lock scroll + move focus into the dialog so SR users hear the new context.
+  // Lock scroll
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    closeRef.current?.focus()
     return () => { document.body.style.overflow = '' }
   }, [])
 
@@ -229,33 +209,19 @@ function ContentLightbox({
       className="fixed inset-0 z-[200] flex flex-col items-center justify-center"
       style={{ background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(12px)' }}
       onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={titleId}
     >
-      {/* SR-only dialog title — pinned to current piece so AT users get context */}
-      <span id={titleId} className="sr-only">
-        {`${piece.platform} ${piece.format} preview, ${current + 1} of ${pieces.length}`}
-      </span>
-
       {/* Close */}
       <button
-        ref={closeRef}
-        type="button"
         onClick={onClose}
-        aria-label="Close preview"
-        className="absolute top-6 right-6 w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+        className="absolute top-6 right-6 w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground transition-all duration-200 z-10"
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       </button>
 
       {/* Counter */}
-      <div
-        className="absolute top-6 left-1/2 -translate-x-1/2 font-mono text-xs text-muted/60"
-        aria-hidden="true"
-      >
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 font-mono text-xs text-muted/60">
         {current + 1} / {pieces.length}
       </div>
 
@@ -316,28 +282,23 @@ function ContentLightbox({
         </div>
       </m.div>
 
-      {/* Nav arrows — stopPropagation is on the buttons themselves to prevent the
-          backdrop's onClose from firing when the arrow is clicked. */}
-      <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+      {/* Nav arrows */}
+      <div className="absolute inset-y-0 left-4 flex items-center" onClick={(e) => e.stopPropagation()}>
         <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); prev() }}
-          aria-label="Previous preview"
-          className="pointer-events-auto w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          onClick={prev}
+          className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground transition-all duration-200"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>
-      <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+      <div className="absolute inset-y-0 right-4 flex items-center" onClick={(e) => e.stopPropagation()}>
         <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); next() }}
-          aria-label="Next preview"
-          className="pointer-events-auto w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground hover:border-foreground transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          onClick={next}
+          className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted hover:text-foreground transition-all duration-200"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
@@ -372,7 +333,7 @@ export default function ContentGrid({
       </div>
 
       {/* Masonry-style grid using CSS columns */}
-      <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 2xl:columns-6 gap-3 space-y-3">
+      <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
         {visiblePieces.map((piece, i) => (
           <div key={i} className="break-inside-avoid mb-3">
             <ContentCard
@@ -413,6 +374,7 @@ export default function ContentGrid({
             pieces={visiblePieces}
             startIndex={lightboxIndex}
             onClose={() => setLightboxIndex(null)}
+            accent={accent}
           />
         )}
       </AnimatePresence>

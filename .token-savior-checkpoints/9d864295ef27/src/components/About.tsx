@@ -45,7 +45,7 @@ export default function About() {
     <section
       id="about"
       ref={containerRef}
-      className="section-pad px-6 md:px-12 lg:px-20 xl:px-24 2xl:px-32 relative"
+      className="section-pad px-6 md:px-12 lg:px-20 relative"
     >
       {/* Section label */}
       <div className="flex items-center gap-4 mb-16 md:mb-20" data-reveal>
@@ -90,7 +90,7 @@ export default function About() {
             <div
               className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
               style={{
-                background: 'linear-gradient(135deg, transparent 30%, rgb(var(--accent-rgb) / 0.08) 50%, transparent 70%)',
+                background: 'linear-gradient(135deg, transparent 30%, rgba(124,58,237,0.08) 50%, transparent 70%)',
               }}
             />
           </div>
@@ -110,11 +110,11 @@ export default function About() {
             {t('headline')}
           </h2>
 
-          <p data-reveal-text className="text-muted text-base md:text-lg xl:text-[1.15rem] 2xl:text-xl leading-relaxed mb-6 max-w-prose">
+          <p data-reveal-text className="text-muted text-base md:text-lg leading-relaxed mb-6">
             {t('p1')}
           </p>
 
-          <p data-reveal-text className="text-muted text-base md:text-lg xl:text-[1.15rem] 2xl:text-xl leading-relaxed max-w-prose">
+          <p data-reveal-text className="text-muted text-base md:text-lg leading-relaxed">
             {t('p2')}
           </p>
 

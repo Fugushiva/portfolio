@@ -24,11 +24,10 @@ export default function LangSwitcher() {
 
   return (
     <button
-      type="button"
       onClick={switchLocale}
-      aria-label={`${activeLabel}, switch to ${otherLabel}`}
+      aria-label={`${activeLabel} — Switch to ${otherLabel}`}
       data-magnetic
-      className="tap-target magnetic-wrap relative overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+      className="magnetic-wrap relative overflow-hidden group"
       style={{ height: '1.2em', width: '2.4ch' }}
     >
       {/* Track — slides on hover */}

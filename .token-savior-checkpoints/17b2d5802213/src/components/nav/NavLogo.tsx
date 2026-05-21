@@ -41,8 +41,8 @@ export function NavLogo({ onNavigate }: NavLogoProps) {
       >
         <defs>
           <linearGradient id="nav-ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stopColor="var(--accent)" />
-              <stop offset="100%" stopColor="var(--accent-light)" />
+            <stop offset="0%"   stopColor="#7c3aed" />
+            <stop offset="100%" stopColor="#a78bfa" />
           </linearGradient>
         </defs>
 

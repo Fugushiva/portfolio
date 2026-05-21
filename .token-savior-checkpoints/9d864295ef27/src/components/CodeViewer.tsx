@@ -115,12 +115,7 @@ interface CodeViewerProps {
 
 export default function CodeViewer({
   files,
-  // Defaults match the brand tokens defined in src/app/globals.css :root.
-  // `accent` accepts any CSS color expression (so `var(--accent)` works);
-  // `accentRgb` must stay as a comma-separated channel string because
-  // consumers compose it inside `rgba()` template literals (no var()
-  // interpolation possible without rewriting every call site).
-  accent = 'var(--accent)',
+  accent = '#7c3aed',
   accentRgb = '124,58,237',
   maxLines = 28,
 }: CodeViewerProps) {
@@ -196,7 +191,7 @@ export default function CodeViewer({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActiveTab(i)}
                 onKeyDown={handleTabKeyDown}
-                className="tap-target relative px-3 py-1.5 text-[0.68rem] transition-colors duration-200 whitespace-nowrap rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="relative px-3 py-1.5 text-[0.68rem] transition-colors duration-200 whitespace-nowrap rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 style={{
                   color: selected ? accent : '#6b6b6b',
                   background: selected ? `rgba(${accentRgb},0.1)` : 'transparent',

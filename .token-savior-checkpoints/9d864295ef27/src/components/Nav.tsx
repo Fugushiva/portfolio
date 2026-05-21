@@ -325,7 +325,7 @@ export default function Nav({ isReady }: NavProps) {
               <button
                 type="button"
                 onClick={openPalette}
-                className="tap-target hidden md:flex items-center gap-1.5 font-mono text-xs text-muted/60 border border-border/40 rounded-md px-2.5 py-1.5 hover:text-muted hover:border-border transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="hidden md:flex items-center gap-1.5 font-mono text-xs text-muted/60 border border-border/40 rounded-md px-2 py-1 hover:text-muted hover:border-border transition-colors duration-200"
                 aria-label="Ouvrir la command palette (⌘K)"
                 title="⌘K"
               >
