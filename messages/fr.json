@@ -46,6 +46,21 @@
     "cta_case": "Case study",
     "projects": [
       {
+        "title": "Veille Podcasts Spotify",
+        "category": "Automation IA",
+        "year": "2026",
+        "client": "Projet personnel",
+        "headline": "19 podcasts → des notes en français chaque jour, sans rien écouter.",
+        "description": "Un pipeline n8n quotidien qui écoute les podcasts à ma place. Chaque nuit, il interroge 19 flux RSS, repère les nouveaux épisodes et fait passer chacun par transcription puis synthèse. L'audio est téléchargé, compressé avec ffmpeg en mono 16kHz/32kbps (pour passer sous la limite des 25 Mo de Groq), puis transcrit par Groq Whisper — qui détecte aussi la langue. Les épisodes non francophones sont traduits automatiquement avant que Gemini produise un résumé strictement factuel en français (résumé, points clés, citations notables). Chaque résultat devient une note Obsidian autonome, tracée dans Supabase pour la déduplication, et un récap Telegram clôt chaque run. Pensé pour la robustesse : retry dynamique sur le rate-limit Groq, skip des fichiers trop gros, et gestion d'erreur par épisode qui ne fait jamais planter le batch.",
+        "architecture": "Cron quotidien · Filtre RSS 24h · Compression ffmpeg · Groq Whisper · Synthèse Gemini · Dedup Supabase · Récap Telegram",
+        "metrics": [
+          { "value": "19", "label": "podcasts surveillés" },
+          { "value": "0", "label": "minute d'écoute manuelle" },
+          { "value": "100%", "label": "notes en français, toute source" },
+          { "value": "24/7", "label": "pipeline cron autonome" }
+        ]
+      },
+      {
         "title": "JobNomad",
         "category": "SaaS / Job Board",
         "year": "2026",

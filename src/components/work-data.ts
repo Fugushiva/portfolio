@@ -203,6 +203,202 @@ return [{ json: { touchpoints: processedTouchpoints } }];`,
   },
 ]
 
+// ─── Spotify Podcast Veille Automation ───────────────────────────────────────
+// Daily n8n pipeline (workflow T1GfBPerstKKRB6G): 19 podcast RSS feeds →
+// transcription (Groq Whisper) → French summary (Gemini) → Obsidian note.
+// Sanitized: no credentials, paths kept (non-sensitive infra layout).
+
+export const SPOTIFY_IMAGES: WorkflowImage[] = [
+  {
+    src: '/projects/spotify-veille/full-workflow.png',
+    alt: 'Full n8n Spotify podcast veille workflow',
+    label: 'Full pipeline overview',
+    description: 'Daily cron → 19 RSS feeds → compress → transcribe → summarize → Obsidian note → Telegram recap',
+    wide: true,
+  },
+  {
+    src: '/projects/spotify-veille/workflow-rss-filter.png',
+    alt: 'RSS fetch and 24h / duration filtering',
+    label: 'Stage 1 — RSS & filter',
+    description: 'Fetch each RSS feed, keep episodes from the last 24h, skip anything over 2h (Groq size ceiling)',
+  },
+  {
+    src: '/projects/spotify-veille/workflow-compress-transcribe.png',
+    alt: 'Download, ffmpeg compression and Groq transcription',
+    label: 'Stage 2 — Compress & transcribe',
+    description: 'HTTP download → ffmpeg mono 16kHz/32kbps → Groq Whisper (verbose_json returns the detected language)',
+  },
+  {
+    src: '/projects/spotify-veille/workflow-summarize-note.png',
+    alt: 'Language detection, translation, Gemini summary and note rendering',
+    label: 'Stage 3 — Summarize & write',
+    description: 'Detect language → translate to French if needed → Gemini summary → structured Markdown note in the vault',
+  },
+  {
+    src: '/projects/spotify-veille/workflow-error-handling.png',
+    alt: 'Groq retry loop and error handlers',
+    label: 'Resilience — retry & errors',
+    description: 'Groq 429 rate-limit retry (dynamic wait, max 3) + download/summarize error handlers that never crash the batch',
+  },
+  {
+    src: '/projects/spotify-veille/output-note-example.png',
+    alt: 'Example of a generated Obsidian note',
+    label: 'Output — generated note',
+    description: 'Real generated note: frontmatter + Résumé + Points clés + Citations notables, fully in French',
+  },
+]
+
+export const SPOTIFY_CODE_FILES: CodeFile[] = [
+  {
+    filename: 'parse-filter.js',
+    language: 'js',
+    description:
+      'Episode filter — keeps only episodes published in the last 24h and extracts the duration from itunes:duration. Episodes over 1h59:59 are skipped (Groq Whisper size + audio-seconds-per-hour ceiling).',
+    content: `// NODE: Parse Filter (Code)
+// Reads the raw RSS XML, keeps fresh episodes, extracts duration.
+// Input fallback: n8n may expose the body as .data or .rss_xml.
+
+const rssXml = $input.item.json.data || $input.item.json.rss_xml || '';
+const rssUrl = $input.item.json.rss_url || '';
+const podcastTitle = $input.item.json.podcast_title || '';
+
+// Cutoff = now - 24h
+const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+const MAX_DURATION = 7199; // 1h59:59 — Groq ceiling
+
+// Parse an itunes:duration value ("3600" or "1:02:33") into seconds.
+function toSeconds(raw) {
+  if (!raw) return 0;
+  if (/^\\d+$/.test(raw)) return parseInt(raw, 10);
+  const parts = raw.split(':').map((n) => parseInt(n, 10) || 0);
+  return parts.reduce((acc, n) => acc * 60 + n, 0);
+}
+
+// Grab the first <item> (latest episode) only — 1 per podcast per run.
+const itemMatch = rssXml.match(/<item[\\s\\S]*?<\\/item>/i);
+if (!itemMatch) return []; // nothing to process
+
+const item = itemMatch[0];
+const pick = (tag) => {
+  const m = item.match(new RegExp('<' + tag + '[^>]*>([\\\\s\\\\S]*?)<\\\\/' + tag + '>', 'i'));
+  return m ? m[1].replace(/<!\\[CDATA\\[|\\]\\]>/g, '').trim() : '';
+};
+
+const episodeTitle = pick('title');
+const pubDate = pick('pubDate');
+const duration = toSeconds(pick('itunes:duration'));
+
+// Enclosure URL = the actual MP3 (dedup key downstream).
+const enc = item.match(/<enclosure[^>]*url=["']([^"']+)["']/i);
+const episodeUrl = enc ? enc[1] : '';
+
+// Drop stale, too-long, or malformed episodes.
+const publishedMs = Date.parse(pubDate);
+if (!episodeUrl) return [];
+if (Number.isFinite(publishedMs) && publishedMs < cutoff) return [];
+if (duration > MAX_DURATION) return [];
+
+return [{
+  json: {
+    podcast_title: podcastTitle,
+    rss_feed_url: rssUrl,
+    episode_title: episodeTitle,
+    episode_url: episodeUrl,
+    published_at: pubDate,
+    duration_seconds: duration,
+  },
+}];`,
+  },
+  {
+    filename: 'calc-retry-wait.js',
+    language: 'js',
+    description:
+      'Groq error handler on the transcription branch. Parses the "try again in Xs" message to wait exactly the right amount on a 429 rate-limit, caps retries at 3, and skips immediately on a 413 (file too large even after compression).',
+    content: `// NODE: Calc Retry Wait (Code) — Groq transcription error branch
+// 429 = ASPH rate limit (7200 audio-seconds/hour on free tier).
+// 413 = payload too large even after compression → skip, no retry.
+
+const j = $input.item.json;
+const err = j.error?.message || j.message || JSON.stringify(j);
+
+// 413 → abandon this episode immediately, let the batch continue.
+if (j.statusCode === 413 || /request entity too large|payload too large/i.test(err)) {
+  throw new Error('Groq 413: file too large after compression, skip');
+}
+
+// Default wait, overridden by the precise delay Groq returns.
+let seconds = 60;
+const m = err.match(/try again in\\s+(?:(\\d+)m)?([\\d.]+)s/i);
+if (m) {
+  const mins = parseInt(m[1] || '0', 10);
+  const secs = parseFloat(m[2] || '0');
+  seconds = Math.ceil(mins * 60 + secs) + 3; // small safety margin
+}
+
+// Anti-infinite-loop: bail after 3 tries.
+const tries = (j._retry_count || 0) + 1;
+if (tries > 3) {
+  throw new Error('Groq rate limit: giving up after 3 retries');
+}
+
+// NOTE: do NOT pass the binary here. In binaryDataMode=filesystem the
+// reference is lost on retry — the loop re-reads small.mp3 from disk instead.
+return [{ json: { ...j, wait_seconds: seconds, _retry_count: tries } }];`,
+  },
+  {
+    filename: 'render-note.js',
+    language: 'js',
+    description:
+      'Builds the final Obsidian note: YAML frontmatter (date, podcast, tags, URLs) plus the Gemini summary body. Returns an absolute vault path used by both the file writer and the Supabase upsert.',
+    content: `// NODE: Render Note (Code)
+// chainLlm output lives on $json.output (not .text).
+// note_path is absolute — the vault dir is bind-mounted into the container.
+
+const summary = $json.output || '(summary unavailable)';
+const title = $('Parse Filter').item.json.episode_title || 'Untitled episode';
+const podcast = $('Parse Filter').item.json.podcast_title || '';
+const pubDate = $('Parse Filter').item.json.published_at || '';
+const epUrl = $('Parse Filter').item.json.episode_url || '';
+const rssFeed = $('Parse Filter').item.json.rss_feed_url || '';
+
+// Slugify the title for the filename.
+const slug = title.toLowerCase()
+  .replace(/[^a-z0-9\\s-]/g, '')
+  .trim()
+  .replace(/\\s+/g, '-')
+  .substring(0, 60);
+
+const today = new Date().toISOString().split('T')[0];
+const notePath = '/opt/vault/veille/spotify/' + today + '-' + slug + '.md';
+
+const content = \`---
+created: \${today}
+status: ok
+tags: [veille/spotify, podcast/résumé]
+podcast: "\${podcast}"
+published_at: "\${pubDate}"
+episode_url: "\${epUrl}"
+rss_feed_url: "\${rssFeed}"
+---
+# \${title}
+
+\${summary}
+\`;
+
+return {
+  json: {
+    note_content: content,
+    note_path: notePath,
+    episode_url: epUrl,
+    rss_feed_url: rssFeed,
+    podcast_title: podcast,
+    episode_title: title,
+    published_at: pubDate,
+  },
+};`,
+  },
+]
+
 // ─── Instagram Comment-to-DM Automation ──────────────────────────────────────
 // Sanitized: webhookIds, documentIds, credentials.id, workflowIds, pinData
 // and instanceIds removed. Replaced by self-explanatory placeholders.
@@ -454,6 +650,17 @@ export interface ProjectMeta {
 }
 
 export const PROJECT_META: ProjectMeta[] = [
+  {
+    index: '00',
+    accent: '#1db954',
+    accentRgb: '29,185,84',
+    stack: ['n8n', 'Groq Whisper', 'Gemini', 'ffmpeg', 'Supabase Postgres', 'Telegram', 'Docker'],
+    category_icon: '🎙️',
+    hasGallery: true,
+    galleryType: 'workflow',
+    images: SPOTIFY_IMAGES,
+    codeFiles: SPOTIFY_CODE_FILES,
+  },
   {
     index: '01',
     accent: '#10b981',
