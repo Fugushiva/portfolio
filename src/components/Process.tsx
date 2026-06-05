@@ -7,12 +7,12 @@ import { useTranslations } from 'next-intl'
 
 const STEP_ICONS = [
   (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <svg key="step-clock" width="20" height="20" viewBox="0 0 20 20" fill="none">
       <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM10 6v4l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   ),
   (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <svg key="step-grid" width="20" height="20" viewBox="0 0 20 20" fill="none">
       <rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.5"/>
       <rect x="11" y="2" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.5"/>
       <rect x="2" y="11" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.5"/>
@@ -20,12 +20,12 @@ const STEP_ICONS = [
     </svg>
   ),
   (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <svg key="step-check" width="20" height="20" viewBox="0 0 20 20" fill="none">
       <polyline points="4,10 8,14 16,6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <svg key="step-star" width="20" height="20" viewBox="0 0 20 20" fill="none">
       <path d="M10 2l2 6h6l-5 3.6 2 6L10 14l-5 3.6 2-6L2 8h6L10 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
     </svg>
   ),
