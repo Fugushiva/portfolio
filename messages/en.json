@@ -46,6 +46,21 @@
     "cta_case": "Case study",
     "projects": [
       {
+        "title": "Spotify Podcast Intelligence",
+        "category": "AI Automation",
+        "year": "2026",
+        "client": "Personal project",
+        "headline": "19 podcasts → daily French notes in my vault, fully unattended.",
+        "description": "A daily n8n pipeline that listens to podcasts so I don't have to. Every night it polls 19 podcast RSS feeds, picks the fresh episodes, and runs each one through transcription and summarization. Audio is downloaded, compressed with ffmpeg to mono 16kHz/32kbps (to clear Groq's 25MB ceiling), then transcribed by Groq Whisper — which also detects the language. Non-French episodes are auto-translated before Gemini produces a strictly factual French summary (résumé, key points, notable quotes). Each result is written as a self-contained Obsidian note, tracked in Supabase for deduplication, and a Telegram recap closes every run. Built for resilience: dynamic Groq rate-limit retries, oversize-file skips, and per-episode error handlers that never crash the batch.",
+        "architecture": "Daily cron · RSS 24h filter · ffmpeg compress · Groq Whisper · Gemini summary · Supabase dedup · Telegram recap",
+        "metrics": [
+          { "value": "19", "label": "podcasts monitored" },
+          { "value": "0", "label": "minutes of manual listening" },
+          { "value": "100%", "label": "notes in French, any source" },
+          { "value": "24/7", "label": "unattended cron pipeline" }
+        ]
+      },
+      {
         "title": "JobNomad",
         "category": "SaaS / Job Board",
         "year": "2026",

@@ -144,11 +144,13 @@ const TAB_LABELS: Record<PanelTab, string> = {
 // Per-project intros for the Assets and Source tabs.
 // Keyed by ProjectMeta.index ('01', '02', ...). Fallbacks exist in the render.
 const WORKFLOW_GALLERY_INTRO: Record<string, string> = {
+  '00': 'Real screenshots from the production n8n instance — a daily pipeline turning 19 podcast RSS feeds into French Obsidian notes, fully unattended. Click any image to open the full-resolution lightbox.',
   '02': 'Real screenshots from the production n8n instance — two workflows, one Google Sheets registry, zero redeploy to add a new lead magnet. Click any image to open the full-resolution lightbox.',
   '03': 'Real screenshots from the production n8n instance — 9 stages, 21 LLM nodes. Click any image to open the full-resolution lightbox.',
 }
 
 const CODE_TAB_INTRO: Record<string, string> = {
+  '00': 'Three real Code nodes from the pipeline: the RSS episode filter (24h window + duration guard), the Groq retry handler (rate-limit backoff + oversize skip), and the Obsidian note renderer. Credentials and instance IDs redacted.',
   '02': 'Three sanitized excerpts from the production workflows: the event router that disambiguates comments from DMs, the dedupe + keyword-match core, and the DM-distributor sub-workflow. All webhook IDs, document IDs and credentials redacted.',
   '03': 'Two real artifacts from the pipeline: the generation contract injected into every LLM call, and the deterministic sanitizer that runs post-generation before LinkedIn delivery.',
 }
