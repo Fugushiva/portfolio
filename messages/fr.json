@@ -119,6 +119,21 @@
           { "value": "85%", "label": "contenu statique produit par IA" },
           { "value": "120", "label": "demo calls/mois cibles" }
         ]
+      },
+      {
+        "title": "Veille HuggingFace automatisée",
+        "category": "AI Automation / Veille",
+        "year": "2026",
+        "client": "Projet personnel",
+        "headline": "Toute l'actu IA de HuggingFace, résumée en français, livrée chaque matin — zéro lecture manuelle.",
+        "description": "Rester à jour sur l'IA est un travail à temps plein. Ce système surveille en continu 4 surfaces de HuggingFace — Daily Papers, Blog officiel, Trending Models et Trending Spaces. Chaque source est récupérée, filtrée et triée pour écarter le bruit (seuils d'upvotes et de likes), puis résumée et traduite en français par LLM. Le résultat atterrit en notes Markdown cherchables dans un second cerveau Obsidian, et un digest unique est envoyé chaque matin sur Telegram. Architecture en 4 sous-workflows autonomes (isolation des pannes), avec déduplication Postgres pour ne jamais traiter deux fois le même contenu, retries et garde-fous calibrés en production.",
+        "architecture": "4 sous-workflows autonomes · crons décalés · filtre/tri top-N avant LLM · dédup insert-first Postgres · résumé + traduction FR · notes vault · digest Telegram · error handler centralisé",
+        "metrics": [
+          { "value": "4", "label": "surfaces HF surveillées" },
+          { "value": "1×/j", "label": "digest livré sur Telegram" },
+          { "value": "100%", "label": "résumés traduits en FR" },
+          { "value": "13", "label": "erreurs de prod résolues" }
+        ]
       }
     ],
     "stackLabel": "Stack",

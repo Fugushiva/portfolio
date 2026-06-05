@@ -119,6 +119,21 @@
           { "value": "85%", "label": "AI-produced static content" },
           { "value": "120", "label": "target demo calls/month" }
         ]
+      },
+      {
+        "title": "Automated HuggingFace Intelligence Feed",
+        "category": "AI Automation / Monitoring",
+        "year": "2026",
+        "client": "Personal project",
+        "headline": "All the AI news from HuggingFace, summarized in French, delivered every morning — zero manual reading.",
+        "description": "Staying current on AI is a full-time job. This system continuously monitors 4 HuggingFace surfaces — Daily Papers, the official Blog, Trending Models and Trending Spaces. Each source is fetched, filtered and ranked to cut the noise (upvote and like thresholds), then summarized and translated to French by an LLM. The output lands as searchable Markdown notes in an Obsidian second brain, with a single digest pushed to Telegram each morning. Built as 4 autonomous sub-workflows (failure isolation), with Postgres deduplication so nothing is ever processed twice, plus production-calibrated retries and guardrails.",
+        "architecture": "4 autonomous sub-workflows · staggered crons · top-N filter/sort before LLM · insert-first Postgres dedup · FR summary + translation · vault notes · Telegram digest · centralized error handler",
+        "metrics": [
+          { "value": "4", "label": "HuggingFace surfaces monitored" },
+          { "value": "1×/day", "label": "digest pushed to Telegram" },
+          { "value": "100%", "label": "summaries translated to FR" },
+          { "value": "13", "label": "production errors resolved" }
+        ]
       }
     ],
     "stackLabel": "Stack",

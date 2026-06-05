@@ -504,4 +504,13 @@ export const PROJECT_META: ProjectMeta[] = [
     galleryType: 'content',
     contentPieces: CONTENT_PIECES,
   },
+  {
+    index: '06',
+    accent: '#FFD21E',
+    accentRgb: '255,210,30',
+    stack: ['n8n', 'PostgreSQL', 'Supabase', 'Groq (Llama 3.3 70B)', 'HuggingFace API', 'Telegram Bot API', 'Syncthing'],
+    category_icon: '🤗',
+    hasGallery: false,
+    galleryType: 'none',
+  },
 ]
